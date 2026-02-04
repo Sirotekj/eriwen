@@ -3,7 +3,7 @@ import { getPostavy } from "@/lib/postavy";
 export default async function PostavyPage() {
   const postavy = await getPostavy();
   return (
-    <main>
+    <div>
       <h1>Postavy</h1>
       <ul>
         {postavy.map((p) => (
@@ -12,6 +12,6 @@ export default async function PostavyPage() {
           </li>
         ))}
       </ul>
-    </main>
+    </div>
   );
 }

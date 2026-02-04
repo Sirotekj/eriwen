@@ -1,7 +1,7 @@
 import FormTazeni from "@/components/forms/form-tazeni";
 export default async function TazeniPage() {
   return (
-    <main className="max-w-3xl px-4 my-8 mx-auto bg-background-light">
+    <div>
       <h2>Tažení</h2>
 
       <div>
@@ -27,6 +27,6 @@ export default async function TazeniPage() {
         </p>
       </div>
       <FormTazeni />
-    </main>
+    </div>
   );
 }

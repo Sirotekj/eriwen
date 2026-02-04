@@ -1,8 +1,8 @@
 export default function NabozenstviPage() {
   return (
-    <main className="nabozenstvi-page">
+    <div>
       <h1>Kraje a místa</h1>
-      <p>Obsah stránky o krajích a místech světa.</p>
-    </main>
+      <p>Obsah stránky o náboženstvích.</p>
+    </div>
   );
 }

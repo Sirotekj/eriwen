@@ -1,3 +1,8 @@
 export default function Home() {
-  return <main className="bg-background text-primary"></main>;
+  return (
+    <>
+      <h2>Úvod</h2>
+      <p>Tady je úvod.</p>
+    </>
+  );
 }

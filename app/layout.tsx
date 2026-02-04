@@ -47,7 +47,7 @@ export default function RootLayout({
       >
         <h1 className="text-center">Vítejte na Eriwenu</h1>
         <MainMenu />
-        {children}
+        <main className="max-w-3xl mx-auto px-4">{children}</main>
       </body>
     </html>
   );
