@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Crimson_Pro, Great_Vibes, Luxurious_Script } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 import MainMenu from "@/components/main-menu/main-menu";
 
 const crimsonPro = Crimson_Pro({
@@ -45,9 +46,11 @@ export default function RootLayout({
       <body
         className={`${crimsonPro.variable} ${greatVibes.variable} ${luxuriousScript.variable} antialiased min-h-screen h-[200vh]`}
       >
-        <h1 className="text-center">Vítejte na Eriwenu</h1>
-        <MainMenu />
-        <main className="max-w-3xl mx-auto px-4">{children}</main>
+        <Providers>
+          <h1 className="text-center">Vítejte na Eriwenu</h1>
+          <MainMenu />
+          <main className="max-w-3xl mx-auto px-4">{children}</main>
+        </Providers>
       </body>
     </html>
   );

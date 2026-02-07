@@ -1,5 +1,7 @@
 import Link from "next/link";
 import MainMenuSub from "./main-menu-sub";
+import EditIcon from "./main-edit";
+import AuthButtons from "./main-signin";
 
 export default function MainMenu() {
   return (
@@ -8,7 +10,7 @@ export default function MainMenu() {
       <ul className="grid grid-cols-4 bg-black max-w-3xl mx-auto px-4 pb-2 rounded-b-xl">
         <li className="relative group bg-background">
           <Link className="px-8 py-2 border block text-center" href="/svet">
-            Svět
+            Svět <span className="text-xs">&#9650;</span>
           </Link>
           <MainMenuSub />
         </li>
@@ -35,6 +37,12 @@ export default function MainMenu() {
           >
             Bestiář
           </Link>
+        </li>
+        <li>
+          <EditIcon />
+        </li>
+        <li>
+          <AuthButtons />
         </li>
       </ul>
     </nav>

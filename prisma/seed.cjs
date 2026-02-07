@@ -4,21 +4,20 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
-  const user = await prisma.user.create({
+  /*const user = await prisma.user.create({
     data: {
-      email: "test@test.cz",
-      name: "Test User",
+      email: "sirotek.j@gmail.com",
+      name: "Kuba",
     },
-  });
-
-  await prisma.postava.create({
+  });*/
+  /*await prisma.postava.create({
     data: {
       name: "Bered",
       race: "trpaslík",
       profession: "válečník",
       content: "Bered z Ornu.",
     },
-  });
+  });*/
 }
 
 main()
