@@ -26,7 +26,6 @@ export default async function TazeniPage() {
           upálen. V klášteře od té doby hlídají stráže.
         </p>
       </div>
-      <FormTazeni />
     </div>
   );
 }
