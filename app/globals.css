@@ -5,6 +5,9 @@
   --color-dark: #0c0a09;
   --color-background: #292524;
   --color-primary: #ffedd5;
+
+  --color-yellow: #fffb79;
+  --color-brown: #242424;
 }
 
 @theme inline {
@@ -12,6 +15,7 @@
   --color-dark: var(--color-dark);
   --color-primary: var(--color-primary);
   --font-primary: var(--font-crimson);
+  --color-light: var(--color-yellow);
 }
 
 /* layers */
@@ -42,6 +46,11 @@
     line-height: 1.2;
     @apply mb-3;
   }
+  h4 {
+    font-size: clamp(1.5rem, 2.1vw, 2.25rem);
+    line-height: 1.2;
+    @apply mb-3;
+  }
 
   p {
     font-size: 1rem;
@@ -51,7 +60,7 @@
 }
 body {
   background: var(--color-background);
-  color: var(--color-primary);
+  color: var(--color-brown);
   font-family: georgia, serif;
 }
 .quote {

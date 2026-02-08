@@ -2,7 +2,26 @@ export default function NepratelePage() {
   return (
     <div>
       <h2>Nepřátelé</h2>
-      <p>Obsah stránky o nepřátelích.</p>
+      <p>
+        Výčet nepřátel, s nimiž se družina střetla, (ať už je porazila nebo ne).
+      </p>
+      <h3>Besiah (†)</h3>
+      <p>
+        <i>Nekromant z kláštera u města Krompach</i>
+      </p>
+      <p>
+        Družina zničila jeho oživlé zombie a zajala ho na zřícenině Reliktark.
+        Besiah byl později veřejně upálen v Krompachu jako heretik.
+      </p>
+      <h3>Isidor Mortirus (†)</h3>
+      <p>
+        <i>Zvrácený alchymista z Rovaldska</i>
+      </p>
+      <p>
+        Bývalý člen zločinné organizace Černá chiméra. Zabit tlupou cizích
+        žoldáků. Družina odhalila jeho doupě a porazila zvrácená monstra, která
+        vytvořil - sešívače.
+      </p>
     </div>
   );
 }

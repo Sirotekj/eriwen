@@ -5,8 +5,19 @@ export default function AuthButtons() {
   const { data: session } = useSession();
 
   if (session) {
-    return <button onClick={() => signOut()}>Odhlásit</button>;
+    return (
+      <button className="w-12 h-12 border text-xs" onClick={() => signOut()}>
+        Odhlásit
+      </button>
+    );
   }
 
-  return <button onClick={() => signIn("google")}>Přihlásit</button>;
+  return (
+    <button
+      className="w-12 h-12 border text-xs"
+      onClick={() => signIn("google")}
+    >
+      Přihlásit
+    </button>
+  );
 }

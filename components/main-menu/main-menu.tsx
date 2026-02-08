@@ -5,39 +5,48 @@ import AuthButtons from "./main-signin";
 
 export default function MainMenu() {
   return (
-    <nav className="sticky top-0 z-100">
-      <div className="bg-black h-2"></div>
-      <ul className="grid grid-cols-4 bg-black max-w-3xl mx-auto px-4 pb-2 rounded-b-xl">
-        <li className="relative group bg-background">
-          <Link className="px-8 py-2 border block text-center" href="/svet">
-            Svět <span className="text-xs">&#9650;</span>
+    <nav className="fixed flex flex-row-reverse w-full top-0 z-100 bg-linear-to-b from-black/50 to-black/0">
+      <ul className="flex text-light">
+        <li className="relative group">
+          <Link
+            className="flex items-center px-8 py-2 text-center uppercase"
+            href="/svet"
+          >
+            Svět
+            <span className="text-[6px] ml-1 group-hover:rotate-180 transition-all duration-200">
+              &#9650;
+            </span>
           </Link>
           <MainMenuSub />
         </li>
-        <li className="bg-background">
+        <div className="mt-3 mb-5 w-[1px] bg-[var(--color-yellow)]"></div>
+        <li>
           <Link
-            className="px-8 py-2 border block w-full text-center"
+            className="px-8 py-2 block w-full text-center uppercase"
             href="/postavy"
           >
             Postavy
           </Link>
         </li>
-        <li className="bg-background">
+        <div className="mt-3 mb-5 w-[1px] bg-[var(--color-yellow)]"></div>
+        <li>
           <Link
-            className="px-8 py-2 border block w-full text-center"
+            className="px-8 py-2 block w-full text-center uppercase"
             href="/tazeni"
           >
             Tažení
           </Link>
         </li>
-        <li className="bg-background">
+        <div className="mt-3 mb-5 w-[1px] bg-[var(--color-yellow)]"></div>
+        <li>
           <Link
-            className="px-8 py-2 border block w-full text-center"
+            className="px-8 py-2 block w-full text-center uppercase"
             href="/bestiar"
           >
             Bestiář
           </Link>
         </li>
+        <div className="mt-3 mb-5 w-[1px] bg-[var(--color-yellow)]"></div>
         <li>
           <EditIcon />
         </li>
