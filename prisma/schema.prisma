@@ -4,6 +4,12 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+enum Role {
+  READER
+  EDITOR
+  ADMIN
+}
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -28,14 +34,33 @@ model User {
   image         String?
   emailVerified DateTime?
 
+  role          Role      @default(READER)
+
   accounts Account[]
   sessions Session[]
+
+  tazeni  Tazeni[]
+  postavy Postava[]
 }
 
 model Tazeni {
   id      String  @id @default(cuid())
   name    String?
+  pj      String?
+  postavy String?
+  obdobi  String?
   content String?
+  
+  order     Int      @default(0)
+
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([authorId])
+  @@index([order])
 }
 
 model Postava {
@@ -45,6 +70,17 @@ model Postava {
   profession String?
   campaign   String?
   content    String?
+  
+  order     Int      @default(0)
+  
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([authorId])
+  @@index([order])
 }
 
 model Account {

@@ -8,13 +8,17 @@
 
   --color-yellow: #fffb79;
   --color-brown: #242424;
+
+  --font-metamorphous: "Metamorphous", georgia, serif;
+  --font-garamond: "EB Garamond", georgia, serif;
+  --font-cinzel: "Cinzel", georgia, serif;
 }
 
 @theme inline {
   --color-background: var(--color-background);
   --color-dark: var(--color-dark);
   --color-primary: var(--color-primary);
-  --font-primary: var(--font-crimson);
+  --font-primary: var(--font-garamond);
   --color-light: var(--color-yellow);
 }
 
@@ -58,10 +62,30 @@
     @apply mb-4;
   }
 }
+@layer components {
+  .menu-item {
+    @apply relative;
+  }
+
+  .menu-item::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 40%;
+    width: 1px;
+    height: 1rem;
+    background-color: var(--color-yellow);
+    transform: translateY(-50%);
+  }
+
+  .menu-item:last-child::after {
+    display: none;
+  }
+}
 body {
   background: var(--color-background);
   color: var(--color-brown);
-  font-family: georgia, serif;
+  font-family: var(--font-garamond);
 }
 .quote {
   font-family: var(--font-luxurious-script);

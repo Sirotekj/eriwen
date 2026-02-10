@@ -1,10 +1,60 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { getEditMode } from "@/lib/edit-mode";
+import { permissions } from "@/lib/permissions";
+import { getTazeni } from "@/lib/tazeni";
 import FormTazeni from "@/components/forms/form-tazeni";
-export default async function TazeniPage() {
+
+type PageProps = {
+  searchParams: Promise<{
+    edit?: string;
+  }>;
+};
+
+export default async function TazeniPage({ searchParams }: PageProps) {
+  const session = await getServerSession(authOptions);
+
+  const role = session?.user?.role;
+  const userId = session?.user?.id;
+
+  const params = await searchParams;
+  const editParamOn = params.edit === "1";
+
+  const { isEditing } = getEditMode(role, editParamOn);
+
+  const canCreate = permissions.canCreate({ role });
+
+  const tazeniList = getTazeni();
   return (
     <div>
       <h2>Tažení</h2>
-
-      <div>
+      {isEditing && canCreate && <FormTazeni />}
+      <ul>
+        {(await tazeniList).map((tazeni) => {
+          const ctx = {
+            role,
+            userId,
+            authorId: tazeni.authorId,
+          };
+          const canEdit = permissions.canEdit(ctx);
+          const canDelete = permissions.canDelete(ctx);
+          return (
+            <li key={tazeni.id}>
+              <h3>{tazeni.name}</h3>
+              <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
+                <dt>PJ:</dt>
+                <dd>{tazeni.pj}</dd>
+                <dt>Postavy:</dt>
+                <dd>{tazeni.postavy}</dd>
+                <dt>Časové období:</dt>
+                <dd>{tazeni.obdobi}</dd>
+              </dl>
+              <p>{tazeni.content}</p>
+            </li>
+          );
+        })}
+      </ul>
+      {/*<div>
         <h3>Kniha Ezargoth</h3>
         <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
           <dt>PJ:</dt>
@@ -25,7 +75,7 @@ export default async function TazeniPage() {
           Družina po vítězství byla odměněna a nekromant na náměstí v Krompachu
           upálen. V klášteře od té doby hlídají stráže.
         </p>
-      </div>
+      </div>*/}
     </div>
   );
 }

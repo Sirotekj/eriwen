@@ -7,7 +7,7 @@ export default function MainMenu() {
   return (
     <nav className="fixed flex flex-row-reverse w-full top-0 z-100 bg-linear-to-b from-black/50 to-black/0">
       <ul className="flex text-light">
-        <li className="relative group">
+        <li className="menu-item group">
           <Link
             className="flex items-center px-8 py-2 text-center uppercase"
             href="/svet"
@@ -19,26 +19,23 @@ export default function MainMenu() {
           </Link>
           <MainMenuSub />
         </li>
-        <div className="mt-3 mb-5 w-[1px] bg-[var(--color-yellow)]"></div>
-        <li>
+        <li className="menu-item">
           <Link
-            className="px-8 py-2 block w-full text-center uppercase"
+            className="flex items-center px-8 py-2 text-center uppercase"
             href="/postavy"
           >
             Postavy
           </Link>
         </li>
-        <div className="mt-3 mb-5 w-[1px] bg-[var(--color-yellow)]"></div>
-        <li>
+        <li className="menu-item">
           <Link
-            className="px-8 py-2 block w-full text-center uppercase"
+            className="flex items-center px-8 py-2 text-center uppercase"
             href="/tazeni"
           >
             Tažení
           </Link>
         </li>
-        <div className="mt-3 mb-5 w-[1px] bg-[var(--color-yellow)]"></div>
-        <li>
+        <li className="menu-item">
           <Link
             className="px-8 py-2 block w-full text-center uppercase"
             href="/bestiar"
@@ -46,7 +43,6 @@ export default function MainMenu() {
             Bestiář
           </Link>
         </li>
-        <div className="mt-3 mb-5 w-[1px] bg-[var(--color-yellow)]"></div>
         <li>
           <EditIcon />
         </li>

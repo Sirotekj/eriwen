@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Crimson_Pro, Great_Vibes, Luxurious_Script } from "next/font/google";
+import { Cinzel, Luxurious_Script, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import MainMenu from "@/components/main-menu/main-menu";
 import Background from "@/components/background/background";
 
-const crimsonPro = Crimson_Pro({
+const ebGaramond = EB_Garamond({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-crimson",
+  variable: "--font-eb-garamond",
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
 });
-const greatVibes = Great_Vibes({
+const cinzel = Cinzel({
   subsets: ["latin"],
   weight: ["400"],
-  variable: "--font-great-vibes",
+  variable: "--font-cinzel",
 });
 
 const luxuriousScript = Luxurious_Script({
@@ -21,16 +22,6 @@ const luxuriousScript = Luxurious_Script({
   weight: ["400"],
   variable: "--font-luxurious-script",
 });
-
-/*const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});*/
 
 export const metadata: Metadata = {
   title: "Eriwen",
@@ -45,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${crimsonPro.variable} ${greatVibes.variable} ${luxuriousScript.variable} antialiased min-h-screen h-[200vh]`}
+        className={`${ebGaramond.variable} ${cinzel.variable} ${luxuriousScript.variable} antialiased min-h-screen h-[200vh]`}
       >
         <Background />
         <Providers>
