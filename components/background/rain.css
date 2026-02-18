@@ -1,0 +1,49 @@
+.rain {
+  margin: 0;
+  padding: -0;
+  transform: rotate(10deg);
+  height: 110vh;
+  width: 110vw;
+  top: -5vh;
+  left: -5vw;
+  overflow: hidden;
+}
+.rain i {
+  position: absolute;
+  opacity: 0.8;
+  height: 30px;
+  background: linear-gradient(transparent, #fff);
+  animation: raining 2s linear Infinite;
+}
+@-moz-keyframes raining {
+  0% {
+    transform: translateY(-160px);
+  }
+  100% {
+    transform: translateY(calc(100vh + 160px));
+  }
+}
+@-webkit-keyframes raining {
+  0% {
+    transform: translateY(-160px);
+  }
+  100% {
+    transform: translateY(calc(100vh + 160px));
+  }
+}
+@-o-keyframes raining {
+  0% {
+    transform: translateY(-160px);
+  }
+  100% {
+    transform: translateY(calc(100vh + 160px));
+  }
+}
+@keyframes raining {
+  0% {
+    transform: translateY(-160px);
+  }
+  100% {
+    transform: translateY(calc(100vh + 160px));
+  }
+}

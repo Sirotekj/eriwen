@@ -1,0 +1,45 @@
+.snow {
+  margin: 0;
+  padding: 0;
+  height: 110vh;
+  width: 110vw;
+  top: -5vh;
+  left: -5vw;
+  overflow: hidden;
+  pointer-events: none;
+}
+.snow i {
+  position: absolute;
+  opacity: 0.8;
+  height: 5px;
+  width: 5px;
+  background: white;
+  border-radius: 50%;
+  filter: blur(4px);
+
+  animation-name: snowing;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes snowing {
+  0% {
+    transform: translate(0, -160px);
+  }
+
+  25% {
+    transform: translate(15px, 25vh);
+  }
+
+  50% {
+    transform: translate(-15px, 50vh);
+  }
+
+  75% {
+    transform: translate(10px, 75vh);
+  }
+
+  100% {
+    transform: translate(0, calc(100vh + 160px));
+  }
+}
