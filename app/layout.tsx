@@ -4,6 +4,7 @@ import './globals.css';
 import Providers from './providers';
 import MainMenu from '@/components/main-menu/main-menu';
 import Background from '@/components/background/background';
+import PaperBackground from '@/components/background/paper';
 
 const ebGaramond = EB_Garamond({
   subsets: ['latin'],
@@ -41,7 +42,8 @@ export default function RootLayout({
         <Background />
         <Providers>
           <MainMenu />
-          <main className="max-w-3xl mx-auto my-16 px-4 py-4 bg-[#F4D6B4]">
+          <main className="relative max-w-3xl mx-auto my-16 px-4 py-16">
+            <PaperBackground />
             {children}
           </main>
         </Providers>
