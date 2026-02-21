@@ -1,11 +1,12 @@
-"use client";
-import { useSession } from "next-auth/react";
-import { usePathname, useSearchParams } from "next/navigation";
-import Link from "next/link";
-import { IconFeather } from "@/components/utils/svgs/icons";
-import HoverWrapper from "@/components/utils/hover-wrapper";
+'use client';
+import { Suspense } from 'react';
+import { useSession } from 'next-auth/react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { IconFeather } from '@/components/utils/svgs/icons';
+import HoverWrapper from '@/components/utils/hover-wrapper';
 
-export default function EditIcon() {
+export function EditIconInner() {
   const { data: session } = useSession();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -13,7 +14,7 @@ export default function EditIcon() {
   if (!session) return null;
   console.log(session?.user?.role);
 
-  const isEditMode = searchParams.get("edit") === "1";
+  const isEditMode = searchParams.get('edit') === '1';
 
   const href = isEditMode ? pathname : `${pathname}?edit=1`;
 
@@ -23,5 +24,12 @@ export default function EditIcon() {
         <IconFeather className="w-full h-full p-2" />
       </Link>
     </HoverWrapper>
+  );
+}
+export default function EditIcon() {
+  return (
+    <Suspense fallback={null}>
+      <EditIconInner />
+    </Suspense>
   );
 }
