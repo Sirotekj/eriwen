@@ -50,6 +50,7 @@ model Tazeni {
   postavy String?
   obdobi  String?
   content String?
+  image      String?
   
   order     Int      @default(0)
 
@@ -70,6 +71,7 @@ model Postava {
   profession String?
   campaign   String?
   content    String?
+  image      String?
   
   order     Int      @default(0)
   

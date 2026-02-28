@@ -1,9 +1,32 @@
-import Image from "next/image";
-import { getPostavy } from "@/lib/postavy";
+import Image from 'next/image';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { getEditMode } from '@/lib/edit-mode';
+import { permissions } from '@/lib/permissions';
+import { getPostavy } from '@/lib/postavy';
 
-export default async function PostavyPage() {
+import ButtonPage from '@/components/utils/button-page';
+import { IconFeather } from '@/components/utils/svgs/icons';
+
+import { PageProps } from '@/types/types';
+import ImageWrapper from '@/components/utils/image-wrapper';
+
+export default async function PostavyPage({ searchParams }: PageProps) {
+  const session = await getServerSession(authOptions);
+
+  const role = session?.user?.role;
+  const userId = session?.user?.id;
+
+  const params = await searchParams;
+  const editParamOn = params.edit === '1';
+
+  const { isEditing } = getEditMode(role, editParamOn);
+
+  const canCreate = permissions.canCreate({ role });
   const postavy = await getPostavy();
-  console.log(postavy);
+  console.log(isEditing, canCreate);
+
+  const openForm = () => {};
   return (
     <div>
       <h1>Postavy</h1>
@@ -14,17 +37,22 @@ export default async function PostavyPage() {
           </li>
         ))}
       </ul>*/}
+      {isEditing && canCreate && (
+        <ButtonPage onClick={openForm}>
+          <IconFeather />
+        </ButtonPage>
+      )}
       <ul>
         <li>
           <strong>Bered</strong> - trpaslík (válečník)
-          <div className="relative float-left max-w-xs w-1/3 aspect-3/4 mr-4 mb-4">
+          <ImageWrapper>
             <Image
               className="object-cover"
               src="/images/bered.jpg"
               alt="bered"
               fill
             />
-          </div>
+          </ImageWrapper>
           <p>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent
             id justo in neque elementum ultrices. Integer rutrum, orci
