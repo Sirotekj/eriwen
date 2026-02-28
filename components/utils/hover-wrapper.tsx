@@ -1,9 +1,7 @@
-"use client";
-
-import { ReactNode } from "react";
+'use client';
 
 type HoverWrapperProps = {
-  children: ReactNode;
+  children: React.ReactNode;
   tooltip: string;
 };
 

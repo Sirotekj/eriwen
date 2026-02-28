@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   /* --foreground: #171717;*/
@@ -9,9 +9,9 @@
   --color-yellow: #fffb79;
   --color-brown: #242424;
 
-  --font-metamorphous: "Metamorphous", georgia, serif;
-  --font-garamond: "EB Garamond", georgia, serif;
-  --font-cinzel: "Cinzel", georgia, serif;
+  --font-metamorphous: 'Metamorphous', georgia, serif;
+  --font-garamond: 'EB Garamond', georgia, serif;
+  --font-cinzel: 'Cinzel', georgia, serif;
 }
 
 @theme inline {
@@ -42,24 +42,24 @@
     /*@apply font-headlines;*/
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.15;
-    @apply mb-4;
+    @apply my-4;
   }
 
   h3 {
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     line-height: 1.2;
-    @apply mb-3;
+    @apply my-3;
   }
   h4 {
     font-size: clamp(1.5rem, 2.1vw, 2.25rem);
     line-height: 1.2;
-    @apply mb-3;
+    @apply my-3;
   }
 
   p {
     font-size: 1rem;
     line-height: 1.75;
-    @apply mb-4;
+    @apply my-4;
   }
 }
 @layer components {
@@ -68,7 +68,7 @@
   }
 
   .menu-item::after {
-    content: "";
+    content: '';
     position: absolute;
     right: 0;
     top: 40%;

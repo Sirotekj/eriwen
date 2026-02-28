@@ -1,15 +1,16 @@
-"use server";
+'use server';
 
-import { prisma } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { permissions } from "@/lib/permissions";
-import { redirect } from "next/navigation";
+import { prisma } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { permissions } from '@/lib/permissions';
+import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 export async function createTazeni(formData: FormData) {
   const session = await getServerSession(authOptions);
   if (!session?.user) {
-    throw new Error("Unauthorized");
+    throw new Error('Unauthorized');
   }
 
   const canCreate = permissions.canCreate({
@@ -17,20 +18,20 @@ export async function createTazeni(formData: FormData) {
   });
 
   if (!canCreate) {
-    throw new Error("Forbidden");
+    throw new Error('Forbidden');
   }
 
   // data z formuláře
-  const name = formData.get("name") as string;
-  const pj = formData.get("pj") as string;
-  const postavy = formData.get("postavy") as string;
-  const obdobi = formData.get("obdobi") as string;
-  const pribeh = formData.get("pribeh") as string;
-  const order = Number(formData.get("order"));
+  const name = formData.get('name') as string;
+  const pj = formData.get('pj') as string;
+  const postavy = formData.get('postavy') as string;
+  const obdobi = formData.get('obdobi') as string;
+  const pribeh = formData.get('pribeh') as string;
+  const order = Number(formData.get('order'));
 
   // základní validace
   if (!name || !pj || !postavy || !obdobi || !pribeh || Number.isNaN(order)) {
-    throw new Error("Invalid input");
+    throw new Error('Invalid input');
   }
 
   // automatické pořadí (pokud chceš)
@@ -57,5 +58,6 @@ export async function createTazeni(formData: FormData) {
     },
   });
 
-  redirect("/tazeni");
+  revalidatePath('/tazeni');
+  redirect('/tazeni');
 }

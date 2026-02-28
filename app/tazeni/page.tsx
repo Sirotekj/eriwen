@@ -1,15 +1,11 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { getEditMode } from "@/lib/edit-mode";
-import { permissions } from "@/lib/permissions";
-import { getTazeni } from "@/lib/tazeni";
-import FormTazeni from "@/components/forms/form-tazeni";
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { getEditMode } from '@/lib/edit-mode';
+import { permissions } from '@/lib/permissions';
+import { getTazeni } from '@/lib/tazeni';
+import FormTazeni from '@/components/forms/form-tazeni';
 
-type PageProps = {
-  searchParams: Promise<{
-    edit?: string;
-  }>;
-};
+import { PageProps } from '@/types/types';
 
 export default async function TazeniPage({ searchParams }: PageProps) {
   const session = await getServerSession(authOptions);
@@ -18,7 +14,7 @@ export default async function TazeniPage({ searchParams }: PageProps) {
   const userId = session?.user?.id;
 
   const params = await searchParams;
-  const editParamOn = params.edit === "1";
+  const editParamOn = params.edit === '1';
 
   const { isEditing } = getEditMode(role, editParamOn);
 
