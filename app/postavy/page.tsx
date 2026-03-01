@@ -30,13 +30,24 @@ export default async function PostavyPage({ searchParams }: PageProps) {
   return (
     <div>
       <h1>Postavy</h1>
-      {/*<ul>
+      <ul>
         {postavy.map((p) => (
           <li key={p.id}>
             <strong>{p.name}</strong> – {p.race} ({p.profession})
+            {p.image && (
+              <ImageWrapper>
+                <Image
+                  className="object-cover"
+                  src={p.image}
+                  alt="bered"
+                  fill
+                />
+              </ImageWrapper>
+            )}
+            <p>{p.content}</p>
           </li>
         ))}
-      </ul>*/}
+      </ul>
       {isEditing && canCreate && (
         <ButtonPage onClick={openForm}>
           <IconFeather />

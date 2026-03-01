@@ -6,7 +6,7 @@ import type { PostavaType } from '@/types/types';
 export async function getPostavy() {
   return prisma.postava.findMany({
     orderBy: {
-      name: { sort: 'asc' },
+      name: 'asc',
     },
   });
 }
