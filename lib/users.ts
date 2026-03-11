@@ -1,4 +1,5 @@
-import { prisma } from "./db";
+import { prisma } from './db';
+export const dynamic = 'force-dynamic';
 
 export async function getUserByEmail(email: string) {
   return prisma.user.findUnique({

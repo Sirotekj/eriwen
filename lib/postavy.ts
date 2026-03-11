@@ -1,4 +1,5 @@
 import { prisma } from './db';
+import { Postava } from '@prisma/client';
 //import fs from 'node:fs';
 import fs from 'fs/promises';
 import path from 'path';
@@ -6,7 +7,7 @@ import withRetry from './with-retry';
 
 import type { PostavaType } from '@/types/types';
 
-export async function getPostavy() {
+export async function getPostavy(): Promise<Postava[]> {
   return withRetry(() =>
     prisma.postava.findMany({
       orderBy: {
