@@ -15,7 +15,7 @@ export type PostavaType = {
   content: string;
   campaign: string;
   order: number;
-  image: File;
+  //image: string;
   author: {
     connect: {
       id: string;

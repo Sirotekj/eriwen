@@ -1,6 +1,7 @@
 'use client';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
+import ButtonPage from '@/components/utils/button-page';
 export default function ImagePicker({
   label,
   name,
@@ -17,6 +18,7 @@ export default function ImagePicker({
     }
   };
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Image Input Change');
     const files = event.target.files;
     if (!files || files.length === 0) {
       setPickedImage(null);
@@ -40,22 +42,25 @@ export default function ImagePicker({
             <Image
               src={pickedImage}
               alt="The image selected by the user."
-              fill
+              width={0}
+              height={0}
+              className="w-[30%] h-auto border"
             />
           )}
         </div>
         <input
           type="file"
           id={name}
-          accept="image/png, image/jpeg"
+          accept="image/png, image/jpeg image/webp"
           name={name}
           ref={imageInputRef}
           onChange={handleImageChange}
           required
+          className="hidden"
         />
-        <button type="button" onClick={handlePickClick}>
+        <ButtonPage type="button" onClick={handlePickClick}>
           Vyber obrázek
-        </button>
+        </ButtonPage>
       </div>
     </div>
   );

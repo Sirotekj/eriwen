@@ -4,12 +4,12 @@ import { authOptions } from '@/lib/auth';
 import { getEditMode } from '@/lib/edit-mode';
 import { permissions } from '@/lib/permissions';
 import { getPostavy } from '@/lib/postavy';
-
-import ButtonPage from '@/components/utils/button-page';
-import { IconFeather } from '@/components/utils/svgs/icons';
+import EditPostavy from './edit';
 
 import { PageProps } from '@/types/types';
 import ImageWrapper from '@/components/utils/image-wrapper';
+
+import PostavyCreateToggle from '@/components/forms/postavy-create-toggle';
 
 export default async function PostavyPage({ searchParams }: PageProps) {
   const session = await getServerSession(authOptions);
@@ -26,33 +26,34 @@ export default async function PostavyPage({ searchParams }: PageProps) {
   const postavy = await getPostavy();
   console.log(isEditing, canCreate);
 
-  const openForm = () => {};
   return (
     <div>
       <h1>Postavy</h1>
+      {isEditing && canCreate && <PostavyCreateToggle />}
       <ul>
         {postavy.map((p) => (
-          <li key={p.id}>
+          <li
+            key={p.id}
+            className="my-4 after-content-[''] after:block after:clear-both"
+          >
             <strong>{p.name}</strong> – {p.race} ({p.profession})
             {p.image && (
               <ImageWrapper>
                 <Image
-                  className="object-cover"
+                  className="object-cover w-1/3"
                   src={p.image}
-                  alt="bered"
+                  alt={p.id}
                   fill
                 />
               </ImageWrapper>
             )}
             <p>{p.content}</p>
+            <span>{p.authorId}</span>
+            {p.authorId === userId && <EditPostavy id={p.id} />}
           </li>
         ))}
       </ul>
-      {isEditing && canCreate && (
-        <ButtonPage onClick={openForm}>
-          <IconFeather />
-        </ButtonPage>
-      )}
+
       <ul>
         <li>
           <strong>Bered</strong> - trpaslík (válečník)

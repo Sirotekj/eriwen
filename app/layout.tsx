@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ebGaramond.variable} ${cinzel.variable} ${luxuriousScript.variable} antialiased min-h-screen`}
+        className={`${ebGaramond.variable} ${cinzel.variable} ${luxuriousScript.variable} antialiased min-h-screen overflow-x-hidden`}
       >
         <Background />
         <Providers>

@@ -1,11 +1,24 @@
 type ButtonProps = {
   children: React.ReactNode;
   label?: string;
-  onClick: () => void;
+  onClick?: () => void;
+  className?: string;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 };
-export default function ButtonPage({ children }: ButtonProps) {
+export default function ButtonPage({
+  children,
+  onClick,
+  className,
+  disabled,
+}: ButtonProps) {
   return (
-    <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={`px-2 py-1 flex items-center border border-radius-10 rounded hover:shadow-lg hover:bg-black/5 text-nowrap cursor-pointer [&>svg]:w-10 [&>svg]:h-10 [&>svg]:p-2 ${className ?? ''}`}
+    >
       {children}
     </button>
   );

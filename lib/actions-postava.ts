@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 import { SavePostavy } from '@/lib/postavy';
+import { DeletePostavy } from '@/lib/postavy';
 
 import { FormState } from '@/types/types';
 
@@ -14,10 +15,11 @@ function isInvalidText(text: string | null) {
   return !text || text.trim() === '';
 }
 
-export async function createPostava(
+export async function createAction(
   prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
+  console.log('server action start');
   const session = await getServerSession(authOptions);
   if (!session?.user) {
     return { message: 'Nepřihlášený uživatel' };
@@ -27,7 +29,8 @@ export async function createPostava(
   });
 
   if (!canCreate) {
-    throw new Error('Nemáš přístup');
+    return { message: 'Nemáš přístup' };
+    //throw new Error('Nemáš přístup');
   }
   const lastPostava = await prisma.postava.findFirst({
     orderBy: {
@@ -39,6 +42,11 @@ export async function createPostava(
   });
   const newOrder = lastPostava ? lastPostava.order + 100 : 100;
 
+  const imageFile = formData.get('image') as File | null;
+  if (!imageFile || imageFile.size === 0) {
+    return { message: 'Chybí obrázek' };
+  }
+
   const postava = {
     name: formData.get('jmeno') as string,
     race: formData.get('rasa') as string,
@@ -46,7 +54,7 @@ export async function createPostava(
     content: formData.get('pribeh') as string,
     campaign: formData.get('tazeni') as string,
     order: newOrder,
-    image: formData.get('image') as File,
+    //image: image.name as string,
     author: {
       connect: {
         id: session.user.id,
@@ -58,14 +66,14 @@ export async function createPostava(
     isInvalidText(postava.race) ||
     isInvalidText(postava.profession) ||
     isInvalidText(postava.content) ||
-    isInvalidText(postava.campaign) ||
-    !postava.image ||
-    postava.image.size === 0
+    isInvalidText(postava.campaign)
   ) {
     return { message: 'Neplatná data formuláře' };
   }
-
-  await SavePostavy(postava);
+  await SavePostavy(postava, imageFile);
   revalidatePath('/postavy');
   redirect('/postavy');
+}
+export async function deleteAction(id: string) {
+  await DeletePostavy(id);
 }

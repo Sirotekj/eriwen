@@ -9,6 +9,8 @@
   --color-yellow: #fffb79;
   --color-brown: #242424;
 
+  --color-red: #ff4c4c;
+
   --font-metamorphous: 'Metamorphous', georgia, serif;
   --font-garamond: 'EB Garamond', georgia, serif;
   --font-cinzel: 'Cinzel', georgia, serif;
@@ -20,6 +22,8 @@
   --color-primary: var(--color-primary);
   --font-primary: var(--font-garamond);
   --color-light: var(--color-yellow);
+
+  --color-red: var(--color-red);
 }
 
 /* layers */
@@ -61,6 +65,10 @@
     line-height: 1.75;
     @apply my-4;
   }
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    -webkit-text-fill-color: inherit;
+  }
 }
 @layer components {
   .menu-item {
@@ -80,6 +88,26 @@
 
   .menu-item:last-child::after {
     display: none;
+  }
+  .form-container {
+    @apply border rounded-sm p-4 my-4 transition-all duration-300;
+  }
+  .form {
+    @apply [&>label]:block [&>label]:mb-1;
+  }
+  .form-input {
+    &:focus-visible {
+      outline: none;
+      @apply border-2;
+    }
+    @apply w-full mb-4 border;
+  }
+  .form-textarea {
+    &:focus-visible {
+      outline: none;
+      @apply border-2;
+    }
+    @apply w-full mb-4 border;
   }
 }
 body {
