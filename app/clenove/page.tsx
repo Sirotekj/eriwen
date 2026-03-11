@@ -1,4 +1,5 @@
-import { getUsers } from "@/lib/users";
+export const dynamic = 'force-dynamic';
+import { getUsers } from '@/lib/users';
 export default async function Clenove() {
   const clenove = await getUsers();
   return (
