@@ -1,27 +1,21 @@
 import type { Metadata } from 'next';
-import { Cinzel, Luxurious_Script, EB_Garamond } from 'next/font/google';
+import { Cinzel, Great_Vibes } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
 import MainMenu from '@/components/main-menu/main-menu';
 import Background from '@/components/background/background';
 import PaperBackground from '@/components/background/paper';
 
-const ebGaramond = EB_Garamond({
-  subsets: ['latin'],
-  variable: '--font-eb-garamond',
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-});
 const cinzel = Cinzel({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-cinzel',
 });
 
-const luxuriousScript = Luxurious_Script({
+const greatVibes = Great_Vibes({
   subsets: ['latin'],
   weight: ['400'],
-  variable: '--font-luxurious-script',
+  variable: '--font-great-vibes',
 });
 
 export const metadata: Metadata = {
@@ -37,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ebGaramond.variable} ${cinzel.variable} ${luxuriousScript.variable} antialiased min-h-screen overflow-x-hidden`}
+        className={`${cinzel.variable} ${greatVibes.variable} antialiased min-h-screen overflow-x-hidden`}
       >
         <Background />
         <Providers>

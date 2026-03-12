@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx,css}", "./components/**/*.{ts,tsx}"],
+  content: ['./app/**/*.{ts,tsx,css}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        garamond: ["var(--font-eb-garamond)"],
-        cinzel: ["var(--font-cinzel)"],
-        luxurious: ["var(--font-luxurious-script)"],
+        georgia: ['var(--font-georgia)'],
+        cinzel: ['var(--font-cinzel)'],
+        greatVibes: ['var(--font-great-vibes)'],
       },
     },
   },
