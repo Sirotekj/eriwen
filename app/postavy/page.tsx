@@ -5,7 +5,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { getEditMode } from '@/lib/edit-mode';
 import { permissions } from '@/lib/permissions';
-import { getPostavy } from '@/lib/postavy';
+import { getPostavy } from '@/lib/postavy-prisma';
 import EditPostavy from './edit';
 
 import { PageProps } from '@/types/types';
@@ -30,7 +30,7 @@ export default async function PostavyPage({ searchParams }: PageProps) {
 
   return (
     <div>
-      <h1>Postavy</h1>
+      <h2>Postavy</h2>
       {isEditing && canCreate && <PostavyCreateToggle />}
       <ul>
         {postavy.map((p) => (

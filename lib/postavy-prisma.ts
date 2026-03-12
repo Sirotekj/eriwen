@@ -20,9 +20,9 @@ export async function getPostavy(): Promise<Postava[]> {
 export async function SavePostavy(postava: PostavaType, image: File) {
   const extension = image.name.split('.').pop() as string;
   const fileName = `postava_${postava.order}.${extension}`;
-
   const filePath = path.join(process.cwd(), 'public/images/postavy', fileName);
   const buffer = Buffer.from(await image.arrayBuffer());
+
   await fs.writeFile(filePath, buffer);
   const imageUrl = `/images/postavy/${fileName}`;
   console.log(imageUrl);
@@ -35,16 +35,14 @@ export async function SavePostavy(postava: PostavaType, image: File) {
 }
 
 export async function DeletePostavy(id: string) {
-  // Najdeme postavu v DB
   const postava = await prisma.postava.findUnique({
     where: { id },
   });
 
   if (!postava) {
-    throw new Error('Postava nebyla nalezena');
+    return { message: 'Postava nebyla nalezena!' };
   }
 
-  // Pokud má obrázek, smažeme ho z disku
   if (postava.image) {
     const filePath = path.join(process.cwd(), 'public', postava.image);
 
@@ -55,7 +53,6 @@ export async function DeletePostavy(id: string) {
     }
   }
 
-  // Smazání z databáze
   await prisma.postava.delete({
     where: { id },
   });

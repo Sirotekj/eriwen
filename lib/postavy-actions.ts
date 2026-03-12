@@ -6,8 +6,8 @@ import { permissions } from '@/lib/permissions';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
-import { SavePostavy } from '@/lib/postavy';
-import { DeletePostavy } from '@/lib/postavy';
+import { SavePostavy } from '@/lib/postavy-prisma';
+import { DeletePostavy } from '@/lib/postavy-prisma';
 
 import { FormState } from '@/types/types';
 
@@ -76,4 +76,6 @@ export async function createAction(
 }
 export async function deleteAction(id: string) {
   await DeletePostavy(id);
+  revalidatePath('/postavy');
+  redirect('/postavy');
 }

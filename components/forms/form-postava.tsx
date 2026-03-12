@@ -5,7 +5,7 @@ import { useActionState } from 'react';
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
 import ButtonPage from '@/components/utils/button-page';
-import { createAction } from '@/lib/actions-postava';
+import { createAction } from '@/lib/postavy-actions';
 
 export default function FormPostava({ onClose }: { onClose: () => void }) {
   //const [state, formAction] = useFormState(createPostava, { message: null });

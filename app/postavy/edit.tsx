@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteAction } from '@/lib/actions-postava';
+import { deleteAction } from '@/lib/postavy-actions';
 import ButtonPage from '@/components/utils/button-page';
 import { IconDelete } from '@/components/utils/svgs/icons';
 
