@@ -1,12 +1,12 @@
-import Link from "next/link";
-import MainMenuSub from "./main-menu-sub";
-import EditIcon from "./main-edit";
-import AuthButtons from "./main-signin";
+import Link from 'next/link';
+import MainMenuSub from './main-menu-sub';
+import EditIcon from './main-edit';
+import AuthButtons from './main-signin';
 
 export default function MainMenu() {
   return (
-    <nav className="fixed flex flex-row-reverse w-full top-0 z-100 bg-linear-to-b from-black/50 to-black/0">
-      <ul className="flex text-light">
+    <nav className="fixed flex flex-row-reverse w-full top-0 z-100 bg-linear-to-b from-black/75 to-black/0">
+      <ul className="flex text-light font-headlines">
         <li className="menu-item group">
           <Link
             className="flex items-center px-8 py-2 text-center uppercase"

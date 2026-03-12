@@ -12,7 +12,7 @@
   --color-red: #ff4c4c;
 
   --font-metamorphous: 'Metamorphous', georgia, serif;
-  --font-garamond: 'EB Garamond', georgia, serif;
+  --font-georgia: georgia, serif;
   --font-cinzel: 'Cinzel', georgia, serif;
 }
 
@@ -20,7 +20,8 @@
   --color-background: var(--color-background);
   --color-dark: var(--color-dark);
   --color-primary: var(--color-primary);
-  --font-primary: var(--font-garamond);
+  --font-primary: var(--font-georgia);
+  --font-headlines: var(--font-cinzel);
   --color-light: var(--color-yellow);
 
   --color-red: var(--color-red);
@@ -37,33 +38,34 @@
   }
 
   h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
     line-height: 1.1;
-    @apply mb-6 mt-6;
+    @apply mt-6 mb-4 font-headlines;
   }
 
   h2 {
     /*@apply font-headlines;*/
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-family: var(--font-headlines);
+    font-size: clamp(2rem, 3vw, 2.6rem);
     line-height: 1.15;
-    @apply my-4;
+    @apply mt-6 mb-3 font-headlines;
   }
 
   h3 {
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
     line-height: 1.2;
-    @apply my-3;
+    @apply mt-6 mb-3 font-headlines;
   }
   h4 {
-    font-size: clamp(1.5rem, 2.1vw, 2.25rem);
+    font-size: clamp(1.5rem, 2.1vw, 1.9rem);
     line-height: 1.2;
-    @apply my-3;
+    @apply mt-6 mb-3 font-headlines;
   }
 
   p {
     font-size: 1rem;
     line-height: 1.75;
-    @apply my-4;
+    @apply my-3;
   }
   input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px transparent inset;
@@ -113,8 +115,12 @@
 body {
   background: var(--color-background);
   color: var(--color-brown);
-  font-family: var(--font-garamond);
+  font-family: var(--font-georgia);
 }
-.quote {
-  font-family: var(--font-luxurious-script);
+blockquote {
+  font-family: var(--font-great-vibes);
+  font-size: 160%;
+  line-height: 1;
+  margin-block: 2rem;
+  margin-inline: 6vw;
 }

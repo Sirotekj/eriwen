@@ -5,6 +5,8 @@ import { authOptions } from '@/lib/auth';
 import { getEditMode } from '@/lib/edit-mode';
 import { permissions } from '@/lib/permissions';
 import { getTazeni } from '@/lib/tazeni';
+
+import TazeniItem from './tazeni';
 import FormTazeni from '@/components/forms/form-tazeni';
 
 import { PageProps } from '@/types/types';
@@ -36,23 +38,10 @@ export default async function TazeniPage({ searchParams }: PageProps) {
           };
           const canEdit = permissions.canEdit(ctx);
           const canDelete = permissions.canDelete(ctx);
-          return (
-            <li key={tazeni.id}>
-              <h3>{tazeni.name}</h3>
-              <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
-                <dt>PJ:</dt>
-                <dd>{tazeni.pj}</dd>
-                <dt>Postavy:</dt>
-                <dd>{tazeni.postavy}</dd>
-                <dt>Časové období:</dt>
-                <dd>{tazeni.obdobi}</dd>
-              </dl>
-              <p>{tazeni.content}</p>
-            </li>
-          );
+          return <TazeniItem key={tazeni.id} tazeni={tazeni} />;
         })}
       </ul>
-      {/*<div>
+      <div>
         <h3>Kniha Ezargoth</h3>
         <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
           <dt>PJ:</dt>
@@ -73,7 +62,7 @@ export default async function TazeniPage({ searchParams }: PageProps) {
           Družina po vítězství byla odměněna a nekromant na náměstí v Krompachu
           upálen. V klášteře od té doby hlídají stráže.
         </p>
-      </div>*/}
+      </div>
     </div>
   );
 }

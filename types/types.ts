@@ -22,3 +22,18 @@ export type PostavaType = {
     };
   };
 };
+
+export type TazeniType = {
+  name: string;
+  pj: string;
+  obdobi: string;
+  postavy: string;
+  content: string;
+  order: number;
+  //image: string;
+  author: {
+    connect: {
+      id: string;
+    };
+  };
+};
