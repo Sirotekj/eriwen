@@ -3,6 +3,9 @@ import { Suspense } from 'react';
 import { useSession } from 'next-auth/react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+
+import { permissions } from '@/lib/permissions';
+
 import { IconFeather } from '@/components/utils/svgs/icons';
 import HoverWrapper from '@/components/utils/hover-wrapper';
 
@@ -14,8 +17,12 @@ export function EditIconInner() {
   if (!session) return null;
   console.log(session?.user?.role);
 
-  const isEditMode = searchParams.get('edit') === '1';
+  const role = session?.user?.role;
+  const canCreate = permissions.canCreate({ role });
 
+  if (!canCreate) return null;
+
+  const isEditMode = searchParams.get('edit') === '1';
   const href = isEditMode ? pathname : `${pathname}?edit=1`;
 
   return (
