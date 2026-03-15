@@ -6,7 +6,7 @@ import { getEditMode } from '@/lib/edit-mode';
 import { permissions } from '@/lib/permissions';
 import { getTazeni } from '@/lib/tazeni';
 
-import TazeniItem from './tazeni';
+import TazeniItem from './tazeni-item';
 import FormTazeni from '@/components/forms/form-tazeni';
 
 import { PageProps } from '@/types/types';
