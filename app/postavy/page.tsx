@@ -56,7 +56,7 @@ export default async function PostavyPage({ searchParams }: PageProps) {
         ))}
       </ul>
 
-      <ul>
+      {/*<ul>
         <li>
           <strong>Bered</strong> - trpaslík (válečník)
           <ImageWrapper>
@@ -86,7 +86,7 @@ export default async function PostavyPage({ searchParams }: PageProps) {
             tempus molestie, porttitor ut, iaculis quis, sem.
           </p>
         </li>
-      </ul>
+      </ul>*/}
     </div>
   );
 }
