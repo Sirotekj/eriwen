@@ -18,13 +18,18 @@ export default function ImagePicker({
     }
   };
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Image Input Change');
     const files = event.target.files;
     if (!files || files.length === 0) {
       setPickedImage(null);
       return;
     }
     const file = files[0];
+    const MAX_SIZE = 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      alert('Soubor je příliš velký. Maximální velikost je 1 MB.');
+      setPickedImage(null);
+      return;
+    }
 
     const fileReader = new FileReader();
     fileReader.onload = () => {
@@ -51,7 +56,7 @@ export default function ImagePicker({
         <input
           type="file"
           id={name}
-          accept="image/png, image/jpeg image/webp"
+          accept="image/png, image/jpeg, image/webp"
           name={name}
           ref={imageInputRef}
           onChange={handleImageChange}
