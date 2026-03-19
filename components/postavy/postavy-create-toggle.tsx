@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import FormPostava from '@/components/forms/form-postava';
 import ButtonPage from '@/components/utils/button-page';
-import { IconFeather } from '@/components/utils/svgs/icons';
+import { IconEdit } from '@/components/utils/svgs/icons';
 
 export default function PostavyCreateToggle() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,7 @@ export default function PostavyCreateToggle() {
         console.log(isOpen);
       }}
     >
-      <IconFeather /> Přidat postavu
+      <IconEdit /> Přidat postavu
     </ButtonPage>
   );
 }

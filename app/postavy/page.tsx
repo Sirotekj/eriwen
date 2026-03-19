@@ -1,17 +1,16 @@
 export const dynamic = 'force-dynamic';
 
-import Image from 'next/image';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { getEditMode } from '@/lib/edit-mode';
 import { permissions } from '@/lib/permissions';
 import { getPostavy } from '@/lib/postavy-prisma';
-import EditPostavy from './edit';
+
+import PostavyList from '@/components/postavy/postavy-list';
 
 import { PageProps } from '@/types/types';
-import ImageWrapper from '@/components/utils/image-wrapper';
 
-import PostavyCreateToggle from '@/components/forms/postavy-create-toggle';
+import PostavyCreateToggle from '@/components/postavy/postavy-create-toggle';
 
 export default async function PostavyPage({ searchParams }: PageProps) {
   const session = await getServerSession(authOptions);
@@ -32,7 +31,8 @@ export default async function PostavyPage({ searchParams }: PageProps) {
     <div>
       <h2>Postavy</h2>
       {isEditing && canCreate && <PostavyCreateToggle />}
-      <ul>
+      <PostavyList postavy={postavy} userId={userId} />
+      {/*<ul>
         {postavy.map((p) => (
           <li
             key={p.id}
@@ -54,7 +54,7 @@ export default async function PostavyPage({ searchParams }: PageProps) {
             {p.authorId === userId && <EditPostavy id={p.id} />}
           </li>
         ))}
-      </ul>
+      </ul>*/}
 
       {/*<ul>
         <li>

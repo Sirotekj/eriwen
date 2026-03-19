@@ -17,8 +17,9 @@ export async function getPostavy(): Promise<Postava[]> {
 }
 
 export async function SavePostavy(postava: PostavaType, image: File) {
+  const env = process.env.NODE_ENV;
   const extension = image.name.split('.').pop() as string;
-  const fileName = `postava_${postava.order}.${extension}`;
+  const fileName = `${env}/postava_${postava.order}.${extension}`;
 
   const blob = await put(fileName, image, {
     access: 'public',

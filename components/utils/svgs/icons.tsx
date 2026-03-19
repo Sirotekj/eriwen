@@ -9,7 +9,7 @@ export function IconKey(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export function IconFeather(props: React.SVGProps<SVGSVGElement>) {
+export function IconEdit(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 64 64" fill="currentColor" {...props}>
       <path
