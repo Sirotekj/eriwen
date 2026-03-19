@@ -74,7 +74,8 @@ export async function createAction(
   revalidatePath('/postavy');
   redirect('/postavy');
 }
-export async function deleteAction(id: string) {
+export async function deleteAction(formData: FormData) {
+  const id = formData.get('id') as string;
   await DeletePostavy(id);
   revalidatePath('/postavy');
   redirect('/postavy');

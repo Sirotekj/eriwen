@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import FormPostava from '@/components/forms/form-postava';
+import PostavyForm from '@/components/forms/postavy-form';
 import ButtonPage from '@/components/utils/button-page';
 import { IconEdit } from '@/components/utils/svgs/icons';
 
@@ -12,7 +12,7 @@ export default function PostavyCreateToggle() {
   if (isOpen) {
     return (
       <div className="form-container">
-        <FormPostava onClose={() => setIsOpen(false)} />
+        <PostavyForm onClose={() => setIsOpen(false)} />
       </div>
     );
   }

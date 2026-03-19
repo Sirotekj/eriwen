@@ -31,30 +31,7 @@ export default async function PostavyPage({ searchParams }: PageProps) {
     <div>
       <h2>Postavy</h2>
       {isEditing && canCreate && <PostavyCreateToggle />}
-      <PostavyList postavy={postavy} userId={userId} />
-      {/*<ul>
-        {postavy.map((p) => (
-          <li
-            key={p.id}
-            className="my-4 after-content-[''] after:block after:clear-both"
-          >
-            <strong>{p.name}</strong> – {p.race} ({p.profession})
-            {p.image && (
-              <ImageWrapper>
-                <Image
-                  className="object-cover w-1/3"
-                  src={p.image}
-                  alt={p.id}
-                  fill
-                />
-              </ImageWrapper>
-            )}
-            <p>{p.content}</p>
-            <span>{p.authorId}</span>
-            {p.authorId === userId && <EditPostavy id={p.id} />}
-          </li>
-        ))}
-      </ul>*/}
+      <PostavyList postavy={postavy} userId={userId} isEditing={isEditing} />
 
       {/*<ul>
         <li>

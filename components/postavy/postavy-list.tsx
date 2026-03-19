@@ -1,38 +1,61 @@
-import Image from 'next/image';
+'use client';
+import { useState } from 'react';
 import { Postava } from '@prisma/client';
-import ImageWrapper from '@/components/utils/image-wrapper';
-import EditArticle from '@/components/utils/edit-article';
+
+import PostavyItem from './postavy-item';
+import PostavyDelete from './postavy-delete';
+import PostavyForm from '../forms/postavy-form';
 
 type Props = {
   postavy: Postava[];
   userId: string | undefined;
+  isEditing: boolean;
 };
 
-const PostavyList = ({ postavy, userId }: Props) => {
+const PostavyList = ({ postavy, userId, isEditing }: Props) => {
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const handleClose = () => {
+    setEditingId(null);
+  };
+  const openDeleteModal = () => {
+    setDeleteModal(true);
+  };
+  const closeDeleteModal = () => {
+    setDeleteModal(false);
+  };
   return (
-    <ul>
-      {postavy.map((p) => (
-        <li
-          key={p.id}
-          className="relative my-4 after-content-[''] after:block after:clear-both"
-        >
-          <strong>{p.name}</strong> – {p.race} ({p.profession})
-          {p.image && (
-            <ImageWrapper>
-              <Image
-                className="object-cover w-1/3"
-                src={p.image}
-                alt={p.id}
-                fill
+    <>
+      <ul>
+        {postavy.map((postava) => (
+          <li
+            key={postava.id}
+            className="relative my-4 after-content-[''] after:block after:clear-both"
+          >
+            {editingId === postava.id ? (
+              <PostavyForm
+                initialData={postava}
+                onClose={() => handleClose()}
               />
-            </ImageWrapper>
-          )}
-          <p>{p.content}</p>
-          <span>{p.authorId}</span>
-          {p.authorId === userId && <EditArticle id={p.id} />}
-        </li>
-      ))}
-    </ul>
+            ) : (
+              <PostavyItem
+                postava={postava}
+                userId={userId}
+                isEditing={isEditing}
+                handleEdit={() => setEditingId(postava.id)}
+                handleDelete={() => {
+                  setEditingId(postava.id);
+                  openDeleteModal();
+                }}
+              />
+            )}
+          </li>
+        ))}
+      </ul>
+      {deleteModal && editingId && (
+        <PostavyDelete id={editingId} onClose={() => closeDeleteModal()} />
+      )}
+    </>
   );
 };
 export default PostavyList;
