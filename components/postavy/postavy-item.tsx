@@ -1,11 +1,16 @@
-import { Postava } from '@prisma/client';
 import Image from 'next/image';
+
+import { Postava } from '@prisma/client';
+import { Role } from '@prisma/client';
+
+import { permissions } from '@/lib/permissions';
 
 import EditPostavy from '@/components/utils/edit-article';
 import ImageWrapper from '@/components/utils/image-wrapper';
 
 type Props = {
   postava: Postava;
+  role: Role | undefined;
   userId: string | undefined;
   isEditing: boolean;
   handleEdit: () => void;
@@ -13,11 +18,17 @@ type Props = {
 };
 export default function PostavyItem({
   postava,
+  role,
   userId,
   isEditing,
   handleEdit,
   handleDelete,
 }: Props) {
+  const canEdit = permissions.canEdit({
+    role,
+    userId,
+    authorId: postava.authorId,
+  });
   return (
     <>
       <strong>{postava.name}</strong> – {postava.race} ({postava.profession})
@@ -33,7 +44,7 @@ export default function PostavyItem({
       )}
       <p>{postava.content}</p>
       <span>{postava.authorId}</span>
-      {isEditing && postava.authorId === userId && (
+      {isEditing && canEdit && (
         <EditPostavy
           handleEdit={() => handleEdit()}
           handleDelete={() => handleDelete()}

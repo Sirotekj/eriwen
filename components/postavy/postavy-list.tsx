@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Postava } from '@prisma/client';
+import { Role } from '@prisma/client';
 
 import PostavyItem from './postavy-item';
 import PostavyDelete from './postavy-delete';
@@ -8,11 +9,12 @@ import PostavyForm from '../forms/postavy-form';
 
 type Props = {
   postavy: Postava[];
+  role: Role | undefined;
   userId: string | undefined;
   isEditing: boolean;
 };
 
-const PostavyList = ({ postavy, userId, isEditing }: Props) => {
+const PostavyList = ({ postavy, role, userId, isEditing }: Props) => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const handleClose = () => {
@@ -40,6 +42,7 @@ const PostavyList = ({ postavy, userId, isEditing }: Props) => {
             ) : (
               <PostavyItem
                 postava={postava}
+                role={role}
                 userId={userId}
                 isEditing={isEditing}
                 handleEdit={() => setEditingId(postava.id)}

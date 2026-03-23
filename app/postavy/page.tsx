@@ -24,14 +24,19 @@ export default async function PostavyPage({ searchParams }: PageProps) {
   const { isEditing } = getEditMode(role, editParamOn);
 
   const canCreate = permissions.canCreate({ role });
+
   const postavy = await getPostavy();
-  console.log(isEditing, canCreate);
 
   return (
     <div>
       <h2>Postavy</h2>
       {isEditing && canCreate && <PostavyCreateToggle />}
-      <PostavyList postavy={postavy} userId={userId} isEditing={isEditing} />
+      <PostavyList
+        postavy={postavy}
+        role={role}
+        userId={userId}
+        isEditing={isEditing}
+      />
 
       {/*<ul>
         <li>
