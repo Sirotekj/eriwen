@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import FormPostava from '@/components/forms/form-postava';
+import PostavyForm from '@/components/forms/postavy-form';
 import ButtonPage from '@/components/utils/button-page';
-import { IconFeather } from '@/components/utils/svgs/icons';
+import { IconEdit } from '@/components/utils/svgs/icons';
 
 export default function PostavyCreateToggle() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +12,7 @@ export default function PostavyCreateToggle() {
   if (isOpen) {
     return (
       <div className="form-container">
-        <FormPostava onClose={() => setIsOpen(false)} />
+        <PostavyForm onClose={() => setIsOpen(false)} />
       </div>
     );
   }
@@ -25,7 +25,7 @@ export default function PostavyCreateToggle() {
         console.log(isOpen);
       }}
     >
-      <IconFeather /> Přidat postavu
+      <IconEdit /> Přidat postavu
     </ButtonPage>
   );
 }

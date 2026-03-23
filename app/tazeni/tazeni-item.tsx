@@ -6,7 +6,7 @@ type Props = {
 
 export default function TazeniItem({ tazeni }: Props) {
   return (
-    <li>
+    <>
       <h3>{tazeni.name}</h3>
 
       <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
@@ -21,6 +21,6 @@ export default function TazeniItem({ tazeni }: Props) {
       </dl>
 
       <p>{tazeni.content}</p>
-    </li>
+    </>
   );
 }

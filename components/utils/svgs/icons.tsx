@@ -9,7 +9,7 @@ export function IconKey(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export function IconFeather(props: React.SVGProps<SVGSVGElement>) {
+export function IconEdit(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 64 64" fill="currentColor" {...props}>
       <path
@@ -35,6 +35,16 @@ export function IconDelete(props: React.SVGProps<SVGSVGElement>) {
         d="M25 35.5C17.6667 40.4153 10.5 45 0 59.3616L29 40.5C37.6667 51.6412 41.5 54.5 49 61C45 52.5 38 40.323 34 36.5C46.5556 26.2326 53.5 22 64 7.91525C55 12 38.0556 25.274 30.5 31.5C23.5 21.6695 15.5 9.5 6.33333 3C9.66667 12.8305 20.3333 28.9463 25 35.5Z"
         fill="currentColor"
       />
+    </svg>
+  );
+}
+
+export function IconMenuMobile(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M5 6.5H19V8H5V6.5Z" fill="currentColor" />
+      <path d="M5 16.5H19V18H5V16.5Z" fill="currentColor" />
+      <path d="M5 11.5H19V13H5V11.5Z" fill="currentColor" />
     </svg>
   );
 }

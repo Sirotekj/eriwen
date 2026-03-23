@@ -1,10 +1,10 @@
 'use client';
 
-import { deleteAction } from '@/lib/postavy-actions';
+import { deleteAction } from '@/lib/tazeni-actions';
 import ButtonPage from '@/components/utils/button-page';
 import { IconDelete } from '@/components/utils/svgs/icons';
 
-export default function EditPostavy({ id }: { id: string }) {
+export default function EditTazeni({ id }: { id: string }) {
   return (
     <ButtonPage type="button" onClick={() => deleteAction(id)}>
       <IconDelete className="text-red" />

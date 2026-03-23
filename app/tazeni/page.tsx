@@ -6,6 +6,7 @@ import { getEditMode } from '@/lib/edit-mode';
 import { permissions } from '@/lib/permissions';
 import { getTazeni } from '@/lib/tazeni';
 
+import EditTazeni from './edit';
 import TazeniItem from './tazeni-item';
 import FormTazeni from '@/components/forms/form-tazeni';
 
@@ -28,6 +29,10 @@ export default async function TazeniPage({ searchParams }: PageProps) {
   return (
     <div>
       <h2>Tažení</h2>
+      <blockquote>
+        Zde můžete nalézt všechna dobrodružství, která postavy zažili. Co a kdy
+        se stalo, kdo se tažení zůčastnil a jak to všechno dopadlo.
+      </blockquote>
       {isEditing && canCreate && <FormTazeni />}
       <ul>
         {(await tazeniList).map((tazeni) => {
@@ -38,7 +43,12 @@ export default async function TazeniPage({ searchParams }: PageProps) {
           };
           const canEdit = permissions.canEdit(ctx);
           const canDelete = permissions.canDelete(ctx);
-          return <TazeniItem key={tazeni.id} tazeni={tazeni} />;
+          return (
+            <li key={tazeni.id}>
+              <TazeniItem tazeni={tazeni} />
+              {tazeni.authorId === userId && <EditTazeni id={tazeni.id} />}
+            </li>
+          );
         })}
       </ul>
       <div>

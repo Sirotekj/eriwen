@@ -1,7 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
 export default function MainMenuSub() {
   return (
-    <ul className="absolute opacity-0 invisible left-[-12px] right-[-12px] border bg-background border-stone-500 py-2 px-4 group-hover:opacity-100 group-hover:visible transition-all duration-200">
+    <ul className="absolute opacity-0 invisible -left-3 -right-3 border bg-background border-stone-500 py-2 px-4 group-hover:opacity-100 group-hover:visible transition-all duration-200">
       <li className="text-center">
         <Link href="/svet/kraje-a-mista">Kraje a místa</Link>
       </li>

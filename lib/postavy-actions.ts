@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 import { SavePostavy } from '@/lib/postavy-prisma';
+import { UpdatePostavy } from '@/lib/postavy-prisma';
 import { DeletePostavy } from '@/lib/postavy-prisma';
 
 import { FormState } from '@/types/types';
@@ -20,6 +21,7 @@ export async function createAction(
   formData: FormData,
 ): Promise<FormState> {
   console.log('server action start');
+  const id = formData.get('id') as string | null;
   const session = await getServerSession(authOptions);
   if (!session?.user) {
     return { message: 'Nepřihlášený uživatel' };
@@ -30,7 +32,6 @@ export async function createAction(
 
   if (!canCreate) {
     return { message: 'Nemáš přístup' };
-    //throw new Error('Nemáš přístup');
   }
   const lastPostava = await prisma.postava.findFirst({
     orderBy: {
@@ -54,7 +55,6 @@ export async function createAction(
     content: formData.get('pribeh') as string,
     campaign: formData.get('tazeni') as string,
     order: newOrder,
-    //image: image.name as string,
     author: {
       connect: {
         id: session.user.id,
@@ -64,17 +64,21 @@ export async function createAction(
   if (
     isInvalidText(postava.name) ||
     isInvalidText(postava.race) ||
-    isInvalidText(postava.profession) ||
-    isInvalidText(postava.content) ||
-    isInvalidText(postava.campaign)
+    isInvalidText(postava.profession)
   ) {
     return { message: 'Neplatná data formuláře' };
   }
-  await SavePostavy(postava, imageFile);
+  if (id) {
+    await UpdatePostavy(postava, imageFile, id);
+  } else {
+    await SavePostavy(postava, imageFile);
+  }
   revalidatePath('/postavy');
   redirect('/postavy');
 }
-export async function deleteAction(id: string) {
+
+export async function deleteAction(formData: FormData) {
+  const id = formData.get('id') as string;
   await DeletePostavy(id);
   revalidatePath('/postavy');
   redirect('/postavy');

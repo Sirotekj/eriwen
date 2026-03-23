@@ -41,8 +41,10 @@ export default function ImagePicker({
     <div>
       <label htmlFor={name}>{label}</label>
       <div className="controls">
-        <div className="preview">
-          {!pickedImage && <p>No image picked yet.</p>}
+        <div>
+          {!pickedImage && (
+            <p className="w-[30%] aspect-3/4 border">No image picked yet.</p>
+          )}
           {pickedImage && (
             <Image
               src={pickedImage}
