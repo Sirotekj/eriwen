@@ -28,11 +28,18 @@ const MainMenuMobile = () => {
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="p-4 flex justify-end cursor-pointer">
-          <button onClick={closeMenu}>✕</button>
+        <div className="flex justify-end">
+          <button className="p-4 cursor-pointer" onClick={closeMenu}>
+            ✕
+          </button>
         </div>
 
         <ul className="flex flex-col gap-4 p-4 text-lg">
+          <li>
+            <Link href="/" onClick={closeMenu}>
+              Úvod
+            </Link>
+          </li>
           <li>
             <Link href="/svet" onClick={closeMenu}>
               Svět

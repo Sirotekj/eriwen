@@ -9,6 +9,14 @@ export default function MainMenu() {
     <>
       <nav className="fixed flex flex-row-reverse w-full top-0 z-100 bg-linear-to-b from-black/75 to-black/0">
         <ul className="text-light font-headlines flex">
+          <li className="menu-item hidden md:inline">
+            <Link
+              className="flex items-center px-8 py-2 text-center uppercase"
+              href="/"
+            >
+              Úvod
+            </Link>
+          </li>
           <li className="menu-item group hidden md:inline">
             <Link
               className="flex items-center px-8 py-2 text-center uppercase"
