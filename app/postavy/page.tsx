@@ -30,6 +30,10 @@ export default async function PostavyPage({ searchParams }: PageProps) {
   return (
     <div>
       <h2>Postavy</h2>
+      <blockquote></blockquote>
+      <p>
+        Zde můžete najít stručný popis postav a jakých tažení se zúčastnili.
+      </p>
       {isEditing && canCreate && <PostavyCreateToggle />}
       <PostavyList
         postavy={postavy}

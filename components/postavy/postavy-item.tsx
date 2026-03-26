@@ -31,7 +31,10 @@ export default function PostavyItem({
   });
   return (
     <>
-      <strong>{postava.name}</strong> – {postava.race} ({postava.profession})
+      <h3 className="mb0">{postava.name}</h3>
+      <p className="mt0">
+        {postava.race} ({postava.profession})
+      </p>
       {postava.image && (
         <ImageWrapper>
           <Image

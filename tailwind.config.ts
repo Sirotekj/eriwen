@@ -1,3 +1,4 @@
+//import { Metamorphous } from 'next/font/google';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -7,6 +8,7 @@ const config: Config = {
       fontFamily: {
         georgia: ['var(--font-georgia)'],
         cinzel: ['var(--font-cinzel)'],
+        metamorphous: ['var(--font-metamorphous)'],
         greatVibes: ['var(--font-great-vibes)'],
       },
     },
