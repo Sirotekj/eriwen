@@ -51,6 +51,9 @@ const MainMenuMobile = () => {
                 </NavLinkMobile>
               </li>
               <li className="ml-1">
+                <NavLinkMobile href="/svet/mapy">Mapy</NavLinkMobile>
+              </li>
+              <li className="ml-1">
                 <NavLinkMobile href="/svet/nabozenstvi">
                   Náboženství
                 </NavLinkMobile>

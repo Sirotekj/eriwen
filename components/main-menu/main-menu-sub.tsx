@@ -7,6 +7,9 @@ export default function MainMenuSub() {
         <NavLinkSub href="/svet/kraje-a-mista">Kraje a místa</NavLinkSub>
       </li>
       <li className="text-center">
+        <NavLinkSub href="/svet/mapy">Mapy</NavLinkSub>
+      </li>
+      <li className="text-center">
         <NavLinkSub href="/svet/nabozenstvi">Náboženství</NavLinkSub>
       </li>
       <li className="text-center">
