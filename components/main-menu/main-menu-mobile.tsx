@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 
+import NavLinkMobile from './nav-link-mobile';
 import { IconMenuMobile } from '@/components/utils/svgs/icons';
 
 const MainMenuMobile = () => {
@@ -34,45 +34,49 @@ const MainMenuMobile = () => {
           </button>
         </div>
 
-        <ul className="flex flex-col gap-4 p-4 text-lg">
+        <ul className="flex flex-col p-4 text-lg">
           <li>
-            <Link href="/" onClick={closeMenu}>
+            <NavLinkMobile href="/" onClick={closeMenu}>
               Úvod
-            </Link>
+            </NavLinkMobile>
           </li>
           <li>
-            <Link href="/svet" onClick={closeMenu}>
+            <NavLinkMobile href="/svet" onClick={closeMenu}>
               Svět
-            </Link>
+            </NavLinkMobile>
             <ul className="ml-4 text-base list-disc">
               <li className="ml-1">
-                <Link href="/svet/kraje-a-mista">Kraje a místa</Link>
+                <NavLinkMobile href="/svet/kraje-a-mista">
+                  Kraje a místa
+                </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <Link href="/svet/nabozenstvi">Náboženství</Link>
+                <NavLinkMobile href="/svet/nabozenstvi">
+                  Náboženství
+                </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <Link href="/svet/spojenci">Spojenci</Link>
+                <NavLinkMobile href="/svet/spojenci">Spojenci</NavLinkMobile>
               </li>
               <li className="ml-1">
-                <Link href="/svet/nepratele">Nepřátelé</Link>
+                <NavLinkMobile href="/svet/nepratele">Nepřátelé</NavLinkMobile>
               </li>
             </ul>
           </li>
           <li>
-            <Link href="/postavy" onClick={closeMenu}>
+            <NavLinkMobile href="/postavy" onClick={closeMenu}>
               Postavy
-            </Link>
+            </NavLinkMobile>
           </li>
           <li>
-            <Link href="/tazeni" onClick={closeMenu}>
+            <NavLinkMobile href="/tazeni" onClick={closeMenu}>
               Tažení
-            </Link>
+            </NavLinkMobile>
           </li>
           <li>
-            <Link href="/bestiar" onClick={closeMenu}>
+            <NavLinkMobile href="/bestiar" onClick={closeMenu}>
               Bestiář
-            </Link>
+            </NavLinkMobile>
           </li>
         </ul>
       </div>
