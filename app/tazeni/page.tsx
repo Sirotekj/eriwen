@@ -4,13 +4,11 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { getEditMode } from '@/lib/edit-mode';
 import { permissions } from '@/lib/permissions';
-import { getTazeni } from '@/lib/tazeni';
-
-import EditTazeni from './edit';
-import TazeniItem from './tazeni-item';
-import FormTazeni from '@/components/forms/form-tazeni';
 
 import { PageProps } from '@/types/types';
+import { getTazeni } from '@/lib/tazeni';
+import TazeniList from '@/components/tazeni/tazeni-list';
+import TazeniCreateToggle from '@/components/tazeni/tazeni-create-toggle';
 
 export default async function TazeniPage({ searchParams }: PageProps) {
   const session = await getServerSession(authOptions);
@@ -25,32 +23,23 @@ export default async function TazeniPage({ searchParams }: PageProps) {
 
   const canCreate = permissions.canCreate({ role });
 
-  const tazeniList = getTazeni();
+  const tazeni = await getTazeni();
   return (
     <div>
       <h2>Tažení</h2>
-      <blockquote>
+      <blockquote></blockquote>
+      <p>
         Zde můžete nalézt všechna dobrodružství, která postavy zažili. Co a kdy
         se stalo, kdo se tažení zůčastnil a jak to všechno dopadlo.
-      </blockquote>
-      {isEditing && canCreate && <FormTazeni />}
-      <ul>
-        {(await tazeniList).map((tazeni) => {
-          const ctx = {
-            role,
-            userId,
-            authorId: tazeni.authorId,
-          };
-          const canEdit = permissions.canEdit(ctx);
-          const canDelete = permissions.canDelete(ctx);
-          return (
-            <li key={tazeni.id}>
-              <TazeniItem tazeni={tazeni} />
-              {tazeni.authorId === userId && <EditTazeni id={tazeni.id} />}
-            </li>
-          );
-        })}
-      </ul>
+      </p>
+      {isEditing && canCreate && <TazeniCreateToggle />}
+      <TazeniList
+        tazeni={tazeni}
+        role={role}
+        userId={userId}
+        isEditing={isEditing}
+      />
+
       <div>
         <h3>Kniha Ezargoth</h3>
         <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">

@@ -1,16 +1,38 @@
-import { Tazeni } from '@prisma/client';
+import { Tazeni, Role } from '@prisma/client';
 
 type Props = {
   tazeni: Tazeni;
+  role: Role | undefined;
+  userId: string | undefined;
+  isEditing: boolean;
+  handleEdit: () => void;
+  handleDelete: () => void;
 };
 
-const TazeniItem = ({ tazeni }: Props) => {
+const TazeniItem = ({
+  tazeni,
+  role,
+  userId,
+  isEditing,
+  handleEdit,
+  handleDelete,
+}: Props) => {
   return (
     <>
       <h3 className="mb0">{tazeni.name}</h3>
-      <p>Vypravěč: {tazeni.pj}</p>
-      <p>Postavy: {tazeni.postavy}</p>
-      <p>Období: {tazeni.obdobi}</p>
+
+      <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
+        <dt>Vypravěč:</dt>
+        <dd>{tazeni.pj}</dd>
+
+        <dt>Postavy:</dt>
+        <dd>{tazeni.postavy}</dd>
+
+        <dt>Časové období:</dt>
+        <dd>{tazeni.obdobi}</dd>
+      </dl>
+
+      <p>{tazeni.content}</p>
     </>
   );
 };

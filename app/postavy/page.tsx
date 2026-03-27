@@ -4,12 +4,10 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { getEditMode } from '@/lib/edit-mode';
 import { permissions } from '@/lib/permissions';
-import { getPostavy } from '@/lib/postavy-prisma';
-
-import PostavyList from '@/components/postavy/postavy-list';
 
 import { PageProps } from '@/types/types';
-
+import { getPostavy } from '@/lib/postavy-prisma';
+import PostavyList from '@/components/postavy/postavy-list';
 import PostavyCreateToggle from '@/components/postavy/postavy-create-toggle';
 
 export default async function PostavyPage({ searchParams }: PageProps) {

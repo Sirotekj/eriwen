@@ -15,13 +15,13 @@ export default function Home() {
         Toma a chodkyni Ewran.
       </p>
       <p>
-        Po mnoha letech se opět někteří z nich sešli, aby prožívali úplně nová
-        dobrodružství v novém světě.
+        Po mnoha letech se opět někteří z nich sešli, další se přidali, aby
+        prožívali úplně nová dobrodružství v novém světě.
       </p>
       <p>
         A o tomto světě se právě můžete dočíst na těchto stránkách. O
         královstvích a krajích, náboženstvích a jednotlivých bozích, o
-        spojencích a nepřátelích, ale především o naších hrdinech a
+        spojencích a nepřátelích, ale především o našich hrdinech a
         dobrodružstvích, která zde prožívají.
       </p>
     </>

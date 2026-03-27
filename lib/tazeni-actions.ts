@@ -11,7 +11,7 @@ import { DeleteTazeni } from '@/lib/tazeni-prisma';
 
 import { FormState } from '@/types/types';
 
-export async function createTazeni(
+export async function createAction(
   prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
@@ -64,7 +64,8 @@ export async function createTazeni(
   redirect('/tazeni');
 }
 
-export async function deleteAction(id: string) {
+export async function deleteAction(formData: FormData) {
+  const id = formData.get('id') as string;
   await DeleteTazeni(id);
   revalidatePath('/tazeni');
   redirect('/tazeni');

@@ -1,7 +1,7 @@
 'use client';
+
 import { useState } from 'react';
-import { Postava } from '@prisma/client';
-import { Role } from '@prisma/client';
+import { Postava, Role } from '@prisma/client';
 
 import PostavyItem from './postavy-item';
 import PostavyDelete from './postavy-delete';

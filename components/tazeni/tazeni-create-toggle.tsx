@@ -1,17 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import PostavyForm from '@/components/forms/postavy-form';
+import TazeniForm from '@/components/forms/tazeni-form';
 import ButtonPage from '@/components/utils/button-page';
 import { IconEdit } from '@/components/utils/svgs/icons';
 
-export default function PostavyCreateToggle() {
+export default function TazeniCreateToggle() {
   const [isOpen, setIsOpen] = useState(false);
 
   if (isOpen) {
     return (
       <div className="form-container">
-        <PostavyForm onClose={() => setIsOpen(false)} />
+        <TazeniForm onClose={() => setIsOpen(false)} />
       </div>
     );
   }
@@ -23,7 +23,7 @@ export default function PostavyCreateToggle() {
         setIsOpen(true);
       }}
     >
-      <IconEdit /> Přidat postavu
+      <IconEdit /> Přidat tažení
     </ButtonPage>
   );
 }

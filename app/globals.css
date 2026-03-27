@@ -17,53 +17,53 @@
 /* layers */
 /* base */
 
-html {
-  @apply text-base;
-}
+@layer base {
+  html {
+    @apply text-base;
+  }
 
-body {
-  @apply font-serif leading-relaxed;
-}
+  body {
+    @apply font-serif leading-relaxed;
+  }
 
-h1 {
-  font-size: clamp(2.1rem, 4vw, 3.2rem);
-  line-height: 1.1;
-  @apply mt-6 mb-4 font-headlines;
-}
+  h1 {
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    line-height: 1.1;
+    @apply mt-6 mb-4 font-headlines;
+  }
 
-h2 {
-  font-size: clamp(2rem, 3vw, 2.6rem);
-  line-height: 1.15;
-  @apply mt-6 mb-3 font-headlines;
-}
+  h2 {
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    line-height: 1.15;
+    @apply mt-6 mb-3 font-headlines;
+  }
 
-h3 {
-  font-size: clamp(1.6rem, 2.1vw, 2.1rem);
-  line-height: 1.2;
-  @apply mt-6 mb-3 font-headlines;
-}
-h3.mb0 {
-  @apply mb-0;
-}
-h4 {
-  font-size: clamp(1.4rem, 2vw, 1.9rem);
-  line-height: 1.2;
-  @apply mt-6 mb-3 font-headlines;
-}
+  h3 {
+    font-size: clamp(1.6rem, 2.1vw, 2.1rem);
+    line-height: 1.2;
+    @apply mt-6 mb-3 font-headlines;
+  }
+  h3.mb0 {
+    @apply mb-0;
+  }
+  h4 {
+    font-size: clamp(1.4rem, 2vw, 1.9rem);
+    line-height: 1.2;
+    @apply mt-6 mb-3 font-headlines;
+  }
 
-p {
-  font-size: 1rem;
-  line-height: 1.75;
-  @apply my-3;
+  p {
+    line-height: 1.75;
+    @apply my-3 text-sm md:text-base;
+  }
+  p.mt0 {
+    @apply mt-0;
+  }
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    -webkit-text-fill-color: inherit;
+  }
 }
-p.mt0 {
-  @apply mt-0;
-}
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px transparent inset;
-  -webkit-text-fill-color: inherit;
-}
-
 /*components*/
 
 @layer components {
@@ -87,6 +87,11 @@ input:-webkit-autofill {
     &:focus-visible {
       outline: none;
       @apply border-2;
+    }
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+      -webkit-text-fill-color: inherit !important;
+      transition: background-color 9999s ease-in-out 0s;
     }
     @apply w-full mb-4 border;
   }
