@@ -1,10 +1,13 @@
 'use server';
+
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { permissions } from '@/lib/permissions';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+
+import xss from 'xss';
 
 import { SavePostavy } from '@/lib/postavy-prisma';
 import { UpdatePostavy } from '@/lib/postavy-prisma';
@@ -52,6 +55,7 @@ export async function createAction(
     name: formData.get('jmeno') as string,
     race: formData.get('rasa') as string,
     profession: formData.get('povolani') as string,
+    player: xss(formData.get('hrac') as string),
     content: formData.get('pribeh') as string,
     campaign: formData.get('tazeni') as string,
     order: newOrder,
@@ -64,7 +68,8 @@ export async function createAction(
   if (
     isInvalidText(postava.name) ||
     isInvalidText(postava.race) ||
-    isInvalidText(postava.profession)
+    isInvalidText(postava.profession) ||
+    isInvalidText(postava.player)
   ) {
     return { message: 'Neplatná data formuláře' };
   }

@@ -9,6 +9,8 @@ import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
 import ButtonPage from '@/components/utils/button-page';
 
+import JoditRTE from './jodit-rte';
+
 type Props = {
   onClose: () => void;
   initialData?: Postava;
@@ -59,14 +61,23 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             defaultValue={initialData?.campaign ?? ''}
             className="form-input"
           />
-          <label htmlFor="pribeh">Popis:</label>
-          <textarea
+          <label htmlFor="hrac">Hráč:</label>
+          <input
+            type="text"
+            id="hrac"
+            name="hrac"
+            defaultValue={initialData?.player ?? ''}
+            className="form-input"
+          />
+          <label htmlFor="popis">Popis:</label>
+          {/*<textarea
             id="pribeh"
             name="pribeh"
             required
             defaultValue={initialData?.content ?? ''}
             className="form-textarea"
-          />
+          />*/}
+          <JoditRTE name="popis" defaultValue={initialData?.content ?? ''} />
           <ImagePicker label="Your image" name="image" />
           {state.message && <p>{state.message}</p>}
           <div className="flex justify-between mt-4">

@@ -30,12 +30,12 @@ model User {
 
 model Tazeni {
   id        String   @id @default(cuid())
-  name      String?
-  pj        String?
-  obdobi    String?
-  postavy   String?
-  content   String?
-  image      String?
+  name      String
+  master    String
+  players   String
+  content   String
+  period    String?
+  image     String?
   authorId  String
   createdAt DateTime @default(now())
   order     Int      @default(0)
@@ -51,6 +51,7 @@ model Postava {
   name       String
   race       String
   profession String
+  player     String
   campaign   String?
   content    String?
   image      String?

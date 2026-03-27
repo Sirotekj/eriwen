@@ -8,6 +8,8 @@ import { permissions } from '@/lib/permissions';
 import EditPostavy from '@/components/utils/edit-article';
 import ImageWrapper from '@/components/utils/image-wrapper';
 
+import SafeContent from '@/components/utils/clear-xss';
+
 type Props = {
   postava: Postava;
   role: Role | undefined;
@@ -35,6 +37,7 @@ export default function PostavyItem({
       <p className="mt0">
         {postava.race} ({postava.profession})
       </p>
+      <p>Hráč: {postava.player}</p>
       {postava.image && (
         <ImageWrapper>
           <Image
@@ -45,7 +48,7 @@ export default function PostavyItem({
           />
         </ImageWrapper>
       )}
-      <p>{postava.content}</p>
+      <p>{postava.content ? SafeContent(postava.content) : ''}</p>
       <span>{postava.authorId}</span>
       {isEditing && canEdit && (
         <EditPostavy
