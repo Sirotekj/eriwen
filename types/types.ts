@@ -9,11 +9,11 @@ export type PageProps = {
 };
 
 export type PostavaType = {
-  name: string;
-  race: string;
-  profession: string;
-  content: string;
-  campaign: string;
+  jmeno: string;
+  rasa: string;
+  povolani: string;
+  popis: string;
+  tazeni: string;
   order: number;
   //image: string;
   author: {
@@ -24,11 +24,11 @@ export type PostavaType = {
 };
 
 export type TazeniType = {
-  name: string;
-  pj: string;
+  jmeno: string;
+  svypravec: string;
   obdobi: string;
   postavy: string;
-  content: string;
+  pribeh: string;
   order: number;
   //image: string;
   author: {

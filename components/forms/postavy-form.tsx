@@ -30,7 +30,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
               type="text"
               id="jmeno"
               name="jmeno"
-              defaultValue={initialData?.name}
+              defaultValue={initialData?.jmeno}
               required
               className="form-input"
             />
@@ -40,7 +40,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             type="text"
             id="rasa"
             name="rasa"
-            defaultValue={initialData?.race}
+            defaultValue={initialData?.rasa}
             required
             className="form-input"
           />
@@ -49,7 +49,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             type="text"
             id="povolani"
             name="povolani"
-            defaultValue={initialData?.profession}
+            defaultValue={initialData?.povolani}
             required
             className="form-input"
           />
@@ -58,7 +58,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             type="text"
             id="tazeni"
             name="tazeni"
-            defaultValue={initialData?.campaign ?? ''}
+            defaultValue={initialData?.tazeni ?? ''}
             className="form-input"
           />
           <label htmlFor="hrac">Hráč:</label>
@@ -66,7 +66,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             type="text"
             id="hrac"
             name="hrac"
-            defaultValue={initialData?.player ?? ''}
+            defaultValue={initialData?.hrac ?? ''}
             className="form-input"
           />
           <label htmlFor="popis">Popis:</label>
@@ -77,7 +77,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             defaultValue={initialData?.content ?? ''}
             className="form-textarea"
           />*/}
-          <JoditRTE name="popis" defaultValue={initialData?.content ?? ''} />
+          <JoditRTE name="popis" defaultValue={initialData?.popis ?? ''} />
           <ImagePicker label="Your image" name="image" />
           {state.message && <p>{state.message}</p>}
           <div className="flex justify-between mt-4">

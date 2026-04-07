@@ -52,12 +52,12 @@ export async function createAction(
   }
 
   const postava = {
-    name: formData.get('jmeno') as string,
-    race: formData.get('rasa') as string,
-    profession: formData.get('povolani') as string,
-    player: xss(formData.get('hrac') as string),
-    content: formData.get('pribeh') as string,
-    campaign: formData.get('tazeni') as string,
+    jmeno: formData.get('jmeno') as string,
+    rasa: formData.get('rasa') as string,
+    povolani: formData.get('povolani') as string,
+    hrac: xss(formData.get('hrac') as string),
+    popis: formData.get('popis') as string,
+    tazeni: formData.get('tazeni') as string,
     order: newOrder,
     author: {
       connect: {
@@ -66,10 +66,10 @@ export async function createAction(
     },
   };
   if (
-    isInvalidText(postava.name) ||
-    isInvalidText(postava.race) ||
-    isInvalidText(postava.profession) ||
-    isInvalidText(postava.player)
+    isInvalidText(postava.jmeno) ||
+    isInvalidText(postava.rasa) ||
+    isInvalidText(postava.povolani) ||
+    isInvalidText(postava.hrac)
   ) {
     return { message: 'Neplatná data formuláře' };
   }

@@ -10,7 +10,7 @@ export async function getPostavy(): Promise<Postava[]> {
   return withRetry(() =>
     prisma.postava.findMany({
       orderBy: {
-        name: 'asc',
+        jmeno: 'asc',
       },
     }),
   );

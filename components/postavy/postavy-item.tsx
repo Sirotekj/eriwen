@@ -33,11 +33,11 @@ export default function PostavyItem({
   });
   return (
     <>
-      <h3 className="mb0">{postava.name}</h3>
+      <h3 className="mb0">{postava.jmeno}</h3>
       <p className="mt0">
-        {postava.race} ({postava.profession})
+        {postava.rasa} ({postava.povolani})
       </p>
-      <p>Hráč: {postava.player}</p>
+      <p>Hráč: {postava.hrac}</p>
       {postava.image && (
         <ImageWrapper>
           <Image
@@ -48,7 +48,7 @@ export default function PostavyItem({
           />
         </ImageWrapper>
       )}
-      <p>{postava.content ? SafeContent(postava.content) : ''}</p>
+      <p>{postava.popis ? SafeContent(postava.popis) : ''}</p>
       <span>{postava.authorId}</span>
       {isEditing && canEdit && (
         <EditPostavy

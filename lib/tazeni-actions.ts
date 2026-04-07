@@ -45,11 +45,11 @@ export async function createAction(
   }
 
   const tazeni = {
-    name: formData.get('jmeno') as string,
-    pj: formData.get('pj') as string,
+    jmeno: formData.get('jmeno') as string,
+    vypravec: formData.get('vypravec') as string,
     obdobi: formData.get('obdobi') as string,
     postavy: formData.get('postavy') as string,
-    content: formData.get('pribeh') as string,
+    pribeh: formData.get('pribeh') as string,
     order: newOrder,
     //image: image.name as string,
     author: {

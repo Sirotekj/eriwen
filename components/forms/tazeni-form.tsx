@@ -24,20 +24,20 @@ export default function TazeniForm({ onClose, initialData }: Props) {
           action={formAction}
           className="border grid grid-cols-[120px_auto_120px_auto] gap-x-2 gap-y-4 p-4 mb-8 rounded-sm"
         >
-          <label htmlFor="name">Název:</label>
+          <label htmlFor="jmeno">Název:</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            defaultValue={initialData?.name ?? ''}
+            id="jmeno"
+            name="jmeno"
+            defaultValue={initialData?.jmeno ?? ''}
             className="rounded-sm border"
             required
           />
-          <label htmlFor="pj">PJ:</label>
+          <label htmlFor="vypravec">PJ:</label>
           <input
             type="text"
-            id="pj"
-            name="pj"
+            id="vypravec"
+            name="vypravec"
             className="rounded-sm border"
             required
           />

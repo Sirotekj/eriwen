@@ -19,11 +19,11 @@ const TazeniItem = ({
 }: Props) => {
   return (
     <>
-      <h3 className="mb0">{tazeni.name}</h3>
+      <h3 className="mb0">{tazeni.jmeno}</h3>
 
       <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
         <dt>Vypravěč:</dt>
-        <dd>{tazeni.pj}</dd>
+        <dd>{tazeni.vypravec}</dd>
 
         <dt>Postavy:</dt>
         <dd>{tazeni.postavy}</dd>
@@ -32,7 +32,7 @@ const TazeniItem = ({
         <dd>{tazeni.obdobi}</dd>
       </dl>
 
-      <p>{tazeni.content}</p>
+      <p>{tazeni.pribeh}</p>
     </>
   );
 };
