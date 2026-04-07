@@ -32,7 +32,7 @@ model Tazeni {
   id        String   @id @default(cuid())
   jmeno      String
   vypravec    String
-  hraci   String
+  postavy   String
   pribeh   String
   obdobi    String?
   image     String?

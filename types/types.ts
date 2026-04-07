@@ -25,7 +25,7 @@ export type PostavaType = {
 
 export type TazeniType = {
   jmeno: string;
-  svypravec: string;
+  vypravec: string;
   obdobi: string;
   postavy: string;
   pribeh: string;
