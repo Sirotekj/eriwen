@@ -43,7 +43,9 @@ export default function ImagePicker({
       <div className="controls">
         <div>
           {!pickedImage && (
-            <p className="w-[30%] aspect-3/4 border">No image picked yet.</p>
+            <p className="w-[30%] aspect-3/4 p-2 border">
+              No image picked yet.
+            </p>
           )}
           {pickedImage && (
             <Image

@@ -6,39 +6,39 @@ export default function BestiarPage() {
       <table className="text-left">
         <tbody>
           <tr>
-            <th className="p-1 w-1/2 border">Životy: 21</th>
-            <th className="p-1 border">Úroveň: 4</th>
+            <td className="p-1 w-1/2 border">Životy: 21</td>
+            <td className="p-1 border">Úroveň: 4</td>
           </tr>
           <tr>
-            <th className="p-1 border">
+            <td className="p-1 border">
               Atributy: SIL 14 (+2), OBR 14 (+2), ODO 14 (+2), INT 1 (-5), CHAR
               9 (-1)
-            </th>
+            </td>
 
-            <th className="p-1 border">Velikost: B</th>
+            <td className="p-1 border">Velikost: B</td>
           </tr>
           <tr>
-            <th className="p-1 border">
+            <td className="p-1 border">
               Útočné číslo: (2+4/+1) = 6/+1 (zuby, drápy)
-            </th>
-            <th className="p-1 border"></th>
+            </td>
+            <td className="p-1 border"></td>
           </tr>
 
           <tr>
-            <th className="p-1 border">
+            <td className="p-1 border">
               Základní obrana: (2+1) = 3 (řasy) Zvl. schopnost: termovize, 2 ú/o
               za kolo, pasti* Obranné číslo: (2+1+3) = 6 (řasy)
-            </th>
-            <th className="p-1 border"></th>
+            </td>
+            <td className="p-1 border"></td>
           </tr>
           <tr>
-            <th className="p-1 border">Pohyblivost: 40</th>
-            <th className="p-1 border"></th>
+            <td className="p-1 border">Pohyblivost: 40</td>
+            <td className="p-1 border"></td>
           </tr>
 
           <tr>
-            <th className="p-1 border">Zkušenost: 100</th>
-            <th className="p-1 border">Poklad: kyselina</th>
+            <td className="p-1 border">Zkušenost: 100</td>
+            <td className="p-1 border">Poklad: kyselina</td>
           </tr>
         </tbody>
       </table>
