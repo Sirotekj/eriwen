@@ -21,7 +21,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
   const [state, formAction] = useActionState(createAction, { message: null });
   return (
     <>
-      <header>Přidání postavy</header>
+      <header>Přidat postavu</header>
       <main>
         <form action={formAction} className="form">
           <div className="">

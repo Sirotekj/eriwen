@@ -14,6 +14,7 @@ export type PostavaType = {
   povolani: string;
   popis: string;
   tazeni: string;
+  hrac: string;
   order: number;
   //image: string;
   author: {

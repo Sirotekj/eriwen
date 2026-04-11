@@ -6,6 +6,8 @@ import { permissions } from '@/lib/permissions';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
+import xss from 'xss';
+
 import { SaveTazeni } from '@/lib/tazeni-prisma';
 import { DeleteTazeni } from '@/lib/tazeni-prisma';
 
@@ -49,7 +51,7 @@ export async function createAction(
     vypravec: formData.get('vypravec') as string,
     obdobi: formData.get('obdobi') as string,
     postavy: formData.get('postavy') as string,
-    pribeh: formData.get('pribeh') as string,
+    pribeh: xss(formData.get('pribeh') as string),
     order: newOrder,
     //image: image.name as string,
     author: {

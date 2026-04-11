@@ -55,8 +55,8 @@ export async function createAction(
     jmeno: formData.get('jmeno') as string,
     rasa: formData.get('rasa') as string,
     povolani: formData.get('povolani') as string,
-    hrac: xss(formData.get('hrac') as string),
-    popis: formData.get('popis') as string,
+    hrac: formData.get('hrac') as string,
+    popis: xss(formData.get('popis') as string),
     tazeni: formData.get('tazeni') as string,
     order: newOrder,
     author: {
