@@ -1,12 +1,15 @@
-import Image from "next/image";
+import Image from 'next/image';
 export default function SpojenciPage() {
   return (
     <div>
       <h2>Spojenci</h2>
+      <p>Stránka je v přípravě!</p>
       <p>
         Výčet spojenců a přátel družiny, na které narazila v průběhu svých
         dobrodružství.
       </p>
+
+      <h2>Příklad</h2>
       <h3>Společnost „Oris a synové“</h3>
       <p>
         Největší doručovací společnost v Krompachu. Zařizuje přepravu zboží
@@ -19,7 +22,7 @@ export default function SpojenciPage() {
       <h4>Alexandr Oris</h4>
       <p>
         Hlava společnosti. Významný obchodník a dobrý přítel starosty Krompachu.
-        Má dva syny, staršího <strong>Stefana</strong> a mladšího{" "}
+        Má dva syny, staršího <strong>Stefana</strong> a mladšího{' '}
         <strong>Tyrose</strong>.
       </p>
       <h4>Stefan Oris</h4>

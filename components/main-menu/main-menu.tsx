@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import MainMenuSub from './main-menu-sub';
 import EditIcon from './main-edit';
 import AuthButtons from './main-signin';
@@ -6,6 +5,34 @@ import MainMenuMobile from './main-menu-mobile';
 import NavLink from './nav-link';
 
 export default function MainMenu() {
+  const svetSubMenu = [
+    {
+      url: '/svet/kraje-a-mista',
+      label: 'Kraje a místa',
+    },
+    {
+      url: '/svet/mapy',
+      label: 'Mapy',
+    },
+    {
+      url: '/svet/nabozenstvi',
+      label: 'Náboženství',
+    },
+    {
+      url: '/svet/spojenci',
+      label: 'Spojenci',
+    },
+    {
+      url: '/svet/nepratele',
+      label: 'Nepřátelé',
+    },
+  ];
+  const pravidlaSubMenu = [
+    {
+      url: '/pravidla/bestiar',
+      label: 'Bestiář',
+    },
+  ];
   return (
     <>
       <nav className="fixed flex flex-row-reverse w-full top-0 z-100 bg-linear-to-b from-black/75 to-black/0">
@@ -20,7 +47,7 @@ export default function MainMenu() {
                 &#9650;
               </span>
             </NavLink>
-            <MainMenuSub />
+            <MainMenuSub options={svetSubMenu} />
           </li>
           <li className="menu-item">
             <NavLink href="/postavy">Postavy</NavLink>
@@ -29,7 +56,7 @@ export default function MainMenu() {
             <NavLink href="/tazeni">Tažení</NavLink>
           </li>
           <li className="menu-item">
-            <NavLink href="/bestiar">Bestiář</NavLink>
+            <NavLink href="/pravidla">Pravidla</NavLink>
           </li>
           <li>
             <EditIcon />

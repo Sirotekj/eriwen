@@ -41,6 +41,7 @@ export default async function TazeniPage({ searchParams }: PageProps) {
       />
 
       <div>
+        <h2>Příklad</h2>
         <h3>Kniha Ezargoth</h3>
         <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
           <dt>PJ:</dt>

@@ -2,9 +2,11 @@ export default function NepratelePage() {
   return (
     <div>
       <h2>Nepřátelé</h2>
+      <p>Stránka je v přípravě!</p>
       <p>
         Výčet nepřátel, s nimiž se družina střetla, (ať už je porazila nebo ne).
       </p>
+      <h2>Příklad</h2>
       <h3>Besiah (†)</h3>
       <p>
         <i>Nekromant z kláštera u města Krompach</i>

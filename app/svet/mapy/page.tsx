@@ -3,6 +3,7 @@ export default function MapyPage() {
   return (
     <>
       <h2>Mapy</h2>
+      <p>Stránka je v přípravě!</p>
       <h3>Struktura</h3>
       <ul className="ml-4">
         <li>

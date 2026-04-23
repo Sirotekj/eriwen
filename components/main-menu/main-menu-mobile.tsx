@@ -78,8 +78,13 @@ const MainMenuMobile = () => {
           </li>
           <li>
             <NavLinkMobile href="/bestiar" onClick={closeMenu}>
-              Bestiář
+              Pravidla
             </NavLinkMobile>
+            <ul className="ml-4 text-base list-disc">
+              <li className="ml-1">
+                <NavLinkMobile href="/pravidla/bestiar">Bestiář</NavLinkMobile>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>

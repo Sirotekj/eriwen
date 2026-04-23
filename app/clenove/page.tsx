@@ -5,6 +5,7 @@ export default async function Clenove() {
   return (
     <div>
       <h2>Členové</h2>
+      <p>Stránka je v přípravě!</p>
       <ul>
         {clenove.map((p) => (
           <li key={p.id}>
