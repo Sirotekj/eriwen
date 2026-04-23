@@ -14,9 +14,9 @@ const JoditRTE = ({ name, defaultValue }: Props) => {
   const config = useMemo(
     () => ({
       readonly: false,
-      placeholder: 'Start typing...',
+      placeholder: 'Zde můžete začít psát...',
       toolbarAdaptive: false,
-      buttons: [{ name: 'basic', buttons: ['bold', 'italic', 'paragraph'] }],
+      buttons: [{ name: 'basic', buttons: ['bold', 'italic'] }],
     }),
     [],
   );
