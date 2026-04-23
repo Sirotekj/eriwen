@@ -32,7 +32,7 @@ export default async function TazeniPage({ searchParams }: PageProps) {
         Zde můžete nalézt všechna dobrodružství, která postavy zažili. Co a kdy
         se stalo, kdo se tažení zůčastnil a jak to všechno dopadlo.
       </p>
-      {isEditing && canCreate && <TazeniCreateToggle />}
+      {/*isEditing && canCreate && <TazeniCreateToggle />*/}
       <TazeniList
         tazeni={tazeni}
         role={role}

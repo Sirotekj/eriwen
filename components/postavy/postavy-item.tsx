@@ -33,23 +33,27 @@ export default function PostavyItem({
   });
   return (
     <>
-      <h3 className="mb0">{postava.jmeno}</h3>
-      <p className="mt0">
+      <h3>{postava.jmeno}</h3>
+      <p>
         {postava.rasa} ({postava.povolani})
       </p>
-      <p>Hráč: {postava.hrac}</p>
       {postava.image && (
         <ImageWrapper>
           <Image
-            className="object-cover w-1/3"
+            className="object-cover"
             src={postava.image}
             alt={postava.id}
+            sizes="242px"
             fill
           />
         </ImageWrapper>
       )}
-      <p>{postava.popis ? SafeContent(postava.popis) : ''}</p>
-      <span>{postava.authorId}</span>
+
+      {postava.popis ? SafeContent(postava.popis) : ''}
+
+      <p>Tažení: {postava.tazeni}</p>
+      <p>Hráč: {postava.hrac}</p>
+
       {isEditing && canEdit && (
         <EditPostavy
           handleEdit={() => handleEdit()}

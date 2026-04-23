@@ -31,7 +31,7 @@ export async function createAction(
     //throw new Error('Forbidden');
   }
 
-  const lastPostava = await prisma.postava.findFirst({
+  const lastTazeni = await prisma.tazeni.findFirst({
     orderBy: {
       order: 'desc',
     },
@@ -39,7 +39,7 @@ export async function createAction(
       order: true,
     },
   });
-  const newOrder = lastPostava ? lastPostava.order + 100 : 100;
+  const newOrder = lastTazeni ? lastTazeni.order + 100 : 100;
 
   const imageFile = formData.get('image') as File | null;
   if (!imageFile || imageFile.size === 0) {
@@ -62,8 +62,10 @@ export async function createAction(
   };
 
   await SaveTazeni(tazeni, imageFile);
-  revalidatePath('/tazeni');
-  redirect('/tazeni');
+  //revalidatePath('/tazeni');
+  //redirect('/tazeni');
+
+  return { message: 'created' };
 }
 
 export async function deleteAction(formData: FormData) {

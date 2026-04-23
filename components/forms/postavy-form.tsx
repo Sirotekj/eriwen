@@ -2,7 +2,8 @@
 
 import { Postava } from '@prisma/client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { createAction } from '@/lib/postavy-actions';
 import ImagePicker from '@/components/forms/image-picker';
@@ -19,6 +20,13 @@ type Props = {
 export default function PostavayForm({ onClose, initialData }: Props) {
   //const [state, formAction] = useFormState(createPostava, { message: null });
   const [state, formAction] = useActionState(createAction, { message: null });
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.message === 'created') {
+      router.push('/postavy');
+    }
+  }, [state, router]);
   return (
     <>
       <header>Přidat postavu</header>
@@ -69,7 +77,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             defaultValue={initialData?.hrac ?? ''}
             className="form-input"
           />
-          <label htmlFor="popis">Popis:</label>
+          <label>Popis:</label>
           {/*<textarea
             id="pribeh"
             name="pribeh"
@@ -78,8 +86,15 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             className="form-textarea"
           />*/}
           <JoditRTE name="popis" defaultValue={initialData?.popis ?? ''} />
-          <ImagePicker label="Your image" name="image" />
+          <ImagePicker
+            label="Váš obrázek:"
+            name="image"
+            defaultImage={initialData?.image ?? undefined}
+          />
           {state.message && <p>{state.message}</p>}
+          {initialData?.id && (
+            <input type="hidden" name="id" value={initialData.id} />
+          )}
           <div className="flex justify-between mt-4">
             <FormSubmit />
             <ButtonPage onClick={onClose}>

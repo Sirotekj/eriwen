@@ -2,6 +2,10 @@ export default function BestiarPage() {
   return (
     <div>
       <h1>Bestiář</h1>
+      <p>
+        Tady můžete najít vymyšlené stvůry a nepřátele, kteří jsou důležití,
+        nebo se můžou hodit do budoucna.
+      </p>
       <h3>Řasnatec - malý</h3>
       <table className="text-left">
         <tbody>

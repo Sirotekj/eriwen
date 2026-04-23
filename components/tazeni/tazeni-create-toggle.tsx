@@ -8,22 +8,22 @@ import { IconEdit } from '@/components/utils/svgs/icons';
 export default function TazeniCreateToggle() {
   const [isOpen, setIsOpen] = useState(false);
 
-  if (isOpen) {
-    return (
-      <div className="form-container">
-        <TazeniForm onClose={() => setIsOpen(false)} />
-      </div>
-    );
-  }
-
   return (
-    <ButtonPage
-      className="my-4"
-      onClick={() => {
-        setIsOpen(true);
-      }}
-    >
-      <IconEdit /> Přidat tažení
-    </ButtonPage>
+    <>
+      {isOpen ? (
+        <div className="form-container">
+          <TazeniForm onClose={() => setIsOpen(false)} />
+        </div>
+      ) : (
+        <ButtonPage
+          className="my-4"
+          onClick={() => {
+            setIsOpen(true);
+          }}
+        >
+          <IconEdit /> Přidat tažení
+        </ButtonPage>
+      )}
+    </>
   );
 }

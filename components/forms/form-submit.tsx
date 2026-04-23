@@ -8,6 +8,7 @@ export default function FormSubmit() {
 
   return (
     <button
+      type="submit"
       className="cursor-pointer border rounded-sm p-1 col-start-4 hover:shadow-lg"
       disabled={pending}
     >

@@ -16,16 +16,19 @@ export async function getPostavy(): Promise<Postava[]> {
   );
 }
 
-export async function SavePostavy(postava: PostavaType, image: File) {
+export async function uploadImage(image: File, order: number) {
   const env = process.env.NODE_ENV;
   const extension = image.name.split('.').pop() as string;
-  const fileName = `${env}/postavy/postava_${postava.order}.${extension}`;
-
+  const fileName = `${env}/postavy/postava_${order}.${extension}`;
   const blob = await put(fileName, image, {
     access: 'public',
+    allowOverwrite: true,
   });
-  const imageUrl = blob.url;
 
+  return blob.url;
+}
+
+export async function SavePostavy(postava: PostavaType, imageUrl: string) {
   await prisma.postava.create({
     data: {
       ...postava,
@@ -33,8 +36,20 @@ export async function SavePostavy(postava: PostavaType, image: File) {
     },
   });
 }
-
 export async function UpdatePostavy(
+  postava: PostavaType,
+  imageUrl: string,
+  id: string,
+) {
+  await prisma.postava.update({
+    where: { id },
+    data: {
+      ...postava,
+      image: imageUrl,
+    },
+  });
+}
+/*export async function UpdatePostavy(
   postava: PostavaType,
   image: File,
   id: string,
@@ -74,7 +89,7 @@ export async function UpdatePostavy(
       image: imageUrl,
     },
   });
-}
+}*/
 
 export async function DeletePostavy(id: string) {
   const postava = await prisma.postava.findUnique({

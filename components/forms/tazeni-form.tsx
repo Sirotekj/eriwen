@@ -2,7 +2,8 @@
 
 import { Tazeni } from '@prisma/client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { createAction } from '@/lib/tazeni-actions';
 import ImagePicker from '@/components/forms/image-picker';
@@ -18,6 +19,13 @@ type Props = {
 
 export default function TazeniForm({ onClose, initialData }: Props) {
   const [state, formAction] = useActionState(createAction, { message: null });
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.message === 'created') {
+      router.push('/tazeni');
+    }
+  }, [state, router]);
   return (
     <>
       <header>Přidat tažení</header>
@@ -66,15 +74,13 @@ export default function TazeniForm({ onClose, initialData }: Props) {
               required
             />
           </div>
-          <label htmlFor="pribeh" className="col-start-1">
-            Příběh:
-          </label>
+          <label className="col-start-1">Příběh:</label>
           <JoditRTE name="pribeh" defaultValue={initialData?.pribeh ?? ''} />
           <ImagePicker label="Your image" name="image" />
           {state.message && <p>{state.message}</p>}
           <div className="flex justify-between mt-4">
             <FormSubmit />
-            <ButtonPage onClick={onClose}>
+            <ButtonPage type="button" onClick={onClose}>
               <strong>Zrušit</strong>
             </ButtonPage>
           </div>

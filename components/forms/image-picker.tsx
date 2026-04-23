@@ -2,14 +2,23 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import ButtonPage from '@/components/utils/button-page';
+
+const MAX_SIZE = 1024 * 1024; // 1MB
+const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/webp'];
+
 export default function ImagePicker({
   label,
   name,
+  defaultImage,
 }: {
   label: string;
   name: string;
+  defaultImage?: string | null;
 }) {
-  const [pickedImage, setPickedImage] = useState<string | null>();
+  const [pickedImage, setPickedImage] = useState<string | null>(
+    defaultImage ?? null,
+  );
+  const [error, setError] = useState<string | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   const handlePickClick = () => {
@@ -23,13 +32,27 @@ export default function ImagePicker({
       setPickedImage(null);
       return;
     }
+
+    function validateFile(file: File) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        setPickedImage(null);
+        return 'Povolené formáty jsou PNG, JPG nebo WEBP.';
+      }
+      if (file.size > MAX_SIZE) {
+        setPickedImage(null);
+        return 'Soubor je příliš velký. Maximální velikost je 1 MB.';
+      }
+    }
     const file = files[0];
-    const MAX_SIZE = 1024 * 1024;
-    if (file.size > MAX_SIZE) {
-      alert('Soubor je příliš velký. Maximální velikost je 1 MB.');
+    const validationError = validateFile(file);
+
+    if (validationError) {
+      setError(validationError);
       setPickedImage(null);
       return;
     }
+
+    setError(null);
 
     const fileReader = new FileReader();
     fileReader.onload = () => {
@@ -41,20 +64,21 @@ export default function ImagePicker({
     <div>
       <label htmlFor={name}>{label}</label>
       <div className="controls">
-        <div>
+        <div className="mb-4">
           {!pickedImage && (
-            <p className="w-[30%] aspect-3/4 p-2 border">
-              No image picked yet.
-            </p>
+            <p className="w-[30%] aspect-3/4 p-2 border">Obrázek nevybrán.</p>
           )}
           {pickedImage && (
-            <Image
-              src={pickedImage}
-              alt="The image selected by the user."
-              width={0}
-              height={0}
-              className="w-[30%] h-auto border"
-            />
+            <div className="relative w-[30%] border">
+              <Image
+                src={pickedImage}
+                width={0}
+                height={0}
+                sizes="30vw"
+                alt="Vybraný obrázek."
+                className="w-100 h-auto"
+              />
+            </div>
           )}
         </div>
         <input
@@ -64,12 +88,15 @@ export default function ImagePicker({
           name={name}
           ref={imageInputRef}
           onChange={handleImageChange}
-          required
           className="hidden"
         />
+        {defaultImage && (
+          <input type="hidden" name="existingImage" value={defaultImage} />
+        )}
         <ButtonPage type="button" onClick={handlePickClick}>
           Vyber obrázek
         </ButtonPage>
+        {error && <p className="text-red text-sm">{error}</p>}
       </div>
     </div>
   );
