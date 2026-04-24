@@ -1,15 +1,35 @@
 import Image from 'next/image';
 
 import { Tazeni } from '@prisma/client';
+import { Role } from '@prisma/client';
 
+import { permissions } from '@/lib/permissions';
+
+import EditTazeni from '@/components/utils/edit-article';
 import ImageWrapper from '@/components/utils/image-wrapper';
+
 import SafeContent from '@/components/utils/clear-xss';
 
 type Props = {
   tazeni: Tazeni;
+  role: Role | undefined;
+  userId: string | undefined;
+  handleEdit: () => void;
+  handleDelete: () => void;
 };
 
-const TazeniItem = ({ tazeni }: Props) => {
+const TazeniItem = ({
+  tazeni,
+  role,
+  userId,
+  handleEdit,
+  handleDelete,
+}: Props) => {
+  const canEdit = permissions.canEdit({
+    role,
+    userId,
+    authorId: tazeni.authorId,
+  });
   return (
     <>
       <h3 className="mb0">{tazeni.jmeno}</h3>
@@ -37,7 +57,13 @@ const TazeniItem = ({ tazeni }: Props) => {
         </ImageWrapper>
       )}
 
-      <p>{tazeni.pribeh ? SafeContent(tazeni.pribeh) : ''}</p>
+      <p>{tazeni.pribeh}</p>
+      {canEdit && (
+        <EditTazeni
+          handleEdit={() => handleEdit()}
+          handleDelete={() => handleDelete()}
+        />
+      )}
     </>
   );
 };

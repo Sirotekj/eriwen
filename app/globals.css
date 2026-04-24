@@ -119,3 +119,9 @@ blockquote {
   margin-block: 2rem;
   margin-inline: 6vw;
 }
+blockquote span {
+  display: block;
+  margin-top: 1rem;
+  font-size: 80%;
+  text-align: right;
+}

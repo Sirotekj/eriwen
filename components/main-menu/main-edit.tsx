@@ -1,7 +1,7 @@
 'use client';
 import { Suspense } from 'react';
 import { useSession } from 'next-auth/react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 import { permissions } from '@/lib/permissions';
@@ -12,18 +12,19 @@ import HoverWrapper from '@/components/utils/hover-wrapper';
 export function EditIconInner() {
   const { data: session } = useSession();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   if (!session) return null;
-  console.log(session?.user?.role);
 
   const role = session?.user?.role;
   const canCreate = permissions.canCreate({ role });
 
   if (!canCreate) return null;
 
-  const isEditMode = searchParams.get('edit') === '1';
-  const href = isEditMode ? pathname : `${pathname}?edit=1`;
+  const isEditMode = pathname.endsWith('/edit');
+
+  const href = isEditMode
+    ? pathname.replace('/edit', '') // zpět na detail
+    : `${pathname}/edit`; // do editu
 
   return (
     <HoverWrapper tooltip="Upravit stránky">

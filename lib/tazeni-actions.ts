@@ -1,4 +1,5 @@
 'use server';
+
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -8,16 +9,27 @@ import { revalidatePath } from 'next/cache';
 
 import xss from 'xss';
 
-import { SaveTazeni } from '@/lib/tazeni-prisma';
-import { DeleteTazeni } from '@/lib/tazeni-prisma';
+import {
+  SaveTazeni,
+  UpdateTazeni,
+  DeleteTazeni,
+  uploadImage,
+} from '@/lib/tazeni-prisma';
 
 import { FormState } from '@/types/types';
+
+const isInvalidText = (text: string | null) => {
+  return !text || text.trim() === '';
+};
 
 export async function createAction(
   prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
+  const rawId = formData.get('id') as string | null;
+  const id = rawId && rawId !== '' ? (rawId as string) : null;
   const session = await getServerSession(authOptions);
+
   if (!session?.user) {
     return { message: 'Nepřihlášený uživatel' };
   }
@@ -28,7 +40,6 @@ export async function createAction(
 
   if (!canCreate) {
     return { message: 'Nemáš přístup' };
-    //throw new Error('Forbidden');
   }
 
   const lastTazeni = await prisma.tazeni.findFirst({

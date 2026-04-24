@@ -1,10 +1,23 @@
 export const dynamic = 'force-dynamic';
 
-import { getTazeni } from '@/lib/tazeni';
-import TazeniList from '@/components/tazeni/tazeni-list';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { permissions } from '@/lib/permissions';
 
-export default async function TazeniPage() {
+import { getTazeni } from '@/lib/tazeni';
+import TazeniListEdit from '@/components/tazeni/tazeni-list-edit';
+import TazeniCreateToggle from '@/components/tazeni/tazeni-create-toggle';
+
+export default async function TazeniPageEdit() {
+  const session = await getServerSession(authOptions);
+
+  const role = session?.user?.role;
+  const userId = session?.user?.id;
+
+  const canCreate = permissions.canCreate({ role });
+
   const tazeni = await getTazeni();
+
   return (
     <div>
       <h2>Tažení</h2>
@@ -16,8 +29,13 @@ export default async function TazeniPage() {
         Zde můžete nalézt všechna dobrodružství, která postavy zažili. Co a kdy
         se stalo, kdo se tažení zůčastnil a jak to všechno dopadlo.
       </p>
-
-      <TazeniList tazeni={tazeni} />
+      {canCreate && (
+        <>
+          <TazeniCreateToggle />
+          <p>Pozn.: Nové tažení se přidá nakonec. </p>
+        </>
+      )}
+      <TazeniListEdit tazeni={tazeni} role={role} userId={userId} />
 
       <div>
         <h2>Příklad</h2>

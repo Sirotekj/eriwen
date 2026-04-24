@@ -18,9 +18,9 @@ import {
 
 import { FormState } from '@/types/types';
 
-function isInvalidText(text: string | null) {
+const isInvalidText = (text: string | null) => {
   return !text || text.trim() === '';
-}
+};
 
 export async function createAction(
   prevState: FormState,
