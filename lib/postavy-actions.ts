@@ -61,14 +61,15 @@ export async function createAction(
 
   const imageFile = formData.get('image') as File | null;
   const existingImage = formData.get('existingImage') as string | null;
-  let imageUrl: string;
+  let imageUrl: string | undefined;
 
   if (imageFile && imageFile.size > 0) {
     imageUrl = await uploadImage(imageFile, order);
   } else if (existingImage) {
     imageUrl = existingImage;
   } else {
-    return { message: 'Chybí obrázek' };
+    imageUrl = undefined;
+    //return { message: 'Chybí obrázek' };
   }
 
   const postava = {
@@ -102,7 +103,7 @@ export async function createAction(
   revalidatePath('/postavy');
   redirect('/postavy');
 
-  return { message: 'created' };
+  return { message: 'Vytvořeno' };
 }
 
 export async function deleteAction(formData: FormData) {

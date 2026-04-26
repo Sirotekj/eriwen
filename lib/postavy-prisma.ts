@@ -28,68 +28,30 @@ export async function uploadImage(image: File, order: number) {
   return blob.url;
 }
 
-export async function SavePostavy(postava: PostavaType, imageUrl: string) {
+export async function SavePostavy(
+  postava: PostavaType,
+  imageUrl: string | undefined,
+) {
   await prisma.postava.create({
     data: {
       ...postava,
-      image: imageUrl,
+      image: imageUrl ?? null,
     },
   });
 }
 export async function UpdatePostavy(
   postava: PostavaType,
-  imageUrl: string,
+  imageUrl: string | undefined,
   id: string,
 ) {
   await prisma.postava.update({
     where: { id },
     data: {
       ...postava,
-      image: imageUrl,
+      ...(imageUrl !== undefined && { image: imageUrl }),
     },
   });
 }
-/*export async function UpdatePostavy(
-  postava: PostavaType,
-  image: File,
-  id: string,
-) {
-  const env = process.env.NODE_ENV;
-  const extension = image.name.split('.').pop() as string;
-  const fileName = `${env}/postavy/postava_${postava.order}.${extension}`;
-
-  const existing = await prisma.postava.findUnique({
-    where: { id },
-  });
-  if (!existing) {
-    return { message: 'Postava neexistuje' };
-  }
-
-  let imageUrl = existing.image;
-
-  if (image && image.size > 0) {
-    const blob = await put(fileName, image, {
-      access: 'public',
-    });
-
-    imageUrl = blob.url;
-    if (existing.image) {
-      try {
-        await del(existing.image);
-      } catch (err) {
-        console.log('Nepodařilo se smazat starý obrázek:', err);
-      }
-    }
-  }
-
-  await prisma.postava.update({
-    where: { id },
-    data: {
-      ...postava,
-      image: imageUrl,
-    },
-  });
-}*/
 
 export async function DeletePostavy(id: string) {
   const postava = await prisma.postava.findUnique({

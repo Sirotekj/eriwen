@@ -42,19 +42,62 @@ export async function createAction(
     return { message: 'Nemáš přístup' };
   }
 
-  const lastTazeni = await prisma.tazeni.findFirst({
-    orderBy: {
-      order: 'desc',
-    },
-    select: {
-      order: true,
-    },
-  });
-  const newOrder = lastTazeni ? lastTazeni.order + 100 : 100;
+  const afterOrderRaw = formData.get('afterOrder');
+  const afterOrder = afterOrderRaw ? Number(afterOrderRaw) : undefined;
+
+  let order: number;
+
+  if (id) {
+    const existing = await prisma.tazeni.findUnique({
+      where: { id },
+      select: { order: true },
+    });
+
+    if (!existing) {
+      return { message: 'Záznam nenalezen' };
+    }
+
+    order = existing.order;
+  } else if (afterOrder !== undefined) {
+    const next = await prisma.tazeni.findFirst({
+      where: {
+        order: {
+          gt: afterOrder,
+        },
+      },
+      orderBy: {
+        order: 'asc',
+      },
+      select: {
+        order: true,
+      },
+    });
+    if (next && next.order - afterOrder > 1) {
+      order = Math.floor((afterOrder + next.order) / 2);
+    } else if (next) {
+      order = afterOrder + 100;
+    } else {
+      order = afterOrder + 100;
+    }
+  } else {
+    const last = await prisma.tazeni.findFirst({
+      orderBy: { order: 'desc' },
+      select: { order: true },
+    });
+
+    order = last ? last.order + 100 : 100;
+  }
 
   const imageFile = formData.get('image') as File | null;
-  if (!imageFile || imageFile.size === 0) {
-    return { message: 'Chybí obrázek' };
+  const existingImage = formData.get('existingImage') as string | null;
+  let imageUrl: string | undefined;
+
+  if (imageFile && imageFile.size > 0) {
+    imageUrl = await uploadImage(imageFile, order);
+  } else if (existingImage) {
+    imageUrl = existingImage;
+  } else {
+    imageUrl = undefined;
   }
 
   const tazeni = {
@@ -63,7 +106,7 @@ export async function createAction(
     obdobi: formData.get('obdobi') as string,
     postavy: formData.get('postavy') as string,
     pribeh: xss(formData.get('pribeh') as string),
-    order: newOrder,
+    order: order,
     //image: image.name as string,
     author: {
       connect: {
@@ -71,12 +114,25 @@ export async function createAction(
       },
     },
   };
+  if (
+    isInvalidText(tazeni.jmeno) ||
+    isInvalidText(tazeni.vypravec) ||
+    isInvalidText(tazeni.postavy) ||
+    isInvalidText(tazeni.pribeh)
+  ) {
+    return { message: 'Neplatná data formuláře' };
+  }
 
-  await SaveTazeni(tazeni, imageFile);
-  //revalidatePath('/tazeni');
-  //redirect('/tazeni');
+  if (id) {
+    await UpdateTazeni(tazeni, imageUrl, id);
+  } else {
+    await SaveTazeni(tazeni, imageUrl);
+  }
 
-  return { message: 'created' };
+  revalidatePath('/tazeni');
+  redirect('/tazeni');
+
+  return { message: 'Vytvořeno' };
 }
 
 export async function deleteAction(formData: FormData) {

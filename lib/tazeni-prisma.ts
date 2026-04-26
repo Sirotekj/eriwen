@@ -30,33 +30,28 @@ export async function uploadImage(image: File, order: number) {
   return blob.url;
 }
 
-export async function SaveTazeni(tazeni: TazeniType, image: File) {
-  const extension = image.name.split('.').pop() as string;
-  const fileName = `tazeni_${tazeni.order}.${extension}`;
-  const filePath = path.join(process.cwd(), 'public/images/tazeni', fileName);
-  const buffer = Buffer.from(await image.arrayBuffer());
-
-  await fs.writeFile(filePath, buffer);
-  const imageUrl = `/images/tazeni/${fileName}`;
-
+export async function SaveTazeni(
+  tazeni: TazeniType,
+  imageUrl: string | undefined,
+) {
   await prisma.tazeni.create({
     data: {
       ...tazeni,
-      image: imageUrl,
+      image: imageUrl ?? null,
     },
   });
 }
 
 export async function UpdateTazeni(
   tazeni: TazeniType,
-  imageUrl: string,
+  imageUrl: string | undefined,
   id: string,
 ) {
   await prisma.tazeni.update({
     where: { id },
     data: {
       ...tazeni,
-      image: imageUrl,
+      ...(imageUrl !== undefined && { image: imageUrl }),
     },
   });
 }

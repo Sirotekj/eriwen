@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
-import { Tazeni } from '@prisma/client';
-import { Role } from '@prisma/client';
+import { Tazeni, Role } from '@prisma/client';
 
 import { permissions } from '@/lib/permissions';
 
+import TazeniCreateToggle from '@/components/tazeni/tazeni-create-toggle';
 import EditTazeni from '@/components/utils/edit-article';
 import ImageWrapper from '@/components/utils/image-wrapper';
 
@@ -57,13 +57,14 @@ const TazeniItem = ({
         </ImageWrapper>
       )}
 
-      <p>{tazeni.pribeh}</p>
+      <p>{tazeni.pribeh ? SafeContent(tazeni.pribeh) : ''}</p>
       {canEdit && (
         <EditTazeni
           handleEdit={() => handleEdit()}
           handleDelete={() => handleDelete()}
         />
       )}
+      <TazeniCreateToggle afterOrder={tazeni.order} />
     </>
   );
 };

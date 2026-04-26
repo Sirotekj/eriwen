@@ -14,10 +14,15 @@ import JoditRTE from './jodit-rte';
 
 type Props = {
   onClose: () => void;
+  afterOrder?: number;
   initialData?: Tazeni;
 };
 
-export default function TazeniForm({ onClose, initialData }: Props) {
+export default function TazeniForm({
+  onClose,
+  initialData,
+  afterOrder,
+}: Props) {
   const [state, formAction] = useActionState(createAction, { message: null });
   const router = useRouter();
 
@@ -84,6 +89,9 @@ export default function TazeniForm({ onClose, initialData }: Props) {
               <strong>Zrušit</strong>
             </ButtonPage>
           </div>
+          {afterOrder && (
+            <input type="hidden" name="afterOrder" value={afterOrder} />
+          )}
         </form>
       </main>
     </>
