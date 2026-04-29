@@ -33,9 +33,11 @@ const JoditRTE = ({ name, defaultValue }: Props) => {
       ],
       controls: {
         paragraph: {
-          p: 'Odstavec',
-          h4: 'Nadpis 4',
-          blockquote: 'Citace',
+          list: {
+            p: 'Odstavec',
+            h4: 'Nadpis 4',
+            blockquote: 'Citace',
+          },
         },
       },
     }),
