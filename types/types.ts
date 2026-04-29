@@ -8,6 +8,8 @@ export type PageProps = {
   }>;
 };
 
+export type ArticleType = 'postava' | 'tazeni';
+
 export type PostavaType = {
   jmeno: string;
   rasa: string;

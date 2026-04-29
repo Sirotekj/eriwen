@@ -10,7 +10,7 @@ const TazeniDelete = ({ id, onClose }: Props) => {
   return (
     <ModalWrapper>
       <div className="bg-white relative p-4 rounded-lg">
-        <p>Opravdu chcete smazat postavu?</p>
+        <p>Opravdu chcete smazat tažení?</p>
         <form action={deleteAction}>
           <input type="hidden" name="id" value={id} />
 

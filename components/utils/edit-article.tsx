@@ -11,7 +11,7 @@ type Props = {
 
 const EditArticle = ({ handleEdit, handleDelete }: Props) => {
   return (
-    <div className="absolute bottom-0 right-0 flex gap-1">
+    <div className="relative justify-end flex gap-1">
       <HoverWrapper tooltip="Upravit">
         <ButtonPage
           type="button"

@@ -37,7 +37,7 @@ const TazeniItem = ({ tazeni }: Props) => {
         </ImageWrapper>
       )}
 
-      <p>{tazeni.pribeh ? SafeContent(tazeni.pribeh) : ''}</p>
+      {tazeni.pribeh ? SafeContent(tazeni.pribeh) : ''}
     </>
   );
 };

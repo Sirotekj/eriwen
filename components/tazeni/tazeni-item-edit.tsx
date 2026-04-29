@@ -32,38 +32,40 @@ const TazeniItem = ({
   });
   return (
     <>
-      <h3 className="mb0">{tazeni.jmeno}</h3>
+      <div>
+        <h3 className="mb0">{tazeni.jmeno}</h3>
 
-      <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
-        <dt>Vypravěč:</dt>
-        <dd>{tazeni.vypravec}</dd>
+        <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
+          <dt>Vypravěč:</dt>
+          <dd>{tazeni.vypravec}</dd>
 
-        <dt>Postavy:</dt>
-        <dd>{tazeni.postavy}</dd>
+          <dt>Postavy:</dt>
+          <dd>{tazeni.postavy}</dd>
 
-        <dt>Časové období:</dt>
-        <dd>{tazeni.obdobi}</dd>
-      </dl>
+          <dt>Časové období:</dt>
+          <dd>{tazeni.obdobi}</dd>
+        </dl>
 
-      {tazeni.image && (
-        <ImageWrapper>
-          <Image
-            className="object-cover"
-            src={tazeni.image}
-            alt={tazeni.id}
-            sizes="242px"
-            fill
+        {tazeni.image && (
+          <ImageWrapper>
+            <Image
+              className="object-cover"
+              src={tazeni.image}
+              alt={tazeni.id}
+              sizes="242px"
+              fill
+            />
+          </ImageWrapper>
+        )}
+
+        {tazeni.pribeh ? SafeContent(tazeni.pribeh) : ''}
+        {canEdit && (
+          <EditTazeni
+            handleEdit={() => handleEdit()}
+            handleDelete={() => handleDelete()}
           />
-        </ImageWrapper>
-      )}
-
-      <p>{tazeni.pribeh ? SafeContent(tazeni.pribeh) : ''}</p>
-      {canEdit && (
-        <EditTazeni
-          handleEdit={() => handleEdit()}
-          handleDelete={() => handleDelete()}
-        />
-      )}
+        )}
+      </div>
       <TazeniCreateToggle afterOrder={tazeni.order} />
     </>
   );
