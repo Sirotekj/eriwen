@@ -32,3 +32,6 @@
   background-color: var(--color-brown);
   opacity: 0.6;
 }
+.jodit-ui-separator {
+  border-right: 1px solid var(--color-brown);
+}

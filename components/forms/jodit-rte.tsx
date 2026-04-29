@@ -16,7 +16,28 @@ const JoditRTE = ({ name, defaultValue }: Props) => {
       readonly: false,
       placeholder: 'Zde můžete začít psát...',
       toolbarAdaptive: false,
-      buttons: [{ name: 'basic', buttons: ['bold', 'italic'] }],
+      buttons: [
+        {
+          name: 'basic',
+          buttons: [
+            'bold',
+            'italic',
+            'underline',
+            '|',
+            'ul',
+            'ol',
+            '|',
+            'paragraph',
+          ],
+        },
+      ],
+      controls: {
+        paragraph: {
+          p: 'Odstavec',
+          h4: 'Nadpis 4',
+          blockquote: 'Citace',
+        },
+      },
     }),
     [],
   );

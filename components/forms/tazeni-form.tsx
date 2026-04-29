@@ -70,14 +70,6 @@ export default function TazeniForm({
               className="rounded-sm border"
               required
             />
-            <label htmlFor="order">Pořadí:</label>
-            <input
-              type="text"
-              id="order"
-              name="order"
-              className="rounded-sm border"
-              required
-            />
           </div>
           <label className="col-start-1">Příběh:</label>
           <JoditRTE name="pribeh" defaultValue={initialData?.pribeh ?? ''} />
