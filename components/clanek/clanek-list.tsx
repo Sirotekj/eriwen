@@ -11,7 +11,10 @@ const ClanekList = ({ clanek }: Props) => {
     <>
       <ul>
         {clanek.map((c) => (
-          <li key={c.id}>
+          <li
+            key={c.id}
+            className="relative my-4 after-content-[''] after:block after:clear-both"
+          >
             <ClanekItem clanek={c} />
           </li>
         ))}
