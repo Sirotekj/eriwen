@@ -27,7 +27,7 @@ export default function TazeniForm({
   const router = useRouter();
 
   useEffect(() => {
-    if (state.message === 'created') {
+    if (state.message === 'Vytvořeno') {
       router.push('/tazeni');
     }
   }, [state, router]);

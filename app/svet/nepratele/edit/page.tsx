@@ -1,10 +1,23 @@
 import Image from 'next/image';
 
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { permissions } from '@/lib/permissions';
+
 import { getNepratele } from '@/lib/clanek-prisma';
-import ClanekList from '@/components/clanek/clanek-list';
+import ClanekListEdit from '@/components/clanek/clanek-list-edit';
+import ClanekCreateToggle from '@/components/clanek/clanek-create-toggle';
 
 export default async function NepratelePage() {
+  const session = await getServerSession(authOptions);
+
+  const role = session?.user?.role;
+  const userId = session?.user?.id;
+
+  const canCreate = permissions.canCreate({ role });
+
   const nepratele = await getNepratele();
+
   return (
     <div>
       <h2>Nepřátelé</h2>
@@ -13,7 +26,19 @@ export default async function NepratelePage() {
         Výčet nepřátel, s nimiž se družina střetla, (ať už je porazila nebo ne).
       </p>
 
-      <ClanekList clanek={nepratele} />
+      {canCreate && (
+        <>
+          <ClanekCreateToggle kategorie="NEPRATELE" />
+          <p>Pozn.: Nový nepřítel se přidá na začátek.</p>
+        </>
+      )}
+
+      <ClanekListEdit
+        clanek={nepratele}
+        role={role}
+        userId={userId}
+        kategorie="NEPRATELE"
+      />
 
       <h2>Příklad</h2>
       <h3>Besiah (†)</h3>

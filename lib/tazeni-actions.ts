@@ -1,13 +1,14 @@
 'use server';
 
-import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { permissions } from '@/lib/permissions';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 import xss from 'xss';
+
+import { prisma } from '@/lib/prisma';
+import { authOptions } from '@/lib/auth';
+import { permissions } from '@/lib/permissions';
 
 import {
   SaveTazeni,
@@ -17,10 +18,7 @@ import {
 } from '@/lib/tazeni-prisma';
 
 import { FormState } from '@/types/types';
-
-const isInvalidText = (text: string | null) => {
-  return !text || text.trim() === '';
-};
+import { isInvalidText } from '@/lib/helpers';
 
 export async function createAction(
   prevState: FormState,

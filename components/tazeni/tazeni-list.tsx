@@ -1,5 +1,3 @@
-'use client';
-
 import { Tazeni } from '@prisma/client';
 
 import TazeniItem from './tazeni-item';

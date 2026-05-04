@@ -1,10 +1,23 @@
 import Image from 'next/image';
 
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { permissions } from '@/lib/permissions';
+
 import { getSpojenci } from '@/lib/clanek-prisma';
-import ClanekList from '@/components/clanek/clanek-list';
+import ClanekListEdit from '@/components/clanek/clanek-list-edit';
+import ClanekCreateToggle from '@/components/clanek/clanek-create-toggle';
 
 export default async function SpojenciPage() {
+  const session = await getServerSession(authOptions);
+
+  const role = session?.user?.role;
+  const userId = session?.user?.id;
+
+  const canCreate = permissions.canCreate({ role });
+
   const spojenci = await getSpojenci();
+
   return (
     <div>
       <h2>Spojenci</h2>
@@ -14,7 +27,18 @@ export default async function SpojenciPage() {
         dobrodružství.
       </p>
 
-      <ClanekList clanek={spojenci} />
+      {canCreate && (
+        <>
+          <ClanekCreateToggle kategorie="SPOJENCI" position="start" />
+          <p>Pozn.: Nový spojenec se přidá na začátek.</p>
+        </>
+      )}
+      <ClanekListEdit
+        clanek={spojenci}
+        role={role}
+        userId={userId}
+        kategorie="SPOJENCI"
+      />
 
       <h2>Příklad</h2>
       <h3>Společnost „Oris a synové“</h3>

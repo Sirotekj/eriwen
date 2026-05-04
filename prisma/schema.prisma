@@ -26,14 +26,34 @@ model User {
   postavy       Postava[]
   sessions      Session[]
   tazeni        Tazeni[]
+  clanek        Clanek[]
+}
+
+enum ClanekKategorie {
+  SPOJENCI
+  NEPRATELE
+  NABOZENSTVI
+}
+
+model Clanek {
+  id        String   @id @default(cuid())
+  nazev     String
+  obsah     String
+  image     String?
+  kategorie ClanekKategorie
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  order     Decimal @db.Decimal(10, 5)
+  author    User     @relation(fields: [authorId], references: [id])
 }
 
 model Tazeni {
   id        String   @id @default(cuid())
-  jmeno      String
-  vypravec    String
+  jmeno     String
+  vypravec  String
   postavy   String
-  pribeh   String
+  pribeh    String
   obdobi    String?
   image     String?
   authorId  String

@@ -3,6 +3,7 @@ export default function KrajemaMistaPage() {
     <div>
       <h1>Kraje a místa</h1>
       <p>Stránka je v přípravě!</p>
+
       <h2>Příklad</h2>
       <h2>Nainův kraj</h2>
       <h3>Krompach</h3>

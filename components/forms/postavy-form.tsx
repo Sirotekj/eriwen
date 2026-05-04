@@ -23,7 +23,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
   const router = useRouter();
 
   useEffect(() => {
-    if (state.message === 'created') {
+    if (state.message === 'Vytvořeno') {
       router.push('/postavy');
     }
   }, [state, router]);

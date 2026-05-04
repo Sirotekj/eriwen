@@ -1,0 +1,84 @@
+import { prisma } from './db';
+import { Clanek } from '@prisma/client';
+import fs from 'fs/promises';
+import path from 'path';
+
+import type { ClanekType } from '@/types/types';
+
+import withRetry from './with-retry';
+
+export async function getSpojenci() {
+  return prisma.clanek.findMany({
+    where: { kategorie: 'SPOJENCI' },
+    orderBy: {
+      order: 'asc',
+    },
+  });
+}
+
+export async function getNepratele() {
+  return prisma.clanek.findMany({
+    where: { kategorie: 'NEPRATELE' },
+    orderBy: {
+      order: 'asc',
+    },
+  });
+}
+
+export async function getNabozenstvi() {
+  return prisma.clanek.findMany({
+    where: { kategorie: 'NABOZENSTVI' },
+    orderBy: {
+      order: 'asc',
+    },
+  });
+}
+export async function SaveClanek(
+  clanek: ClanekType,
+  imageUrl: string | undefined,
+) {
+  await prisma.clanek.create({
+    data: {
+      ...clanek,
+      image: imageUrl ?? null,
+    },
+  });
+}
+
+export async function UpdateClanek(
+  clanek: ClanekType,
+  imageUrl: string | undefined,
+  id: string,
+) {
+  await prisma.clanek.update({
+    where: { id },
+    data: {
+      ...clanek,
+      ...(imageUrl !== undefined && { image: imageUrl }),
+    },
+  });
+}
+
+export async function DeleteClanek(id: string) {
+  const clanek = await prisma.clanek.findUnique({
+    where: { id },
+  });
+
+  if (!clanek) {
+    return { message: 'Tažení nebylo nalezeno!' };
+  }
+
+  if (clanek.image) {
+    const filePath = path.join(process.cwd(), 'public', clanek.image);
+
+    try {
+      await fs.unlink(filePath);
+    } catch (err) {
+      console.warn('Obrázek se nepodařilo smazat:', err);
+    }
+  }
+
+  await prisma.clanek.delete({
+    where: { id },
+  });
+}
