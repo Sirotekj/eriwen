@@ -103,7 +103,11 @@ export async function createAction(
 
 export async function deleteAction(formData: FormData) {
   const id = formData.get('id') as string;
+  const redirectTo = formData.get('redirectTo') as string;
   await DeleteClanek(id);
   /*revalidatePath('/tazeni');
   redirect('/tazeni');*/
+  if (!redirectTo.startsWith('/')) {
+    redirect('/');
+  }
 }
