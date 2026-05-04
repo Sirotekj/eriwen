@@ -1,5 +1,5 @@
 import { prisma } from './db';
-import { Prisma, Clanek } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import fs from 'fs/promises';
 import path from 'path';
 

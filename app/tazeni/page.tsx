@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import { getTazeni } from '@/lib/tazeni';
+import { getTazeni } from '@/lib/tazeni-prisma';
 import TazeniList from '@/components/tazeni/tazeni-list';
 
 export default async function TazeniPage() {
