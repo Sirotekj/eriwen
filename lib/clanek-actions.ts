@@ -6,7 +6,6 @@ import { revalidatePath } from 'next/cache';
 
 import xss from 'xss';
 
-import { prisma } from '@/lib/prisma';
 import { authOptions } from '@/lib/auth';
 import { permissions } from '@/lib/permissions';
 
@@ -77,7 +76,7 @@ export async function createAction(
   const clanek = {
     nazev: formData.get('nazev') as string,
     obsah: xss(formData.get('obsah') as string),
-    order: order.toString(),
+    order: order,
     kategorie: kategorie,
     //image: image.name as string,
     author: {

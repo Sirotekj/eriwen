@@ -1,4 +1,3 @@
-import { Clanek } from '@prisma/client';
 import { ClanekView } from '@/types/types';
 
 import ClanekItem from './clanek-item';

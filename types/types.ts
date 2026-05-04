@@ -1,4 +1,4 @@
-import { ClanekKategorie } from '@prisma/client';
+import { Prisma, ClanekKategorie } from '@prisma/client';
 export type FormState = {
   message: string | null;
 };
@@ -42,7 +42,19 @@ export type TazeniType = {
   };
 };
 
-export type ClanekType = {
+export type ClanekCreateInput = {
+  nazev: string;
+  obsah: string;
+  kategorie: ClanekKategorie;
+  order: Prisma.Decimal;
+  author: {
+    connect: {
+      id: string;
+    };
+  };
+};
+
+/*export type ClanekType = {
   id: string;
   nazev: string;
   obsah: string;
@@ -52,7 +64,7 @@ export type ClanekType = {
   authorId: string;
   createdAt: Date;
   updatedAt: Date;
-};
+};*/
 
 export type ClanekView = {
   id: string;
@@ -61,4 +73,5 @@ export type ClanekView = {
   image: string | null;
   kategorie: ClanekKategorie;
   order: string;
+  authorId: string;
 };

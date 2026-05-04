@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import fs from 'fs/promises';
 import path from 'path';
 
-import type { ClanekType } from '@/types/types';
+import type { ClanekCreateInput } from '@/types/types';
 
 import withRetry from './with-retry';
 
@@ -51,7 +51,7 @@ export async function getNabozenstvi() {
   }));
 }
 export async function SaveClanek(
-  clanek: ClanekType,
+  clanek: ClanekCreateInput,
   imageUrl: string | undefined,
 ) {
   await prisma.clanek.create({
@@ -64,7 +64,7 @@ export async function SaveClanek(
 }
 
 export async function UpdateClanek(
-  clanek: ClanekType,
+  clanek: ClanekCreateInput,
   imageUrl: string | undefined,
   id: string,
 ) {

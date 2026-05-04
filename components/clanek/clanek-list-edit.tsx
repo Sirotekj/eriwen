@@ -2,14 +2,15 @@
 
 import { useState } from 'react';
 import { ClanekKategorie, Role } from '@prisma/client';
-import { ClanekType } from '@/types/types';
+import { ClanekView } from '@/types/types';
 
 import ClanekItemEdit from './clanek-item-edit';
 import ClanekDelete from './clanek-delete';
 import ClanekForm from '../forms/clanek-form';
 
 type Props = {
-  clanek: ClanekType[];
+  //clanek: ClanekType[];
+  clanek: ClanekView[];
   role: Role | undefined;
   userId: string | undefined;
   kategorie: ClanekKategorie;
