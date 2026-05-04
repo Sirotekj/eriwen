@@ -8,6 +8,8 @@ import ClanekItemEdit from './clanek-item-edit';
 import ClanekDelete from './clanek-delete';
 import ClanekForm from '../forms/clanek-form';
 
+import { slovoFromKategorie } from '@/lib/helpers';
+
 type Props = {
   //clanek: ClanekType[];
   clanek: ClanekView[];
@@ -60,7 +62,11 @@ const ClanekListEdit = ({ clanek, role, userId, kategorie }: Props) => {
         ))}
       </ul>
       {deleteModal && editingId && (
-        <ClanekDelete id={editingId} onClose={() => closeDeleteModal()} />
+        <ClanekDelete
+          id={editingId}
+          slovoKategorie={slovoFromKategorie(kategorie)}
+          onClose={() => closeDeleteModal()}
+        />
       )}
     </>
   );

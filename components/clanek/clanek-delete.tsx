@@ -1,16 +1,21 @@
 'use client';
+
 import { deleteAction } from '@/lib/clanek-actions';
+import { ClanekKategorie } from '@prisma/client';
 
 import ModalWrapper from '@/components/utils/modal-wrapper';
+
 type Props = {
   id: string;
+  slovoKategorie: string;
   onClose: () => void;
 };
-const ClanekDelete = ({ id, onClose }: Props) => {
+
+const ClanekDelete = ({ id, slovoKategorie, onClose }: Props) => {
   return (
     <ModalWrapper>
       <div className="bg-white relative p-4 rounded-lg">
-        <p>Opravdu chcete smazat tažení?</p>
+        <p>Opravdu chcete smazat {slovoKategorie}?</p>
         <form action={deleteAction}>
           <input type="hidden" name="id" value={id} />
 
