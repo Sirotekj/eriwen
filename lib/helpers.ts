@@ -4,8 +4,11 @@ export const isInvalidText = (text: string | null) => {
   return !text || text.trim() === '';
 };
 
+const KATEGORIE_MAP = {
+  SPOJENCI: { menu: 'svet', submenu: 'spojenci' },
+  NEPRATELE: { menu: 'svet', submenu: 'nepratele' },
+  NABOZENSTVI: { menu: 'svet', submenu: 'nabozenstvi' },
+};
 export const urlFromKategorie = (kategorie: ClanekKategorie) => {
-  if (kategorie === 'SPOJENCI') return '/svet/spojenci';
-  if (kategorie === 'NEPRATELE') return '/svet/nepratele';
-  if (kategorie === 'NABOZENSTVI') return '/svet/nabozenstvi';
+  return KATEGORIE_MAP[kategorie];
 };

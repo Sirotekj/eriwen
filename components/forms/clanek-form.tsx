@@ -6,6 +6,8 @@ import { useActionState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { createAction } from '@/lib/clanek-actions';
+import { urlFromKategorie } from '@/lib/helpers';
+
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
 import ButtonPage from '@/components/utils/button-page';
@@ -33,7 +35,9 @@ export default function ClanekForm({
 
   useEffect(() => {
     if (state.message === 'Vytvořeno') {
-      router.push(`/${kategorie.toLowerCase()}`);
+      router.push(
+        `/${urlFromKategorie(kategorie).menu}/${urlFromKategorie(kategorie).submenu}`,
+      );
     }
   }, [state, router]);
   return (

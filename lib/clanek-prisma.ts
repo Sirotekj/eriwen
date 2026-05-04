@@ -1,5 +1,5 @@
 import { prisma } from './db';
-import { Clanek } from '@prisma/client';
+import { Prisma, Clanek } from '@prisma/client';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -8,30 +8,47 @@ import type { ClanekType } from '@/types/types';
 import withRetry from './with-retry';
 
 export async function getSpojenci() {
-  return prisma.clanek.findMany({
-    where: { kategorie: 'SPOJENCI' },
-    orderBy: {
-      order: 'asc',
-    },
-  });
+  const data = await withRetry(() =>
+    prisma.clanek.findMany({
+      where: { kategorie: 'SPOJENCI' },
+      orderBy: { order: 'asc' },
+    }),
+  );
+
+  return data.map((item) => ({
+    ...item,
+    order: item.order.toString(),
+  }));
 }
 
 export async function getNepratele() {
-  return prisma.clanek.findMany({
-    where: { kategorie: 'NEPRATELE' },
-    orderBy: {
-      order: 'asc',
-    },
-  });
+  const data = await withRetry(() =>
+    prisma.clanek.findMany({
+      where: { kategorie: 'NEPRATELE' },
+      orderBy: {
+        order: 'asc',
+      },
+    }),
+  );
+  return data.map((item) => ({
+    ...item,
+    order: item.order.toString(),
+  }));
 }
 
 export async function getNabozenstvi() {
-  return prisma.clanek.findMany({
-    where: { kategorie: 'NABOZENSTVI' },
-    orderBy: {
-      order: 'asc',
-    },
-  });
+  const data = await withRetry(() =>
+    prisma.clanek.findMany({
+      where: { kategorie: 'NABOZENSTVI' },
+      orderBy: {
+        order: 'asc',
+      },
+    }),
+  );
+  return data.map((item) => ({
+    ...item,
+    order: item.order.toString(),
+  }));
 }
 export async function SaveClanek(
   clanek: ClanekType,
@@ -40,6 +57,7 @@ export async function SaveClanek(
   await prisma.clanek.create({
     data: {
       ...clanek,
+      order: new Prisma.Decimal(clanek.order),
       image: imageUrl ?? null,
     },
   });
@@ -54,6 +72,7 @@ export async function UpdateClanek(
     where: { id },
     data: {
       ...clanek,
+      order: new Prisma.Decimal(clanek.order),
       ...(imageUrl !== undefined && { image: imageUrl }),
     },
   });

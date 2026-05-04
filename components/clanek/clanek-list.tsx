@@ -1,9 +1,10 @@
 import { Clanek } from '@prisma/client';
+import { ClanekView } from '@/types/types';
 
 import ClanekItem from './clanek-item';
 
 type Props = {
-  clanek: Clanek[];
+  clanek: ClanekView[];
 };
 
 const ClanekList = ({ clanek }: Props) => {

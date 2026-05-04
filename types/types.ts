@@ -1,4 +1,4 @@
-import { Prisma, ClanekKategorie } from '@prisma/client';
+import { ClanekKategorie } from '@prisma/client';
 export type FormState = {
   message: string | null;
 };
@@ -46,11 +46,20 @@ export type ClanekType = {
   nazev: string;
   obsah: string;
   kategorie: ClanekKategorie;
-  order: Prisma.Decimal;
-  //image: string;
+  //image: string | null;
+  order: string;
   author: {
     connect: {
       id: string;
     };
   };
+};
+
+export type ClanekView = {
+  id: string;
+  nazev: string;
+  obsah: string | null;
+  image: string | null;
+  kategorie: ClanekKategorie;
+  order: string;
 };

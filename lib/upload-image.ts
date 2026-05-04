@@ -15,7 +15,7 @@ export async function uploadImage({
 }: UploadImageParams) {
   const env = process.env.NODE_ENV;
   const extension = image.name.split('.').pop() as string;
-  const fileUrl = `${env}/${url}/${fileName}_${order}.${extension}`;
+  const fileUrl = `${env}${url}/${fileName}_${order}.${extension}`;
   const blob = await put(fileUrl, image, {
     access: 'public',
     allowOverwrite: true,

@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-import { Clanek } from '@prisma/client';
+import { ClanekView } from '@/types/types';
 
 import ImageWrapper from '@/components/utils/image-wrapper';
 import SafeContent from '@/components/utils/clear-xss';
 
 type Props = {
-  clanek: Clanek;
+  clanek: ClanekView;
 };
 
 const ClanekItem = ({ clanek }: Props) => {

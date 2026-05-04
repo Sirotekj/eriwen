@@ -15,6 +15,7 @@ import { uploadImage } from '@/lib/upload-image';
 
 import { FormState } from '@/types/types';
 import { isInvalidText } from '@/lib/helpers';
+import { urlFromKategorie } from '@/lib/helpers';
 import { Prisma, ClanekKategorie } from '@prisma/client';
 
 import { calculateOrder } from './clanek-order';
@@ -65,7 +66,7 @@ export async function createAction(
       image: imageFile,
       fileName: kategorie.toLowerCase(),
       order: order.toString(),
-      url: '',
+      url: `/${urlFromKategorie(kategorie).menu}/${urlFromKategorie(kategorie).submenu}`,
     });
   } else if (existingImage) {
     imageUrl = existingImage;
@@ -76,8 +77,8 @@ export async function createAction(
   const clanek = {
     nazev: formData.get('nazev') as string,
     obsah: xss(formData.get('obsah') as string),
-    order: order,
-    kategorie: formData.get('kategorie') as ClanekKategorie,
+    order: order.toString(),
+    kategorie: kategorie,
     //image: image.name as string,
     author: {
       connect: {
