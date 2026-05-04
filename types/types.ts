@@ -43,16 +43,15 @@ export type TazeniType = {
 };
 
 export type ClanekType = {
+  id: string;
   nazev: string;
   obsah: string;
   kategorie: ClanekKategorie;
-  //image: string | null;
+  image: string | null;
   order: string;
-  author: {
-    connect: {
-      id: string;
-    };
-  };
+  authorId: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type ClanekView = {

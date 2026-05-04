@@ -1,6 +1,7 @@
 'use client';
 
 import { Clanek, ClanekKategorie } from '@prisma/client';
+import { ClanekType } from '@/types/types';
 
 import { useActionState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -16,7 +17,7 @@ import JoditRTE from './jodit-rte';
 
 type Props = {
   onClose: () => void;
-  initialData?: Clanek;
+  initialData?: ClanekType;
 
   afterOrder?: string;
   position?: 'start' | 'end';

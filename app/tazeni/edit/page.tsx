@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { permissions } from '@/lib/permissions';
 
-import { getTazeni } from '@/lib/tazeni';
+import { getTazeni } from '@/lib/tazeni-prisma';
 import TazeniListEdit from '@/components/tazeni/tazeni-list-edit';
 import TazeniCreateToggle from '@/components/tazeni/tazeni-create-toggle';
 

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
-import { Clanek, ClanekKategorie, Role } from '@prisma/client';
+import { ClanekKategorie, Role } from '@prisma/client';
+import { ClanekType } from '@/types/types';
 
 import { permissions } from '@/lib/permissions';
 
@@ -11,7 +12,7 @@ import ImageWrapper from '@/components/utils/image-wrapper';
 import SafeContent from '@/components/utils/clear-xss';
 
 type Props = {
-  clanek: Clanek;
+  clanek: ClanekType;
   kategorie: ClanekKategorie;
   role: Role | undefined;
   userId: string | undefined;
