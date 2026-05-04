@@ -1,7 +1,7 @@
 'use client';
 
-import { Clanek, ClanekKategorie } from '@prisma/client';
-import { ClanekType, ClanekView } from '@/types/types';
+import { ClanekKategorie } from '@prisma/client';
+import { ClanekView } from '@/types/types';
 
 import { useActionState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
