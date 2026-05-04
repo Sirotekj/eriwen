@@ -1,57 +1,26 @@
 export const dynamic = 'force-dynamic';
 
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { getEditMode } from '@/lib/edit-mode';
-import { permissions } from '@/lib/permissions';
-import { getTazeni } from '@/lib/tazeni';
+import { getTazeni } from '@/lib/tazeni-prisma';
+import TazeniList from '@/components/tazeni/tazeni-list';
 
-import EditTazeni from './edit';
-import TazeniItem from './tazeni-item';
-import FormTazeni from '@/components/forms/form-tazeni';
-
-import { PageProps } from '@/types/types';
-
-export default async function TazeniPage({ searchParams }: PageProps) {
-  const session = await getServerSession(authOptions);
-
-  const role = session?.user?.role;
-  const userId = session?.user?.id;
-
-  const params = await searchParams;
-  const editParamOn = params.edit === '1';
-
-  const { isEditing } = getEditMode(role, editParamOn);
-
-  const canCreate = permissions.canCreate({ role });
-
-  const tazeniList = getTazeni();
+export default async function TazeniPage() {
+  const tazeni = await getTazeni();
   return (
     <div>
       <h2>Tažení</h2>
       <blockquote>
+        „Svět je kniha, a kdo necestuje, čte jen jednu stránku.“
+        <span>Svatý Augustin</span>
+      </blockquote>
+      <p>
         Zde můžete nalézt všechna dobrodružství, která postavy zažili. Co a kdy
         se stalo, kdo se tažení zůčastnil a jak to všechno dopadlo.
-      </blockquote>
-      {isEditing && canCreate && <FormTazeni />}
-      <ul>
-        {(await tazeniList).map((tazeni) => {
-          const ctx = {
-            role,
-            userId,
-            authorId: tazeni.authorId,
-          };
-          const canEdit = permissions.canEdit(ctx);
-          const canDelete = permissions.canDelete(ctx);
-          return (
-            <li key={tazeni.id}>
-              <TazeniItem tazeni={tazeni} />
-              {tazeni.authorId === userId && <EditTazeni id={tazeni.id} />}
-            </li>
-          );
-        })}
-      </ul>
+      </p>
+
+      <TazeniList tazeni={tazeni} />
+
       <div>
+        <h2>Příklad</h2>
         <h3>Kniha Ezargoth</h3>
         <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
           <dt>PJ:</dt>

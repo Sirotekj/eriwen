@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
 
 model VerificationToken {
@@ -26,16 +26,36 @@ model User {
   postavy       Postava[]
   sessions      Session[]
   tazeni        Tazeni[]
+  clanek        Clanek[]
+}
+
+enum ClanekKategorie {
+  SPOJENCI
+  NEPRATELE
+  NABOZENSTVI
+}
+
+model Clanek {
+  id        String   @id @default(cuid())
+  nazev     String
+  obsah     String
+  image     String?
+  kategorie ClanekKategorie
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  order     Decimal @db.Decimal(10, 5)
+  author    User     @relation(fields: [authorId], references: [id])
 }
 
 model Tazeni {
   id        String   @id @default(cuid())
-  name      String?
-  pj        String?
+  jmeno     String
+  vypravec  String
+  postavy   String
+  pribeh    String
   obdobi    String?
-  postavy   String?
-  content   String?
-  image      String?
+  image     String?
   authorId  String
   createdAt DateTime @default(now())
   order     Int      @default(0)
@@ -48,11 +68,12 @@ model Tazeni {
 
 model Postava {
   id         String   @id @default(cuid())
-  name       String
-  race       String
-  profession String
-  campaign   String?
-  content    String?
+  jmeno       String
+  rasa       String
+  povolani String
+  hrac     String
+  tazeni   String?
+  popis    String?
   image      String?
   authorId   String
   createdAt  DateTime @default(now())

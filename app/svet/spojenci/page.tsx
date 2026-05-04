@@ -1,12 +1,24 @@
-import Image from "next/image";
-export default function SpojenciPage() {
+export const dynamic = 'force-dynamic';
+
+import Image from 'next/image';
+
+import { getSpojenci } from '@/lib/clanek-prisma';
+import ClanekList from '@/components/clanek/clanek-list';
+
+export default async function SpojenciPage() {
+  const spojenci = await getSpojenci();
   return (
     <div>
       <h2>Spojenci</h2>
+      <p>Stránka je v přípravě!</p>
       <p>
         Výčet spojenců a přátel družiny, na které narazila v průběhu svých
         dobrodružství.
       </p>
+
+      <ClanekList clanek={spojenci} />
+
+      <h2>Příklad</h2>
       <h3>Společnost „Oris a synové“</h3>
       <p>
         Největší doručovací společnost v Krompachu. Zařizuje přepravu zboží
@@ -19,7 +31,7 @@ export default function SpojenciPage() {
       <h4>Alexandr Oris</h4>
       <p>
         Hlava společnosti. Významný obchodník a dobrý přítel starosty Krompachu.
-        Má dva syny, staršího <strong>Stefana</strong> a mladšího{" "}
+        Má dva syny, staršího <strong>Stefana</strong> a mladšího{' '}
         <strong>Tyrose</strong>.
       </p>
       <h4>Stefan Oris</h4>

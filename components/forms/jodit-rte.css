@@ -1,0 +1,37 @@
+.jodit-container:not(.jodit-inline) {
+  background-color: transparent;
+  color: var(--color-brown);
+  border: 1px solid var(--color-brown);
+}
+.jodit-toolbar__box:not(:empty) {
+  background-color: transparent;
+  border-bottom: 1px solid var(--color-brown);
+}
+.jodit-container:not(.jodit_inline) .jodit-workplace {
+  background-color: transparent;
+}
+.jodit-toolbar__box:not(:empty) .jodit-toolbar-editor-collection:after {
+  background-color: transparent;
+}
+.jodit-status-bar:not(:empty) {
+  background-color: transparent;
+  border-top: 1px solid var(--color-brown);
+}
+.jodit-placeholder {
+  color: var(--color-brown);
+}
+.jodit-add-new-line:after {
+  color: var(--color-brown);
+  background-color: transparent;
+}
+.jodit-add-new-line span {
+  border: var(--color-brown);
+  background-color: var(--color-brown);
+}
+.jodit-add-new-line span:hover {
+  background-color: var(--color-brown);
+  opacity: 0.6;
+}
+.jodit-ui-separator {
+  border-right: 1px solid var(--color-brown);
+}

@@ -7,25 +7,23 @@ import { IconEdit } from '@/components/utils/svgs/icons';
 
 export default function PostavyCreateToggle() {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
-
-  if (isOpen) {
-    return (
-      <div className="form-container">
-        <PostavyForm onClose={() => setIsOpen(false)} />
-      </div>
-    );
-  }
 
   return (
-    <ButtonPage
-      className="my-4"
-      onClick={() => {
-        setIsOpen(true);
-        console.log(isOpen);
-      }}
-    >
-      <IconEdit /> Přidat postavu
-    </ButtonPage>
+    <>
+      {isOpen ? (
+        <div className="form-container">
+          <PostavyForm onClose={() => setIsOpen(false)} />
+        </div>
+      ) : (
+        <ButtonPage
+          className="my-4"
+          onClick={() => {
+            setIsOpen(true);
+          }}
+        >
+          <IconEdit /> Přidat postavu
+        </ButtonPage>
+      )}
+    </>
   );
 }

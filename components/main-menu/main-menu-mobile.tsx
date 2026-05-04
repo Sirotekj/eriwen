@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 
+import NavLinkMobile from './nav-link-mobile';
 import { IconMenuMobile } from '@/components/utils/svgs/icons';
 
 const MainMenuMobile = () => {
@@ -28,44 +28,63 @@ const MainMenuMobile = () => {
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="p-4 flex justify-end cursor-pointer">
-          <button onClick={closeMenu}>✕</button>
+        <div className="flex justify-end">
+          <button className="p-4 cursor-pointer" onClick={closeMenu}>
+            ✕
+          </button>
         </div>
 
-        <ul className="flex flex-col gap-4 p-4 text-lg">
+        <ul className="flex flex-col p-4 text-lg">
           <li>
-            <Link href="/svet" onClick={closeMenu}>
+            <NavLinkMobile href="/" onClick={closeMenu}>
+              Úvod
+            </NavLinkMobile>
+          </li>
+          <li>
+            <NavLinkMobile href="/svet" onClick={closeMenu}>
               Svět
-            </Link>
+            </NavLinkMobile>
             <ul className="ml-4 text-base list-disc">
               <li className="ml-1">
-                <Link href="/svet/kraje-a-mista">Kraje a místa</Link>
+                <NavLinkMobile href="/svet/kraje-a-mista">
+                  Kraje a místa
+                </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <Link href="/svet/nabozenstvi">Náboženství</Link>
+                <NavLinkMobile href="/svet/mapy">Mapy</NavLinkMobile>
               </li>
               <li className="ml-1">
-                <Link href="/svet/spojenci">Spojenci</Link>
+                <NavLinkMobile href="/svet/nabozenstvi">
+                  Náboženství
+                </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <Link href="/svet/nepratele">Nepřátelé</Link>
+                <NavLinkMobile href="/svet/spojenci">Spojenci</NavLinkMobile>
+              </li>
+              <li className="ml-1">
+                <NavLinkMobile href="/svet/nepratele">Nepřátelé</NavLinkMobile>
               </li>
             </ul>
           </li>
           <li>
-            <Link href="/postavy" onClick={closeMenu}>
+            <NavLinkMobile href="/postavy" onClick={closeMenu}>
               Postavy
-            </Link>
+            </NavLinkMobile>
           </li>
           <li>
-            <Link href="/tazeni" onClick={closeMenu}>
+            <NavLinkMobile href="/tazeni" onClick={closeMenu}>
               Tažení
-            </Link>
+            </NavLinkMobile>
           </li>
           <li>
-            <Link href="/bestiar" onClick={closeMenu}>
-              Bestiář
-            </Link>
+            <NavLinkMobile href="/bestiar" onClick={closeMenu}>
+              Pravidla
+            </NavLinkMobile>
+            <ul className="ml-4 text-base list-disc">
+              <li className="ml-1">
+                <NavLinkMobile href="/pravidla/bestiar">Bestiář</NavLinkMobile>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>

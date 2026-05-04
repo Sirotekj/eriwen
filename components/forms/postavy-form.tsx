@@ -2,12 +2,15 @@
 
 import { Postava } from '@prisma/client';
 
-//import { useFormState } from 'react-dom';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { createAction } from '@/lib/postavy-actions';
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
 import ButtonPage from '@/components/utils/button-page';
-import { createAction } from '@/lib/postavy-actions';
+
+import JoditRTE from './jodit-rte';
 
 type Props = {
   onClose: () => void;
@@ -17,9 +20,16 @@ type Props = {
 export default function PostavayForm({ onClose, initialData }: Props) {
   //const [state, formAction] = useFormState(createPostava, { message: null });
   const [state, formAction] = useActionState(createAction, { message: null });
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.message === 'Vytvořeno') {
+      router.push('/postavy');
+    }
+  }, [state, router]);
   return (
     <>
-      <header>Přidání postavy</header>
+      <header>Přidat postavu</header>
       <main>
         <form action={formAction} className="form">
           <div className="">
@@ -28,7 +38,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
               type="text"
               id="jmeno"
               name="jmeno"
-              defaultValue={initialData?.name}
+              defaultValue={initialData?.jmeno}
               required
               className="form-input"
             />
@@ -38,7 +48,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             type="text"
             id="rasa"
             name="rasa"
-            defaultValue={initialData?.race}
+            defaultValue={initialData?.rasa}
             required
             className="form-input"
           />
@@ -47,7 +57,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             type="text"
             id="povolani"
             name="povolani"
-            defaultValue={initialData?.profession}
+            defaultValue={initialData?.povolani}
             required
             className="form-input"
           />
@@ -56,19 +66,35 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             type="text"
             id="tazeni"
             name="tazeni"
-            defaultValue={initialData?.campaign ?? ''}
+            defaultValue={initialData?.tazeni ?? ''}
             className="form-input"
           />
-          <label htmlFor="pribeh">Popis:</label>
-          <textarea
+          <label htmlFor="hrac">Hráč:</label>
+          <input
+            type="text"
+            id="hrac"
+            name="hrac"
+            defaultValue={initialData?.hrac ?? ''}
+            className="form-input"
+          />
+          <label>Popis:</label>
+          {/*<textarea
             id="pribeh"
             name="pribeh"
             required
             defaultValue={initialData?.content ?? ''}
             className="form-textarea"
+          />*/}
+          <JoditRTE name="popis" defaultValue={initialData?.popis ?? ''} />
+          <ImagePicker
+            label="Váš obrázek:"
+            name="image"
+            defaultImage={initialData?.image ?? undefined}
           />
-          <ImagePicker label="Your image" name="image" />
           {state.message && <p>{state.message}</p>}
+          {initialData?.id && (
+            <input type="hidden" name="id" value={initialData.id} />
+          )}
           <div className="flex justify-between mt-4">
             <FormSubmit />
             <ButtonPage onClick={onClose}>

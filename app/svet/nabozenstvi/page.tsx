@@ -1,7 +1,11 @@
+export const dynamic = 'force-dynamic';
+
 export default function NabozenstviPage() {
   return (
     <div>
       <h2>Náboženství</h2>
+      <p>Stránka je v přípravě!</p>
+      <h2>Příklad</h2>
       <p>Nejrozšířenější polyteismus</p>
       <h3>Hlavní bohové</h3>
       <p>

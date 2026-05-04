@@ -2,6 +2,8 @@ import { prisma } from './db';
 import { Tazeni } from '@prisma/client';
 import fs from 'fs/promises';
 import path from 'path';
+import { put, del } from '@vercel/blob';
+
 import withRetry from './with-retry';
 
 import type { TazeniType } from '@/types/types';
@@ -16,19 +18,40 @@ export async function getTazeni(): Promise<Tazeni[]> {
   );
 }
 
-export async function SaveTazeni(tazeni: TazeniType, image: File) {
+export async function uploadImage(image: File, order: number) {
+  const env = process.env.NODE_ENV;
   const extension = image.name.split('.').pop() as string;
-  const fileName = `tazeni_${tazeni.order}.${extension}`;
-  const filePath = path.join(process.cwd(), 'public/images/tazeni', fileName);
-  const buffer = Buffer.from(await image.arrayBuffer());
+  const fileName = `${env}/tazeni/tazeni_${order}.${extension}`;
+  const blob = await put(fileName, image, {
+    access: 'public',
+    allowOverwrite: true,
+  });
 
-  await fs.writeFile(filePath, buffer);
-  const imageUrl = `/images/tazeni/${fileName}`;
+  return blob.url;
+}
 
+export async function SaveTazeni(
+  tazeni: TazeniType,
+  imageUrl: string | undefined,
+) {
   await prisma.tazeni.create({
     data: {
       ...tazeni,
-      image: imageUrl,
+      image: imageUrl ?? null,
+    },
+  });
+}
+
+export async function UpdateTazeni(
+  tazeni: TazeniType,
+  imageUrl: string | undefined,
+  id: string,
+) {
+  await prisma.tazeni.update({
+    where: { id },
+    data: {
+      ...tazeni,
+      ...(imageUrl !== undefined && { image: imageUrl }),
     },
   });
 }
