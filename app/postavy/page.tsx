@@ -17,8 +17,13 @@ export default async function PostavyPage() {
       <p>
         Zde můžete najít stručný popis postav a jakých tažení se zúčastnili.
       </p>
-
-      <PostavyList postavy={postavy} />
+      {postavy.length > 0 ? (
+        <PostavyList postavy={postavy} />
+      ) : (
+        <p>
+          <i>Ještě zde nejsou žádné postavy!</i>
+        </p>
+      )}
     </div>
   );
 }

@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { permissions } from '@/lib/permissions';
@@ -35,7 +33,16 @@ export default async function TazeniPageEdit() {
           <p>Pozn.: Nové tažení se přidá nakonec. </p>
         </>
       )}
-      <TazeniListEdit tazeni={tazeni} role={role} userId={userId} />
+
+      {tazeni.length > 0 ? (
+        <TazeniListEdit tazeni={tazeni} role={role} userId={userId} />
+      ) : (
+        <p>
+          <i>Ještě zde nejsou žádná tažení!</i>
+        </p>
+      )}
+
+      <hr />
 
       <div>
         <h2>Příklad</h2>

@@ -17,7 +17,15 @@ export default async function TazeniPage() {
         se stalo, kdo se tažení zůčastnil a jak to všechno dopadlo.
       </p>
 
-      <TazeniList tazeni={tazeni} />
+      {tazeni.length > 0 ? (
+        <TazeniList tazeni={tazeni} />
+      ) : (
+        <p>
+          <i>Ještě zde nejsou žádná tažení!</i>
+        </p>
+      )}
+
+      <hr />
 
       <div>
         <h2>Příklad</h2>

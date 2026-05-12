@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { permissions } from '@/lib/permissions';
@@ -35,7 +33,13 @@ export default async function PostavyPageEdit() {
           <p>Pozn.: Postavy se řadí abecedně.</p>
         </>
       )}
-      <PostavyListEdit postavy={postavy} role={role} userId={userId} />
+      {postavy.length > 0 ? (
+        <PostavyListEdit postavy={postavy} role={role} userId={userId} />
+      ) : (
+        <p>
+          <i>Ještě zde nejsou žádné postavy!</i>
+        </p>
+      )}
     </div>
   );
 }
