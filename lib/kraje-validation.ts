@@ -1,22 +1,35 @@
 import { LokalitaUroven } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 
+type ValidationResult =
+  | {
+      valid: true;
+    }
+  | {
+      valid: false;
+      message: string;
+    };
+
 export async function validateHierarchy(
   uroven: LokalitaUroven,
   parentId: string | null,
-) {
-  // SVET
+): Promise<ValidationResult> {
   if (uroven === 'SVET') {
     if (parentId !== null) {
-      throw new Error('SVET nesmí mít parent.');
+      return {
+        valid: false,
+        message: 'SVET nesmí mít parent.',
+      };
     }
 
-    return;
+    return { valid: true };
   }
 
-  // ostatní musí parent mít
   if (!parentId) {
-    throw new Error('Tato úroveň musí mít parent.');
+    return {
+      valid: false,
+      message: 'Tato úroveň musí mít parent.',
+    };
   }
 
   const parent = await prisma.lokalita.findUnique({
@@ -27,21 +40,26 @@ export async function validateHierarchy(
   });
 
   if (!parent) {
-    throw new Error('Parent nebyl nalezen.');
+    return {
+      valid: false,
+      message: 'Parent nebyl nalezen.',
+    };
   }
 
-  // KRALOVSTVI
-  if (uroven === 'KRALOVSTVI' && parent.uroven !== 'SVET') {
-    throw new Error('KRALOVSTVI musí být uvnitř SVETA.');
+  const allowedParents = {
+    KRALOVSTVI: 'SVET',
+    KRAJ: 'KRALOVSTVI',
+    MISTO: 'KRAJ',
+  };
+
+  const expected = allowedParents[uroven as keyof typeof allowedParents];
+
+  if (expected && parent.uroven !== expected) {
+    return {
+      valid: false,
+      message: `${uroven} musí být uvnitř ${expected}.`,
+    };
   }
 
-  // KRAJ
-  if (uroven === 'KRAJ' && parent.uroven !== 'KRALOVSTVI') {
-    throw new Error('KRAJ musí být uvnitř KRALOVSTVI.');
-  }
-
-  // MISTO
-  if (uroven === 'MISTO' && parent.uroven !== 'KRAJ') {
-    throw new Error('MISTO musí být uvnitř KRAJE.');
-  }
+  return { valid: true };
 }

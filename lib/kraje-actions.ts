@@ -19,6 +19,7 @@ import {
 
 import { FormState } from '@/types/types';
 import { isInvalidText } from '@/lib/helpers';
+import { validateHierarchy } from './kraje-validation';
 import { uploadImage } from '@/lib/upload-image';
 
 export async function createAction(
@@ -90,6 +91,17 @@ export async function createAction(
     return { message: 'Neplatná data formuláře' };
   }
 
+  const validation = await validateHierarchy(
+    lokalita.uroven,
+    lokalita.parentId,
+  );
+
+  if (!validation.valid) {
+    return {
+      message: validation.message,
+    };
+  }
+
   if (id) {
     await UpdateLokalita(lokalita, imageUrl, id);
   } else {
@@ -98,8 +110,6 @@ export async function createAction(
 
   revalidatePath('/svet/kraje-a-mista');
   redirect('/svet/kraje-a-mista');
-
-  return { message: 'Vytvořeno' };
 }
 
 export async function deleteAction(formData: FormData) {
