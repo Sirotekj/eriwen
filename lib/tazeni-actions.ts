@@ -129,13 +129,12 @@ export async function createAction(
 
   revalidatePath('/tazeni');
   redirect('/tazeni');
-
-  return { message: 'Vytvořeno' };
 }
 
 export async function deleteAction(formData: FormData) {
   const id = formData.get('id') as string;
   await DeleteTazeni(id);
+
   revalidatePath('/tazeni');
   redirect('/tazeni');
 }

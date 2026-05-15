@@ -100,8 +100,6 @@ export async function createAction(
 
   revalidatePath('/postavy');
   redirect('/postavy');
-
-  return { message: 'Vytvořeno' };
 }
 
 export async function deleteAction(formData: FormData) {
