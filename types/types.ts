@@ -69,15 +69,11 @@ export type ClanekCreateInput = {
 export type ClanekView = {
   id: string;
   nazev: string;
-  popis: string | null;
+  obsah: string | null;
   image: string | null;
   kategorie: ClanekKategorie;
   order: string;
-  author: {
-    connect: {
-      id: string;
-    };
-  };
+  authorId: string;
 };
 
 export type LokalitaInput = {
