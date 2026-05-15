@@ -18,6 +18,10 @@ export default async function NabozenstviPageEdit() {
   return (
     <div>
       <h2>Náboženství</h2>
+      <blockquote>
+        „Náboženství se střídají, pivo a víno zůstávají.“
+        <span>Harvey Allen</span>
+      </blockquote>
       <p>Známá náboženství ve světě.</p>
 
       {canCreate && (

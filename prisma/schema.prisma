@@ -15,20 +15,6 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model User {
-  id            String    @id @default(cuid())
-  email         String?   @unique
-  name          String?
-  emailVerified DateTime?
-  image         String?
-  role          Role      @default(READER)
-  accounts      Account[]
-  postavy       Postava[]
-  sessions      Session[]
-  tazeni        Tazeni[]
-  clanek        Clanek[]
-}
-
 enum ClanekKategorie {
   SPOJENCI
   NEPRATELE
@@ -41,10 +27,11 @@ model Clanek {
   obsah     String
   image     String?
   kategorie ClanekKategorie
+
+  order     Decimal @db.Decimal(10, 5)
   authorId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  order     Decimal @db.Decimal(10, 5)
   author    User     @relation(fields: [authorId], references: [id])
 }
 
@@ -56,9 +43,10 @@ model Tazeni {
   pribeh    String
   obdobi    String?
   image     String?
+
+  order     Int      @default(0)
   authorId  String
   createdAt DateTime @default(now())
-  order     Int      @default(0)
   updatedAt DateTime @updatedAt
   author    User     @relation(fields: [authorId], references: [id])
 
@@ -75,14 +63,76 @@ model Postava {
   tazeni   String?
   popis    String?
   image      String?
+
+  order      Int      @default(0)
   authorId   String
   createdAt  DateTime @default(now())
-  order      Int      @default(0)
   updatedAt  DateTime @updatedAt
   author     User     @relation(fields: [authorId], references: [id])
 
   @@index([authorId])
   @@index([order])
+}
+
+model Lokalita {
+  id          String       @id @default(cuid())
+  nazev       String
+  popis       String?
+  image       String?
+
+  parentId  String?
+  parent    Lokalita?   @relation("Hierarchy", fields: [parentId], references: [id])
+  children  Lokalita[]  @relation("Hierarchy")
+
+  uroven   LokalitaUroven
+  
+  order      Int      @default(0)
+  authorId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+}
+
+model Mapa {
+  id          String       @id @default(cuid())
+  nazev       String
+  popis       String?
+  image       String?
+
+  parentId  String?
+  parent    Mapa?   @relation("Hierarchy", fields: [parentId], references: [id])
+  children  Mapa[]  @relation("Hierarchy")
+
+  uroven   LokalitaUroven
+
+  order      Int      @default(0)
+  authorId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+}
+
+enum LokalitaUroven {
+  SVET
+  KRALOVSTVI
+  KRAJ
+  MISTO
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  name          String?
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(READER)
+  accounts      Account[]
+  postavy       Postava[]
+  sessions      Session[]
+  tazeni        Tazeni[]
+  clanek        Clanek[]
+  kraje         Lokalita[]
+  mapy          Mapa[]
 }
 
 model Account {
