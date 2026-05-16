@@ -87,7 +87,7 @@ export async function createAction(
     parentId: parentId,
     authorId: session.user.id,
   };
-  if (isInvalidText(lokalita.nazev) || isInvalidText(lokalita.popis)) {
+  if (isInvalidText(lokalita.nazev)) {
     return { message: 'Neplatná data formuláře' };
   }
 
