@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Cinzel, Great_Vibes, Metamorphous } from 'next/font/google';
-import './globals.css';
-import Providers from './providers';
+import '../globals.css';
+import Providers from '../providers';
 import MainMenu from '@/components/main-menu/main-menu';
 import Background from '@/components/background/background';
 import PaperBackground from '@/components/background/paper';

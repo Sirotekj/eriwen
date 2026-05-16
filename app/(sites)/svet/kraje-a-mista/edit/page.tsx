@@ -1,20 +1,38 @@
-export const dynamic = 'force-dynamic';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { permissions } from '@/lib/permissions';
 
 import { getAllLokalita } from '@/lib/kraje-prisma';
-import KrajeList from '@/components/kraje/kraje-list';
-
 import { buildTree } from '@/components/kraje/kraje-helper';
 
-export default async function KrajeMistaPage() {
+import KrajeCreateToggle from '@/components/kraje/kraje-create-toggle';
+import KrajeListEdit from '@/components/kraje/kraje-list-edit';
+
+export default async function KrajeMistaPageEdit() {
+  const session = await getServerSession(authOptions);
+
+  const role = session?.user?.role;
+  const userId = session?.user?.id;
+
+  const canCreate = permissions.canCreate({ role });
+
   const lokality = await getAllLokalita();
   const tree = buildTree(lokality);
   return (
     <div>
       <h1>Kraje a místa</h1>
-      <p>Stránka je v přípravě!</p>
 
+      {canCreate && (
+        <>
+          <KrajeCreateToggle lokality={lokality} />
+          <p>
+            Pozn.: Nové místo se řadí abecedně ve struktuře: svět → království →
+            kraj → místo.
+          </p>
+        </>
+      )}
       {lokality.length > 0 ? (
-        <KrajeList lokality={tree} />
+        <KrajeListEdit lokality={tree} role={role} userId={userId} />
       ) : (
         <p>
           <i>Ještě zde nejsou žádné popisy míst!</i>
@@ -22,7 +40,6 @@ export default async function KrajeMistaPage() {
       )}
 
       <hr />
-
       <div>
         <h2>Příklad</h2>
         <h2>Nainův kraj</h2>
