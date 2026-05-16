@@ -1,21 +1,20 @@
-import { Lokalita } from '@prisma/client';
-
 import KrajeItem from './kraje-item';
-import { buildTree } from './kraje-helper';
+import { LokalitaTree } from './kraje-helper';
 
 type Props = {
-  lokality: Lokalita[];
+  lokality: LokalitaTree[];
 };
 
 const KrajeList = ({ lokality }: Props) => {
-  const tree = buildTree(lokality);
   return (
     <>
       <ul>
-        {tree.map((a) => (
-          <li key={a.id}>
-            <KrajeItem lokalita={a} />
-            {a.children?.length > 0 && <KrajeList lokality={a.children} />}
+        {lokality.map((lokalita) => (
+          <li key={lokalita.id}>
+            <KrajeItem lokalita={lokalita} />
+            {lokalita.children?.length > 0 && (
+              <KrajeList lokality={lokalita.children} />
+            )}
           </li>
         ))}
       </ul>

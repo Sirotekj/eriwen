@@ -3,15 +3,18 @@ export const dynamic = 'force-dynamic';
 import { getAllLokalita } from '@/lib/kraje-prisma';
 import KrajeList from '@/components/kraje/kraje-list';
 
+import { buildTree } from '@/components/kraje/kraje-helper';
+
 export default async function KrajeMistaPage() {
   const lokality = await getAllLokalita();
+  const tree = buildTree(lokality);
   return (
     <div>
       <h1>Kraje a místa</h1>
       <p>Stránka je v přípravě!</p>
 
       {lokality.length > 0 ? (
-        <KrajeList lokality={lokality} />
+        <KrajeList lokality={tree} />
       ) : (
         <p>
           <i>Ještě zde nejsou žádné popisy míst!</i>

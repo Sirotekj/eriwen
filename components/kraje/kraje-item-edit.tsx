@@ -4,7 +4,6 @@ import { Lokalita, Role } from '@prisma/client';
 
 import { permissions } from '@/lib/permissions';
 
-import KrajeCreateToggle from '@/components/kraje/kraje-create-toggle';
 import EditKraje from '@/components/utils/edit-article';
 import ImageWrapper from '@/components/utils/image-wrapper';
 
@@ -34,7 +33,7 @@ const KrajeItemEdit = ({
     <>
       <div>
         {lokalita.uroven === 'SVET' && (
-          <h1 className="mb0">{lokalita.nazev}</h1>
+          <h1 className="mb0 text-center">{lokalita.nazev}</h1>
         )}
         {lokalita.uroven === 'KRALOVSTVI' && (
           <h2 className="mb0">{lokalita.nazev}</h2>
@@ -45,8 +44,25 @@ const KrajeItemEdit = ({
         {lokalita.uroven === 'MISTO' && (
           <h4 className="mb0">{lokalita.nazev}</h4>
         )}
+        {lokalita.image && (
+          <ImageWrapper>
+            <Image
+              className="object-cover"
+              src={lokalita.image}
+              alt={lokalita.id}
+              sizes="242px"
+              fill
+            />
+          </ImageWrapper>
+        )}
         {lokalita.popis ? SafeContent(lokalita.popis) : ''}
       </div>
+      {canEdit && (
+        <EditKraje
+          handleEdit={() => handleEdit()}
+          handleDelete={() => handleDelete()}
+        />
+      )}
     </>
   );
 };

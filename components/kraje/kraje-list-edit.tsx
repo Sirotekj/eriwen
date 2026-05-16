@@ -2,13 +2,14 @@
 
 import { useState } from 'react';
 
-import { Lokalita, LokalitaUroven, Role } from '@prisma/client';
+import { Role } from '@prisma/client';
+import { LokalitaTree } from './kraje-helper';
 
 import KrajeItemEdit from './kraje-item-edit';
 import KrajeDelete from './kraje-delete';
 import KrajeForm from '../forms/kraje-form';
 type Props = {
-  lokality: Lokalita[];
+  lokality: LokalitaTree[];
   role: Role | undefined;
   userId: string | undefined;
 };
@@ -55,6 +56,9 @@ const KrajeListEdit = ({ lokality, role, userId }: Props) => {
           </li>
         ))}
       </ul>
+      {deleteModal && editingId && (
+        <KrajeDelete id={editingId} onClose={() => closeDeleteModal()} />
+      )}
     </>
   );
 };

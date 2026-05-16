@@ -12,7 +12,9 @@ type Props = {
 const KrajeItem = ({ lokalita }: Props) => {
   return (
     <>
-      {lokalita.uroven === 'SVET' && <h1 className="mb0">{lokalita.nazev}</h1>}
+      {lokalita.uroven === 'SVET' && (
+        <h1 className="mb0 text-center">{lokalita.nazev}</h1>
+      )}
       {lokalita.uroven === 'KRALOVSTVI' && (
         <h2 className="mb0">{lokalita.nazev}</h2>
       )}

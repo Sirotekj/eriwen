@@ -3,6 +3,8 @@ import { authOptions } from '@/lib/auth';
 import { permissions } from '@/lib/permissions';
 
 import { getAllLokalita } from '@/lib/kraje-prisma';
+import { buildTree } from '@/components/kraje/kraje-helper';
+
 import KrajeCreateToggle from '@/components/kraje/kraje-create-toggle';
 import KrajeListEdit from '@/components/kraje/kraje-list-edit';
 
@@ -14,7 +16,8 @@ export default async function KrajeMistaPageEdit() {
 
   const canCreate = permissions.canCreate({ role });
 
-  const lokalita = await getAllLokalita();
+  const lokality = await getAllLokalita();
+  const tree = buildTree(lokality);
   return (
     <div>
       <h1>Kraje a místa</h1>
@@ -22,15 +25,15 @@ export default async function KrajeMistaPageEdit() {
 
       {canCreate && (
         <>
-          <KrajeCreateToggle lokality={lokalita} />
+          <KrajeCreateToggle lokality={lokality} />
           <p>
             Pozn.: Nové místo se řadí abecedně ve struktuře: svět → království →
             kraj → místo.
           </p>
         </>
       )}
-      {lokalita.length > 0 ? (
-        <KrajeListEdit lokality={lokalita} role={role} userId={userId} />
+      {lokality.length > 0 ? (
+        <KrajeListEdit lokality={tree} role={role} userId={userId} />
       ) : (
         <p>
           <i>Ještě zde nejsou žádné popisy míst!</i>
