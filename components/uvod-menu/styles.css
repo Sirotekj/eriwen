@@ -1,0 +1,22 @@
+svg {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  stroke-linejoin: round;
+  stroke-miterlimit: 2;
+}
+.yellow-line {
+  fill: none;
+  stroke: #fffb79;
+  stroke-width: 1px;
+  stroke-linecap: round;
+  stroke-miterlimit: 1.5;
+}
+.brown-fill {
+  fill: #242424;
+}
+.eriwen-uvod {
+  fill: #fffb79;
+  fill-rule: nonzero;
+  stroke: #242424;
+  stroke-width: 1px;
+}
