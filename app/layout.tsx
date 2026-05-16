@@ -42,10 +42,12 @@ export default function RootLayout({
         <Background />
         <Providers>
           <MainMenu />
-          <main className="relative max-w-3xl mx-auto my-36 px-4 pt-24 pb-16">
-            <PaperBackground />
-            {children}
-          </main>
+          <div className="w-screen overflow-hidden">
+            <main className="relative max-w-3xl mx-auto my-36 px-4 pt-24 pb-16">
+              <PaperBackground />
+              {children}
+            </main>
+          </div>
         </Providers>
       </body>
     </html>
