@@ -18,7 +18,7 @@ export async function getTazeni(): Promise<Tazeni[]> {
   );
 }
 
-export async function uploadImage(image: File, order: number) {
+/*export async function uploadImage(image: File, order: number) {
   const env = process.env.NODE_ENV;
   const extension = image.name.split('.').pop() as string;
   const fileName = `${env}/tazeni/tazeni_${order}.${extension}`;
@@ -28,7 +28,7 @@ export async function uploadImage(image: File, order: number) {
   });
 
   return blob.url;
-}
+}*/
 
 export async function SaveTazeni(
   tazeni: TazeniType,

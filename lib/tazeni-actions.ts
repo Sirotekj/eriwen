@@ -10,15 +10,11 @@ import { prisma } from '@/lib/prisma';
 import { authOptions } from '@/lib/auth';
 import { permissions } from '@/lib/permissions';
 
-import {
-  SaveTazeni,
-  UpdateTazeni,
-  DeleteTazeni,
-  uploadImage,
-} from '@/lib/tazeni-prisma';
+import { SaveTazeni, UpdateTazeni, DeleteTazeni } from '@/lib/tazeni-prisma';
 
 import { FormState } from '@/types/types';
 import { isInvalidText } from '@/lib/helpers';
+import { uploadImage } from '@/lib/upload-image';
 
 export async function createAction(
   prevState: FormState,
@@ -91,7 +87,12 @@ export async function createAction(
   let imageUrl: string | undefined;
 
   if (imageFile && imageFile.size > 0) {
-    imageUrl = await uploadImage(imageFile, order);
+    imageUrl = await uploadImage({
+      image: imageFile,
+      fileName: 'tazeni',
+      order: order.toString(),
+      url: `/tazeni`,
+    });
   } else if (existingImage) {
     imageUrl = existingImage;
   } else {

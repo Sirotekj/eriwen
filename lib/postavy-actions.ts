@@ -14,11 +14,11 @@ import {
   SavePostavy,
   UpdatePostavy,
   DeletePostavy,
-  uploadImage,
 } from '@/lib/postavy-prisma';
 
 import { FormState } from '@/types/types';
 import { isInvalidText } from '@/lib/helpers';
+import { uploadImage } from '@/lib/upload-image';
 
 export async function createAction(
   prevState: FormState,
@@ -62,7 +62,12 @@ export async function createAction(
   let imageUrl: string | undefined;
 
   if (imageFile && imageFile.size > 0) {
-    imageUrl = await uploadImage(imageFile, order);
+    imageUrl = await uploadImage({
+      image: imageFile,
+      fileName: '/postavy/postava',
+      order: order.toString(),
+      url: `/postavy`,
+    });
   } else if (existingImage) {
     imageUrl = existingImage;
   } else {
