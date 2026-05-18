@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Image from 'next/image';
 
 import { getAllMapa } from '@/lib/mapy-prisma';
