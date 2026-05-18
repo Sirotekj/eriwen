@@ -19,18 +19,29 @@ svg {
   fill-rule: nonzero;
   stroke: #242424;
   stroke-width: 1px;
+  display: none;
+  @media (width >=48rem) {
+    displa: block;
+  }
 }
 .menu-circle {
   position: absolute;
-  inset: 0;
-  transform: scaleX(1.5);
+  transform: scaleX(1);
+  @media (width >= 48rem) {
+    inset: 0;
+    transform: scaleX(1.5);
+  }
 }
 
 .menu-circle-item {
   position: absolute;
   left: 50%;
   top: 50%;
+  transform: translate(-50%, -50%) rotate(var(--angle-mobile)) translate(220px)
+    rotate(calc(var(--angle-mobile) * -1));
 
-  transform: translate(-50%, -50%) rotate(var(--angle)) translate(220px)
-    rotate(calc(var(--angle) * -1)) scaleX(0.666);
+  @media (width >= 48rem) {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translate(220px)
+      rotate(calc(var(--angle) * -1)) scaleX(0.666);
+  }
 }

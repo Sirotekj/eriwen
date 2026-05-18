@@ -12,15 +12,15 @@ const UvodMenu = () => {
 
   const items = [
     { href: '/svet', label: 'Svět' },
-    { href: '/kraje-a-mista', label: 'Kraje a místa' },
-    { href: '/mapy', label: 'Mapy' },
-    { href: '/nabozenstvi', label: 'Náboženství' },
-    { href: '/spojenci', label: 'Spojenci' },
-    { href: '/nepratele', label: 'Nepřátelé' },
+    { href: '/svet/kraje-a-mista', label: 'Kraje a místa' },
+    { href: '/svet/mapy', label: 'Mapy' },
+    { href: '/svet/nabozenstvi', label: 'Náboženství' },
+    { href: '/svet/spojenci', label: 'Spojenci' },
+    { href: '/svet/nepratele', label: 'Nepřátelé' },
     { href: '/postavy', label: 'Postavy' },
     { href: '/tazeni', label: 'Tažení' },
     { href: '/pravidla', label: 'Pravidla' },
-    { href: '/bestiar', label: 'Bestiář' },
+    { href: '/pravidla/bestiar', label: 'Bestiář' },
   ];
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const UvodMenu = () => {
       if (diff > 180) diff -= 360;
       if (diff < -180) diff += 360;
 
-      currentAngle.current += diff;
+      currentAngle.current += diff * 0.1;
 
       arrowRef.current.style.transform = `translate(-50%, -50%) rotate(${currentAngle.current}deg)`;
     };
@@ -58,17 +58,19 @@ const UvodMenu = () => {
         <svg
           ref={arrowRef}
           viewBox="0 0 440 22"
-          className="absolute left-1/2 top-1/2 w-82 text-light transition-transform duration-50"
+          className="absolute hidden md:block left-1/2 top-1/2 w-82 text-light transition-transform duration-50"
           fill="currentColor"
         >
           <path d="M440,11l-44,10.284l0,-20.568l44,10.284Z" />
         </svg>
 
-        <ul className="absolute menu-circle h-full w-full text-light font-greatVibes">
+        <ul className="absolute -left-1/2 menu-circle h-full w-full text-light font-greatVibes">
           {items.map((item, index) => {
             const angle = (360 / items.length) * index - 90;
+            const angleMobile = (196 / items.length) * index - 88;
             const style = {
               '--angle': `${angle}deg`,
+              '--angle-mobile': `${angleMobile}deg`,
             } as React.CSSProperties;
             return (
               <li
