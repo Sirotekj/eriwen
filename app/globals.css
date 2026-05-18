@@ -106,6 +106,9 @@
   .form-select {
     @apply border rounded-sm p-1;
   }
+  .form-mapa {
+    @apply w-full;
+  }
 }
 
 /* GLOBAL */

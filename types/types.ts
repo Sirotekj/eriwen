@@ -92,3 +92,20 @@ export type LokalitaView = {
   image: string | null;
   authorId: string;
 };
+
+export type MapaInput = {
+  nazev: string;
+  popis: string;
+  uroven: LokalitaUroven;
+  parentId?: string | null;
+  authorId: string;
+};
+
+export type MapaView = {
+  id: string;
+  nazev: string;
+  uroven: LokalitaUroven;
+  popis: string | null;
+  image: string | null;
+  authorId: string;
+};

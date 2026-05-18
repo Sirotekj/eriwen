@@ -9,10 +9,12 @@ const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/webp'];
 export default function ImagePicker({
   label,
   name,
+  width,
   defaultImage,
 }: {
   label: string;
   name: string;
+  width: 'full' | 'small';
   defaultImage?: string | null;
 }) {
   const [pickedImage, setPickedImage] = useState<string | null>(
@@ -66,17 +68,23 @@ export default function ImagePicker({
       <div className="controls">
         <div className="mb-4">
           {!pickedImage && (
-            <p className="w-[30%] aspect-3/4 p-2 border">Obrázek nevybrán.</p>
+            <p
+              className={`${width === 'small' ? 'w-[30%] aspect-3/4' : 'w-full aspect-video'} p-2 border`}
+            >
+              Obrázek nevybrán.
+            </p>
           )}
           {pickedImage && (
-            <div className="relative w-[30%] border">
+            <div
+              className={`relative border ${width === 'small' ? 'w-[30%] aspect-3/4' : 'w-full aspect-video'}`}
+            >
               <Image
                 src={pickedImage}
                 width={0}
                 height={0}
                 sizes="30vw"
                 alt="Vybraný obrázek."
-                className="w-100 h-auto"
+                className="w-full h-auto mix-blend-multiply"
               />
             </div>
           )}

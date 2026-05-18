@@ -11,6 +11,7 @@ type ValidationResult =
     };
 
 export async function validateHierarchy(
+  type: 'lokalita' | 'mapa',
   uroven: LokalitaUroven,
   parentId: string | null,
 ): Promise<ValidationResult> {
@@ -31,13 +32,22 @@ export async function validateHierarchy(
       message: 'Tato úroveň musí mít parent.',
     };
   }
-
-  const parent = await prisma.lokalita.findUnique({
-    where: { id: parentId },
-    select: {
-      uroven: true,
-    },
-  });
+  let parent;
+  if (type === 'lokalita') {
+    parent = await prisma.lokalita.findUnique({
+      where: { id: parentId },
+      select: {
+        uroven: true,
+      },
+    });
+  } else {
+    parent = await prisma.mapa.findUnique({
+      where: { id: parentId },
+      select: {
+        uroven: true,
+      },
+    });
+  }
 
   if (!parent) {
     return {

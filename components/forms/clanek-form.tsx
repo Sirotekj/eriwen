@@ -59,7 +59,12 @@ export default function ClanekForm({
           </div>
           <label className="col-start-1">Obsah:</label>
           <JoditRTE name="obsah" defaultValue={initialData?.obsah ?? ''} />
-          <ImagePicker label="Your image" name="image" />
+          <ImagePicker
+            label="Váš obrázek:"
+            name="image"
+            width="small"
+            defaultImage={initialData?.image ?? undefined}
+          />
           {state.message && <p>{state.message}</p>}
 
           {afterOrder && (

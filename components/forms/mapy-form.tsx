@@ -1,10 +1,10 @@
 'use client';
 
-import { Lokalita, LokalitaUroven } from '@prisma/client';
+import { Mapa, LokalitaUroven } from '@prisma/client';
 
 import { useActionState } from 'react';
 
-import { createAction } from '@/lib/kraje-actions';
+import { createAction } from '@/lib/mapy-actions';
 
 import { useLokalitaHierarchy } from '@/hooks/use-lokalita-hierarchy';
 
@@ -15,19 +15,20 @@ import ButtonPage from '@/components/utils/button-page';
 import JoditRTE from './jodit-rte';
 
 type Props = {
-  lokality: Lokalita[];
+  mapy: Mapa[];
   onClose: () => void;
   afterOrder?: string;
-  initialData?: Lokalita;
+  initialData?: Mapa;
 };
 
-export default function KrajeForm({
-  lokality,
+export default function MapyForm({
+  mapy,
   afterOrder,
   initialData,
   onClose,
 }: Props) {
   const [state, formAction] = useActionState(createAction, { message: null });
+  const lokality = mapy;
 
   const {
     type,
@@ -52,63 +53,11 @@ export default function KrajeForm({
     initialData,
   });
 
-  /*const [type, setType] = useState<'SVET' | 'KRALOVSTVI' | 'KRAJ' | 'MISTO'>(
-    initialData?.uroven ?? 'SVET',
-  );*/
-
-  /*const [selectedSvet, setSelectedSvet] = useState<string | undefined>(
-    hierarchy.svetId,
-  );
-  const [selectedKralovstvi, setSelectedKralovstvi] = useState<
-    string | undefined
-  >(hierarchy.kralovstviId);
-
-  const [selectedKraj, setSelectedKraj] = useState<string | undefined>(
-    initialData?.uroven === 'MISTO'
-      ? (initialData.parentId ?? undefined)
-      : hierarchy.krajId,
-  );*/
-
-  /*function resolveParentId() {
-    switch (type) {
-      case 'KRALOVSTVI':
-        return selectedSvet;
-
-      case 'KRAJ':
-        return selectedKralovstvi;
-
-      case 'MISTO':
-        return selectedKraj;
-
-      default:
-        return null;
-    }
-  }*/
-
-  /*const svety = useMemo(
-    () => lokality.filter((l) => l.uroven === 'SVET'),
-    [lokality],
-  );
-  const kralovstvi = useMemo(
-    () =>
-      lokality.filter(
-        (l) => l.uroven === 'KRALOVSTVI' && l.parentId === selectedSvet,
-      ),
-    [lokality, selectedSvet],
-  );
-  const kraje = useMemo(
-    () =>
-      lokality.filter(
-        (l) => l.uroven === 'KRAJ' && l.parentId === selectedKralovstvi,
-      ),
-    [lokality, selectedKralovstvi],
-  );*/
-
   return (
     <form action={formAction} className="form">
       {/* uroven */}
       <label htmlFor="uroven">
-        Nejprve vyber úroveň, zda budeš vytvářet popis světa, království, kraje
+        Nejprve vyber úroveň, zda budeš vytvářet mapu světa, království, kraje
         nebo místa.
       </label>
       <select
@@ -217,7 +166,7 @@ export default function KrajeForm({
       <ImagePicker
         label="Váš obrázek (nepovinné):"
         name="image"
-        width="small"
+        width="full"
         defaultImage={initialData?.image ?? undefined}
       />
 
