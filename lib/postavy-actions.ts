@@ -64,7 +64,7 @@ export async function createAction(
   if (imageFile && imageFile.size > 0) {
     imageUrl = await uploadImage({
       image: imageFile,
-      fileName: '/postavy/postava',
+      fileName: 'postava',
       order: order.toString(),
       url: `/postavy`,
     });
