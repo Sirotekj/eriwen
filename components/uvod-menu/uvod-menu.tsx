@@ -1,5 +1,6 @@
 'use client';
 
+import './styles.css';
 import { useEffect, useRef } from 'react';
 
 import NavLink from './nav-link';
@@ -7,6 +8,20 @@ import Kompas from './uvod-kompas';
 
 const UvodMenu = () => {
   const arrowRef = useRef<SVGSVGElement>(null);
+  const currentAngle = useRef(0);
+
+  const items = [
+    { href: '/svet', label: 'Svět' },
+    { href: '/kraje-a-mista', label: 'Kraje a místa' },
+    { href: '/mapy', label: 'Mapy' },
+    { href: '/nabozenstvi', label: 'Náboženství' },
+    { href: '/spojenci', label: 'Spojenci' },
+    { href: '/nepratele', label: 'Nepřátelé' },
+    { href: '/postavy', label: 'Postavy' },
+    { href: '/tazeni', label: 'Tažení' },
+    { href: '/pravidla', label: 'Pravidla' },
+    { href: '/bestiar', label: 'Bestiář' },
+  ];
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -17,10 +32,17 @@ const UvodMenu = () => {
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
 
-      const angle =
+      const targetAngle =
         Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
 
-      arrowRef.current.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      let diff = targetAngle - currentAngle.current;
+
+      if (diff > 180) diff -= 360;
+      if (diff < -180) diff += 360;
+
+      currentAngle.current += diff;
+
+      arrowRef.current.style.transform = `translate(-50%, -50%) rotate(${currentAngle.current}deg)`;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -30,20 +52,35 @@ const UvodMenu = () => {
     };
   }, []);
   return (
-    <div className="relative mt-20 h-[56vh] w-full overflow-hidden">
+    <div className="relative mt-20 h-[60vh] w-full overflow-hidden">
+      <Kompas />
       <nav className="absolute left-1/2 top-1/2 h-[48vw] w-[56vw] max-h-[48vh] max-w-[56vh] -translate-x-1/2 -translate-y-1/2">
         <svg
           ref={arrowRef}
-          viewBox="0 0 100 20"
-          className="absolute left-1/2 top-1/2 w-32 text-brown transition-transform duration-75"
+          viewBox="0 0 440 22"
+          className="absolute left-1/2 top-1/2 w-82 text-light transition-transform duration-50"
           fill="currentColor"
         >
-          <path d="M0 8h70V0l30 10-30 10v-8H0z" />
+          <path d="M440,11l-44,10.284l0,-20.568l44,10.284Z" />
         </svg>
-        <Kompas />
 
-        <ul className="absolute h-full w-full text-light font-greatVibes">
-          <li className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
+        <ul className="absolute menu-circle h-full w-full text-light font-greatVibes">
+          {items.map((item, index) => {
+            const angle = (360 / items.length) * index - 90;
+            const style = {
+              '--angle': `${angle}deg`,
+            } as React.CSSProperties;
+            return (
+              <li
+                key={item.href}
+                className="menu-circle-item w-38"
+                style={style}
+              >
+                <NavLink href={item.href}>{item.label}</NavLink>
+              </li>
+            );
+          })}
+          {/*<li className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
             <NavLink href="/svet">Svět</NavLink>
           </li>
 
@@ -57,7 +94,7 @@ const UvodMenu = () => {
 
           <li className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <NavLink href="/pravidla">Pravidla</NavLink>
-          </li>
+          </li>*/}
         </ul>
       </nav>
     </div>

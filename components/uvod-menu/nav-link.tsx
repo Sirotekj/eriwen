@@ -10,9 +10,9 @@ type Props = {
 
 const NavLink = ({ href, children }: Props) => {
   return (
-    <div className="relative p-1 bg-background">
+    <div className="relative w-full p-1 bg-background">
       <Link
-        className="inline-block text-2xl px-4 pt-2 pb-1 color-yellow text-center border hover:font-bold"
+        className="block text-2xl px-4 pt-2 pb-1 color-yellow text-center border hover:font-bold"
         href={href}
       >
         {children}
