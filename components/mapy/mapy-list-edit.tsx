@@ -53,6 +53,9 @@ const MapyListEdit = ({ mapy, role, userId }: Props) => {
                 }}
               />
             )}
+            {mapa.children?.length > 0 && (
+              <MapyListEdit mapy={mapa.children} role={role} userId={userId} />
+            )}
           </li>
         ))}
       </ul>

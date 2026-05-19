@@ -53,6 +53,13 @@ const KrajeListEdit = ({ lokality, role, userId }: Props) => {
                 }}
               />
             )}
+            {lokalita.children?.length > 0 && (
+              <KrajeListEdit
+                role={role}
+                userId={userId}
+                lokality={lokalita.children}
+              />
+            )}
           </li>
         ))}
       </ul>

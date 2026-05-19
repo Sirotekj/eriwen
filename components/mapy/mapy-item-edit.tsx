@@ -31,7 +31,7 @@ const MapyItemEdit = ({
   });
   return (
     <>
-      <div>
+      <div className="mb-2">
         {mapa.uroven === 'SVET' && (
           <h1 className="mb0 text-center">{mapa.nazev}</h1>
         )}
@@ -39,7 +39,7 @@ const MapyItemEdit = ({
         {mapa.uroven === 'KRAJ' && <h3 className="mb0">{mapa.nazev}</h3>}
         {mapa.uroven === 'MISTO' && <h4 className="mb0">{mapa.nazev}</h4>}
         {mapa.image && (
-          <ImageWrapper>
+          <ImageWrapper size="large">
             <img
               className="object-cover h-auto mix-blend-multiply"
               src={mapa.image}
