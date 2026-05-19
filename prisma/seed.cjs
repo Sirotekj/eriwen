@@ -1,5 +1,5 @@
 /* eslint-disable */
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
@@ -22,7 +22,7 @@ async function main() {
 
 main()
   .then(() => {
-    console.log("Seed hotový ✅");
+    console.log('Seed hotový ✅');
   })
   .catch((e) => {
     console.error(e);

@@ -89,6 +89,7 @@ export default function PostavayForm({ onClose, initialData }: Props) {
           <ImagePicker
             label="Váš obrázek:"
             name="image"
+            width="small"
             defaultImage={initialData?.image ?? undefined}
           />
           {state.message && <p>{state.message}</p>}

@@ -103,6 +103,12 @@
     }
     @apply w-full mb-4 border;
   }
+  .form-select {
+    @apply border rounded-sm p-1;
+  }
+  .form-mapa {
+    @apply w-full;
+  }
 }
 
 /* GLOBAL */

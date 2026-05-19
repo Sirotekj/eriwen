@@ -18,7 +18,7 @@ type Props = {
   handleDelete: () => void;
 };
 
-const TazeniItem = ({
+const TazeniItemEdit = ({
   tazeni,
   role,
   userId,
@@ -70,4 +70,4 @@ const TazeniItem = ({
     </>
   );
 };
-export default TazeniItem;
+export default TazeniItemEdit;

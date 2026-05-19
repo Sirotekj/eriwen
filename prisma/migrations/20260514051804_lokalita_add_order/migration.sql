@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Lokalita" ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE "Mapa" ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 0;

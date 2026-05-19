@@ -46,23 +46,29 @@ const MainMenuMobile = () => {
             </NavLinkMobile>
             <ul className="ml-4 text-base list-disc">
               <li className="ml-1">
-                <NavLinkMobile href="/svet/kraje-a-mista">
+                <NavLinkMobile href="/svet/kraje-a-mista" onClick={closeMenu}>
                   Kraje a místa
                 </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <NavLinkMobile href="/svet/mapy">Mapy</NavLinkMobile>
+                <NavLinkMobile href="/svet/mapy" onClick={closeMenu}>
+                  Mapy
+                </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <NavLinkMobile href="/svet/nabozenstvi">
+                <NavLinkMobile href="/svet/nabozenstvi" onClick={closeMenu}>
                   Náboženství
                 </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <NavLinkMobile href="/svet/spojenci">Spojenci</NavLinkMobile>
+                <NavLinkMobile href="/svet/spojenci" onClick={closeMenu}>
+                  Spojenci
+                </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <NavLinkMobile href="/svet/nepratele">Nepřátelé</NavLinkMobile>
+                <NavLinkMobile href="/svet/nepratele" onClick={closeMenu}>
+                  Nepřátelé
+                </NavLinkMobile>
               </li>
             </ul>
           </li>
@@ -82,7 +88,9 @@ const MainMenuMobile = () => {
             </NavLinkMobile>
             <ul className="ml-4 text-base list-disc">
               <li className="ml-1">
-                <NavLinkMobile href="/pravidla/bestiar">Bestiář</NavLinkMobile>
+                <NavLinkMobile href="/pravidla/bestiar" onClick={closeMenu}>
+                  Bestiář
+                </NavLinkMobile>
               </li>
             </ul>
           </li>

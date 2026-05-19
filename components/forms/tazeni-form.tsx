@@ -73,7 +73,12 @@ export default function TazeniForm({
           </div>
           <label className="col-start-1">Příběh:</label>
           <JoditRTE name="pribeh" defaultValue={initialData?.pribeh ?? ''} />
-          <ImagePicker label="Your image" name="image" />
+          <ImagePicker
+            label="Váš obrázek:"
+            name="image"
+            width="small"
+            defaultImage={initialData?.image ?? undefined}
+          />
           {state.message && <p>{state.message}</p>}
           <div className="flex justify-between mt-4">
             <FormSubmit />

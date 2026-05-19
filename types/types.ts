@@ -1,4 +1,4 @@
-import { Prisma, ClanekKategorie } from '@prisma/client';
+import { Prisma, ClanekKategorie, LokalitaUroven } from '@prisma/client';
 export type FormState = {
   message: string | null;
 };
@@ -73,5 +73,39 @@ export type ClanekView = {
   image: string | null;
   kategorie: ClanekKategorie;
   order: string;
+  authorId: string;
+};
+
+export type LokalitaInput = {
+  nazev: string;
+  popis: string;
+  uroven: LokalitaUroven;
+  parentId?: string | null;
+  authorId: string;
+};
+
+export type LokalitaView = {
+  id: string;
+  nazev: string;
+  uroven: LokalitaUroven;
+  popis: string | null;
+  image: string | null;
+  authorId: string;
+};
+
+export type MapaInput = {
+  nazev: string;
+  popis: string;
+  uroven: LokalitaUroven;
+  parentId?: string | null;
+  authorId: string;
+};
+
+export type MapaView = {
+  id: string;
+  nazev: string;
+  uroven: LokalitaUroven;
+  popis: string | null;
+  image: string | null;
   authorId: string;
 };

@@ -55,8 +55,14 @@ export default function MainMenu() {
           <li className="menu-item">
             <NavLink href="/tazeni">Tažení</NavLink>
           </li>
-          <li className="menu-item">
-            <NavLink href="/pravidla">Pravidla</NavLink>
+          <li className="menu-item -mr-1 group">
+            <NavLink href="/pravidla">
+              <span className="mr-1">Pravidla</span>
+              <span className="text-[6px] group-hover:rotate-180 transition-all duration-200">
+                &#9650;
+              </span>
+            </NavLink>
+            <MainMenuSub options={pravidlaSubMenu} />
           </li>
           <li>
             <EditIcon />
