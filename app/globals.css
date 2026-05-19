@@ -131,3 +131,9 @@ blockquote span {
   font-size: 80%;
   text-align: right;
 }
+hr {
+  margin-block: 4rem;
+  border: 0;
+  border-top: 4px double var(--color-brown);
+  height: 5px;
+}

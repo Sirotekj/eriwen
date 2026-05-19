@@ -21,11 +21,13 @@ const MapyItem = ({ mapa }: Props) => {
 
       {mapa.image && (
         <ImageWrapper size="large">
-          <img
-            className="object-cover h-auto mix-blend-multiply"
-            src={mapa.image}
-            alt={mapa.id}
-          />
+          <picture>
+            <img
+              className="object-cover h-auto mix-blend-multiply"
+              src={mapa.image}
+              alt={mapa.id}
+            />
+          </picture>
         </ImageWrapper>
       )}
 
