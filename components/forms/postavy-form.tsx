@@ -29,81 +29,79 @@ export default function PostavayForm({ onClose, initialData }: Props) {
   }, [state, router]);
   return (
     <>
-      <header>Přidat postavu</header>
-      <main>
-        <form action={formAction} className="form">
-          <div className="">
-            <label htmlFor="jmeno">Jméno:</label>
-            <input
-              type="text"
-              id="jmeno"
-              name="jmeno"
-              defaultValue={initialData?.jmeno}
-              required
-              className="form-input"
-            />
-          </div>
-          <label htmlFor="rasa">Rasa:</label>
+      <header className="mb-4">Přidat postavu</header>
+      <form action={formAction} className="form">
+        <div className="">
+          <label htmlFor="jmeno">Jméno:</label>
           <input
             type="text"
-            id="rasa"
-            name="rasa"
-            defaultValue={initialData?.rasa}
+            id="jmeno"
+            name="jmeno"
+            defaultValue={initialData?.jmeno}
             required
             className="form-input"
           />
-          <label htmlFor="povolani">Povolání:</label>
-          <input
-            type="text"
-            id="povolani"
-            name="povolani"
-            defaultValue={initialData?.povolani}
-            required
-            className="form-input"
-          />
-          <label htmlFor="tazeni">Tažení:</label>
-          <input
-            type="text"
-            id="tazeni"
-            name="tazeni"
-            defaultValue={initialData?.tazeni ?? ''}
-            className="form-input"
-          />
-          <label htmlFor="hrac">Hráč:</label>
-          <input
-            type="text"
-            id="hrac"
-            name="hrac"
-            defaultValue={initialData?.hrac ?? ''}
-            className="form-input"
-          />
-          <label>Popis:</label>
-          {/*<textarea
+        </div>
+        <label htmlFor="rasa">Rasa:</label>
+        <input
+          type="text"
+          id="rasa"
+          name="rasa"
+          defaultValue={initialData?.rasa}
+          required
+          className="form-input"
+        />
+        <label htmlFor="povolani">Povolání:</label>
+        <input
+          type="text"
+          id="povolani"
+          name="povolani"
+          defaultValue={initialData?.povolani}
+          required
+          className="form-input"
+        />
+        <label htmlFor="tazeni">Tažení:</label>
+        <input
+          type="text"
+          id="tazeni"
+          name="tazeni"
+          defaultValue={initialData?.tazeni ?? ''}
+          className="form-input"
+        />
+        <label htmlFor="hrac">Hráč:</label>
+        <input
+          type="text"
+          id="hrac"
+          name="hrac"
+          defaultValue={initialData?.hrac ?? ''}
+          className="form-input"
+        />
+        <label>Popis:</label>
+        {/*<textarea
             id="pribeh"
             name="pribeh"
             required
             defaultValue={initialData?.content ?? ''}
             className="form-textarea"
           />*/}
-          <JoditRTE name="popis" defaultValue={initialData?.popis ?? ''} />
-          <ImagePicker
-            label="Váš obrázek:"
-            name="image"
-            width="small"
-            defaultImage={initialData?.image ?? undefined}
-          />
-          {state.message && <p>{state.message}</p>}
-          {initialData?.id && (
-            <input type="hidden" name="id" value={initialData.id} />
-          )}
-          <div className="flex justify-between mt-4">
-            <FormSubmit />
-            <ButtonPage onClick={onClose}>
-              <strong>Zrušit</strong>
-            </ButtonPage>
-          </div>
-        </form>
-      </main>
+        <JoditRTE name="popis" defaultValue={initialData?.popis ?? ''} />
+        <ImagePicker
+          label="Váš obrázek:"
+          name="image"
+          width="small"
+          defaultImage={initialData?.image ?? undefined}
+        />
+        {state.message && <p>{state.message}</p>}
+        {initialData?.id && (
+          <input type="hidden" name="id" value={initialData.id} />
+        )}
+        <div className="flex justify-between mt-4">
+          <FormSubmit />
+          <ButtonPage onClick={onClose}>
+            <strong>Zrušit</strong>
+          </ButtonPage>
+        </div>
+      </form>
     </>
   );
 }

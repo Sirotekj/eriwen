@@ -54,135 +54,138 @@ export default function MapyForm({
   });
 
   return (
-    <form action={formAction} className="form">
-      {/* uroven */}
-      <label htmlFor="uroven">
-        Nejprve vyber úroveň, zda budeš vytvářet mapu světa, království, kraje
-        nebo místa.
-      </label>
-      <select
-        name="uroven"
-        title="uroven"
-        value={type}
-        onChange={(e) => setType(e.target.value as LokalitaUroven)}
-        className="form-select block mb-4"
-      >
-        <option value="SVET">Svět</option>
-        <option value="KRALOVSTVI">Království</option>
-        <option value="KRAJ">Kraj</option>
-        <option value="MISTO">Místo</option>
-      </select>
+    <>
+      <header className="mb-4">Přidat mapu</header>
+      <form action={formAction} className="form">
+        {/* uroven */}
+        <label htmlFor="uroven">
+          Nejprve vyber úroveň, zda budeš vytvářet mapu světa, království, kraje
+          nebo místa.
+        </label>
+        <select
+          name="uroven"
+          title="uroven"
+          value={type}
+          onChange={(e) => setType(e.target.value as LokalitaUroven)}
+          className="form-select block mb-4"
+        >
+          <option value="SVET">Svět</option>
+          <option value="KRALOVSTVI">Království</option>
+          <option value="KRAJ">Kraj</option>
+          <option value="MISTO">Místo</option>
+        </select>
 
-      {type === 'SVET' ? (
-        ''
-      ) : (
-        <p>
-          {type === 'KRALOVSTVI' &&
-            (svety.length > 0
-              ? 'Vyber svět, ve kterém se království nachází.'
-              : 'Nejprve musí existovat svět, ve kterém se království nachází.')}
-          {type === 'KRAJ' &&
-            (kralovstvi.length > 0
-              ? 'Vyber svět a království, ve kterém se kraj nachází.'
-              : 'Nejprve musí existovat království, ve kterém se kraj nachází.')}
-          {type === 'MISTO' &&
-            (kraje.length > 0
-              ? 'Vyber svět, království a kraj, ve kterém se místo nachází.'
-              : 'Nejprve musí existovat kraj, ve kterém se místo nachází.')}
-        </p>
-      )}
+        {type === 'SVET' ? (
+          ''
+        ) : (
+          <p>
+            {type === 'KRALOVSTVI' &&
+              (svety.length > 0
+                ? 'Vyber svět, ve kterém se království nachází.'
+                : 'Nejprve musí existovat svět, ve kterém se království nachází.')}
+            {type === 'KRAJ' &&
+              (kralovstvi.length > 0
+                ? 'Vyber svět a království, ve kterém se kraj nachází.'
+                : 'Nejprve musí existovat království, ve kterém se kraj nachází.')}
+            {type === 'MISTO' &&
+              (kraje.length > 0
+                ? 'Vyber svět, království a kraj, ve kterém se místo nachází.'
+                : 'Nejprve musí existovat kraj, ve kterém se místo nachází.')}
+          </p>
+        )}
 
-      {/* SVET */}
-      {svety.length > 0 &&
-        (type === 'KRALOVSTVI' || type === 'KRAJ' || type === 'MISTO') && (
+        {/* SVET */}
+        {svety.length > 0 &&
+          (type === 'KRALOVSTVI' || type === 'KRAJ' || type === 'MISTO') && (
+            <select
+              title="svet"
+              name="svet"
+              value={selectedSvet ?? ''}
+              onChange={(e) => {
+                setSelectedSvet(e.target.value);
+                setSelectedKralovstvi(undefined);
+                setSelectedKraj(undefined);
+              }}
+              className="form-select mb-4 mr-2"
+            >
+              <option value="">Vyber svět</option>
+              {svety.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.nazev}
+                </option>
+              ))}
+            </select>
+          )}
+        {/* KRALOVSTVI */}
+        {kralovstvi.length > 0 && (type === 'KRAJ' || type === 'MISTO') && (
           <select
-            title="svet"
-            name="svet"
-            value={selectedSvet ?? ''}
+            title="kralovstvi"
+            name="kralovstvi"
+            value={selectedKralovstvi ?? ''}
             onChange={(e) => {
-              setSelectedSvet(e.target.value);
-              setSelectedKralovstvi(undefined);
+              setSelectedKralovstvi(e.target.value);
               setSelectedKraj(undefined);
             }}
             className="form-select mb-4 mr-2"
           >
-            <option value="">Vyber svět</option>
-            {svety.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.nazev}
+            <option value="">Vyber království</option>
+            {kralovstvi.map((k) => (
+              <option key={k.id} value={k.id}>
+                {k.nazev}
               </option>
             ))}
           </select>
         )}
-      {/* KRALOVSTVI */}
-      {kralovstvi.length > 0 && (type === 'KRAJ' || type === 'MISTO') && (
-        <select
-          title="kralovstvi"
-          name="kralovstvi"
-          value={selectedKralovstvi ?? ''}
-          onChange={(e) => {
-            setSelectedKralovstvi(e.target.value);
-            setSelectedKraj(undefined);
-          }}
-          className="form-select mb-4 mr-2"
-        >
-          <option value="">Vyber království</option>
-          {kralovstvi.map((k) => (
-            <option key={k.id} value={k.id}>
-              {k.nazev}
-            </option>
-          ))}
-        </select>
-      )}
 
-      {/* KRAJ */}
-      {kraje.length > 0 && type === 'MISTO' && (
-        <select
-          title="kraj"
-          name="kraj"
-          value={selectedKraj ?? ''}
-          className="form-select mb-4"
-        >
-          <option value="">Vyber kraj</option>
-          {kraje.map((k) => (
-            <option key={k.id} value={k.id}>
-              {k.nazev}
-            </option>
-          ))}
-        </select>
-      )}
+        {/* KRAJ */}
+        {kraje.length > 0 && type === 'MISTO' && (
+          <select
+            title="kraj"
+            name="kraj"
+            value={selectedKraj ?? ''}
+            className="form-select mb-4"
+          >
+            <option value="">Vyber kraj</option>
+            {kraje.map((k) => (
+              <option key={k.id} value={k.id}>
+                {k.nazev}
+              </option>
+            ))}
+          </select>
+        )}
 
-      <label htmlFor="nazev">Název:</label>
-      <input
-        title="nazev"
-        name="nazev"
-        defaultValue={initialData?.nazev}
-        className="form-input"
-      />
+        <label htmlFor="nazev">Název:</label>
+        <input
+          title="nazev"
+          name="nazev"
+          defaultValue={initialData?.nazev}
+          className="form-input"
+        />
 
-      <label className="col-start-1">Popis (nepovinné):</label>
-      <JoditRTE name="popis" defaultValue={initialData?.popis ?? ''} />
+        <label className="col-start-1">Popis (nepovinné):</label>
+        <JoditRTE name="popis" defaultValue={initialData?.popis ?? ''} />
 
-      <ImagePicker
-        label="Váš obrázek (nepovinné):"
-        name="image"
-        width="full"
-        defaultImage={initialData?.image ?? undefined}
-      />
+        <ImagePicker
+          label="Váš obrázek (nepovinné):"
+          name="image"
+          width="full"
+          defaultImage={initialData?.image ?? undefined}
+        />
 
-      <input type="hidden" name="parentId" value={resolveParentId() ?? ''} />
+        <input type="hidden" name="parentId" value={resolveParentId() ?? ''} />
 
-      {state.message && <p>{state.message}</p>}
-      {initialData?.id && (
-        <input type="hidden" name="id" value={initialData.id} />
-      )}
+        {state.message && <p>{state.message}</p>}
+        {initialData?.id && (
+          <input type="hidden" name="id" value={initialData.id} />
+        )}
 
-      <div className="flex justify-between mt-4">
-        <FormSubmit />
-        <ButtonPage onClick={onClose}>
-          <strong>Zrušit</strong>
-        </ButtonPage>
-      </div>
-    </form>
+        <div className="flex justify-between mt-4">
+          <FormSubmit />
+          <ButtonPage onClick={onClose}>
+            <strong>Zrušit</strong>
+          </ButtonPage>
+        </div>
+      </form>
+    </>
   );
 }

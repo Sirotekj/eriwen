@@ -33,64 +33,62 @@ export default function TazeniForm({
   }, [state, router]);
   return (
     <>
-      <header>Přidat tažení</header>
-      <main>
-        <form action={formAction} className="form">
-          <div className="grid grid-cols-[100px_auto_100px_auto] gap-x-2 gap-y-4">
-            <label htmlFor="jmeno">Název:</label>
-            <input
-              type="text"
-              id="jmeno"
-              name="jmeno"
-              defaultValue={initialData?.jmeno ?? ''}
-              className="rounded-sm border"
-              required
-            />
-            <label htmlFor="vypravec">PJ:</label>
-            <input
-              type="text"
-              id="vypravec"
-              name="vypravec"
-              className="rounded-sm border"
-              required
-            />
-            <label htmlFor="postavy">Postavy:</label>
-            <input
-              type="text"
-              id="postavy"
-              name="postavy"
-              className="rounded-sm border"
-              required
-            />
-            <label htmlFor="obdobi">Časové období:</label>
-            <input
-              type="text"
-              id="obdobi"
-              name="obdobi"
-              className="rounded-sm border"
-              required
-            />
-          </div>
-          <label className="col-start-1">Příběh:</label>
-          <JoditRTE name="pribeh" defaultValue={initialData?.pribeh ?? ''} />
-          <ImagePicker
-            label="Váš obrázek:"
-            name="image"
-            width="small"
-            defaultImage={initialData?.image ?? undefined}
+      <header className="mb-4">Přidat tažení</header>
+      <form action={formAction} className="form">
+        <div className="w-full max-w-full grid grid-cols-[100px_auto]  gap-x-2 gap-y-4 md:grid-cols-[92px_auto_92px_auto]">
+          <label htmlFor="jmeno">Název:</label>
+          <input
+            type="text"
+            id="jmeno"
+            name="jmeno"
+            defaultValue={initialData?.jmeno ?? ''}
+            className="rounded-sm border"
+            required
           />
-          {state.message && <p>{state.message}</p>}
-          <div className="flex justify-between mt-4">
-            <FormSubmit />
-            <ButtonPage type="button" onClick={onClose}>
-              <strong>Zrušit</strong>
-            </ButtonPage>
-          </div>
-          {afterOrder && (
-            <input type="hidden" name="afterOrder" value={afterOrder} />
-          )}
-        </form>
-      </main>
+          <label htmlFor="vypravec">PJ:</label>
+          <input
+            type="text"
+            id="vypravec"
+            name="vypravec"
+            className="rounded-sm border"
+            required
+          />
+          <label htmlFor="postavy">Postavy:</label>
+          <input
+            type="text"
+            id="postavy"
+            name="postavy"
+            className="rounded-sm border"
+            required
+          />
+          <label htmlFor="obdobi">Časové období:</label>
+          <input
+            type="text"
+            id="obdobi"
+            name="obdobi"
+            className="rounded-sm border"
+            required
+          />
+        </div>
+        <label className="col-start-1">Příběh:</label>
+        <JoditRTE name="pribeh" defaultValue={initialData?.pribeh ?? ''} />
+        <ImagePicker
+          label="Váš obrázek:"
+          name="image"
+          width="small"
+          defaultImage={initialData?.image ?? undefined}
+        />
+        {state.message && <p>{state.message}</p>}
+        <div className="flex justify-between mt-4">
+          <FormSubmit />
+          <ButtonPage type="button" onClick={onClose}>
+            <strong>Zrušit</strong>
+          </ButtonPage>
+        </div>
+        {afterOrder && (
+          <input type="hidden" name="afterOrder" value={afterOrder} />
+        )}
+      </form>
     </>
   );
 }
