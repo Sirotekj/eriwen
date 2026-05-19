@@ -67,7 +67,7 @@ const UvodMenu = () => {
         <ul className="absolute -left-1/2 menu-circle h-full w-full text-light font-greatVibes">
           {items.map((item, index) => {
             const angle = (360 / items.length) * index - 90;
-            const angleMobile = (196 / items.length) * index - 88;
+            const angleMobile = (100 / items.length) * index - 45;
             const style = {
               '--angle': `${angle}deg`,
               '--angle-mobile': `${angleMobile}deg`,

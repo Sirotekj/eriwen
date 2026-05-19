@@ -1,7 +1,7 @@
 import './styles.css';
 const Kompas = () => {
   return (
-    <div className="absolute w-82 top-1/2 left-0 -translate-1/2  md:left-1/2">
+    <div className="absolute w-md top-1/2 left-0 -translate-x-3/5 -translate-y-1/2 md:-translate-1/2  md:w-82 md:left-1/2">
       <svg
         width="100%"
         height="100%"

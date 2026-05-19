@@ -35,12 +35,13 @@ svg {
 
 .menu-circle-item {
   position: absolute;
-  left: 50%;
+  left: calc(50% - 152px);
   top: 50%;
-  transform: translate(-50%, -50%) rotate(var(--angle-mobile)) translate(220px)
+  transform: translate(-50%, -50%) rotate(var(--angle-mobile)) translate(320px)
     rotate(calc(var(--angle-mobile) * -1));
 
   @media (width >= 48rem) {
+    left: 50%;
     transform: translate(-50%, -50%) rotate(var(--angle)) translate(220px)
       rotate(calc(var(--angle) * -1)) scaleX(0.666);
   }
