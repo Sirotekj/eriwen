@@ -17,8 +17,6 @@ export default async function MapyPage() {
         <span>František z Assissi</span>
       </blockquote>
 
-      <p>Stránka je v přípravě!</p>
-
       <h3>Struktura</h3>
       <ul className="ml-4">
         <li>
