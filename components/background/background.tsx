@@ -9,7 +9,7 @@ export default function Background() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsNight((prev) => !prev);
-    }, 60_000);
+    }, 120_000);
 
     return () => clearInterval(interval);
   }, []);
