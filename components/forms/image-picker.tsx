@@ -69,14 +69,14 @@ export default function ImagePicker({
         <div className="mb-4">
           {!pickedImage && (
             <p
-              className={`${width === 'small' ? 'w-[30%] aspect-3/4' : 'w-full aspect-video'} p-2 border`}
+              className={`${width === 'small' ? 'w-full aspect-3/4 sm:w-1/2 md:w-1/3' : 'w-full aspect-video'} p-2 border`}
             >
               Obrázek nevybrán.
             </p>
           )}
           {pickedImage && (
             <div
-              className={`relative border ${width === 'small' ? 'w-[30%] aspect-3/4' : 'w-full aspect-video'}`}
+              className={`relative border ${width === 'small' ? 'w-full sm:w-1/2 md:w-1/3 aspect-3/4' : 'w-full aspect-video'}`}
             >
               <Image
                 src={pickedImage}

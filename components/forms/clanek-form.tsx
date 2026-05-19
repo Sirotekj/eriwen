@@ -40,47 +40,45 @@ export default function ClanekForm({
         `/${urlFromKategorie(kategorie).menu}/${urlFromKategorie(kategorie).submenu}`,
       );
     }
-  }, [state, router]);
+  }, [state, router, kategorie]);
   return (
     <>
-      <header>Přidat článek</header>
-      <main>
-        <form action={formAction} className="form">
-          <div className="grid grid-cols-[100px_auto_100px_auto] gap-x-2 gap-y-4">
-            <label htmlFor="nazev">Název:</label>
-            <input
-              type="text"
-              id="nazev"
-              name="nazev"
-              defaultValue={initialData?.nazev ?? ''}
-              className="rounded-sm border"
-              required
-            />
-          </div>
-          <label className="col-start-1">Obsah:</label>
-          <JoditRTE name="obsah" defaultValue={initialData?.obsah ?? ''} />
-          <ImagePicker
-            label="Váš obrázek:"
-            name="image"
-            width="small"
-            defaultImage={initialData?.image ?? undefined}
+      <header className="mb-4">Přidat článek</header>
+      <form action={formAction} className="form">
+        <div className="grid grid-cols-[100px_auto_100px_auto] gap-x-2 gap-y-4">
+          <label htmlFor="nazev">Název:</label>
+          <input
+            type="text"
+            id="nazev"
+            name="nazev"
+            defaultValue={initialData?.nazev ?? ''}
+            className="rounded-sm border"
+            required
           />
-          {state.message && <p>{state.message}</p>}
+        </div>
+        <label className="col-start-1">Obsah:</label>
+        <JoditRTE name="obsah" defaultValue={initialData?.obsah ?? ''} />
+        <ImagePicker
+          label="Váš obrázek:"
+          name="image"
+          width="small"
+          defaultImage={initialData?.image ?? undefined}
+        />
+        {state.message && <p>{state.message}</p>}
 
-          {afterOrder && (
-            <input type="hidden" name="afterOrder" value={afterOrder} />
-          )}
-          {position && <input type="hidden" name="position" value={position} />}
-          <input type="hidden" name="kategorie" value={kategorie} />
+        {afterOrder && (
+          <input type="hidden" name="afterOrder" value={afterOrder} />
+        )}
+        {position && <input type="hidden" name="position" value={position} />}
+        <input type="hidden" name="kategorie" value={kategorie} />
 
-          <div className="flex justify-between mt-4">
-            <FormSubmit />
-            <ButtonPage type="button" onClick={onClose}>
-              <strong>Zrušit</strong>
-            </ButtonPage>
-          </div>
-        </form>
-      </main>
+        <div className="flex justify-between mt-4">
+          <FormSubmit />
+          <ButtonPage type="button" onClick={onClose}>
+            <strong>Zrušit</strong>
+          </ButtonPage>
+        </div>
+      </form>
     </>
   );
 }
