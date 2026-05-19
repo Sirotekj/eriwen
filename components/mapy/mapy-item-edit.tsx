@@ -40,11 +40,13 @@ const MapyItemEdit = ({
         {mapa.uroven === 'MISTO' && <h4 className="mb0">{mapa.nazev}</h4>}
         {mapa.image && (
           <ImageWrapper size="large">
-            <img
-              className="object-cover h-auto mix-blend-multiply"
-              src={mapa.image}
-              alt={mapa.id}
-            />
+            <picture>
+              <img
+                className="object-cover h-auto mix-blend-multiply"
+                src={mapa.image}
+                alt={mapa.id}
+              />
+            </picture>
           </ImageWrapper>
         )}
         {mapa.popis ? SafeContent(mapa.popis) : ''}
