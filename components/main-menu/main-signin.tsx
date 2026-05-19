@@ -37,7 +37,7 @@ export default function AuthButtons() {
     <div className="relative" ref={popupRef}>
       {/* BUTTON */}
 
-      <HoverWrapper tooltip="Přihlásit">
+      <HoverWrapper tooltip={session?.user?.image ? 'Odhlásit' : 'Přihlásit'}>
         <button
           type="button"
           title={session ? 'Účet' : 'Přihlášení'}
@@ -45,13 +45,15 @@ export default function AuthButtons() {
           onClick={() => setOpen((prev) => !prev)}
         >
           {session?.user?.image ? (
-            <Image
-              src={session.user.image}
-              alt={session.user.name ?? 'User'}
-              width={40}
-              height={40}
-              className="rounded-full border"
-            />
+            <div className="rounded-full border w-9">
+              <Image
+                src={session.user.image}
+                alt={session.user.name ?? 'User'}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            </div>
           ) : (
             <IconKey className="w-full h-full p-2" />
           )}
@@ -65,13 +67,15 @@ export default function AuthButtons() {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 {session.user.image && (
-                  <Image
-                    src={session.user.image}
-                    alt={session.user.name ?? 'User'}
-                    width={48}
-                    height={48}
-                    className="rounded-full"
-                  />
+                  <div className="rounded-full border color-light">
+                    <Image
+                      src={session.user.image}
+                      alt={session.user.name ?? 'User'}
+                      width={48}
+                      height={48}
+                      className="rounded-full border color-light"
+                    />
+                  </div>
                 )}
 
                 <div>
