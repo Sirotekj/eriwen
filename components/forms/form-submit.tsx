@@ -9,7 +9,7 @@ export default function FormSubmit() {
   return (
     <button
       type="submit"
-      className="cursor-pointer border rounded-sm p-1 col-start-4 hover:shadow-lg"
+      className="cursor-pointer border rounded-sm p-1 col-start-4 hover:shadow-md hover:bg-background/10"
       disabled={pending}
     >
       <strong>{pending ? 'Zpracovávám...' : 'Potvrdit'}</strong>

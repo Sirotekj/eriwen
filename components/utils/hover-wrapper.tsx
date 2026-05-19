@@ -14,7 +14,7 @@ export default function HoverWrapper({ children, tooltip }: HoverWrapperProps) {
         className="
         pointer-events-none
         absolute left-1/2 top-full z-50
-        mt-0 -translate-x-1/2
+        mt-1 -translate-x-1/2
         whitespace-nowrap
         rounded bg-black px-2 py-1
         text-xs text-white
