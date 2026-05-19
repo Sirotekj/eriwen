@@ -41,7 +41,7 @@ export default function Home() {
         <Background />
         <Providers>
           <MainMenu />
-          <div className="w-screen overflow-hidden">
+          <div className="w-full overflow-hidden">
             <UvodMenu />
             <main className="relative max-w-3xl mx-auto my-16 px-4 pt-24 pb-16">
               <PaperBackground />
