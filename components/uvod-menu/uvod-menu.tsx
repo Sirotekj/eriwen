@@ -52,7 +52,7 @@ const UvodMenu = () => {
     };
   }, []);
   return (
-    <div className="relative mt-20 h-[60vh] w-full overflow-hidden">
+    <div className="relative mt-20 h-[60vh] min-h-126 w-full overflow-hidden">
       <Kompas />
       <nav className="absolute left-1/2 top-1/2 h-[48vw] w-[56vw] max-h-[48vh] max-w-[56vh] -translate-x-1/2 -translate-y-1/2">
         <svg
