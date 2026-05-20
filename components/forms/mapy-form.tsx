@@ -143,6 +143,7 @@ export default function MapyForm({
             title="kraj"
             name="kraj"
             value={selectedKraj ?? ''}
+            onChange={(e) => setSelectedKraj(e.target.value)}
             className="form-select mb-4"
           >
             <option value="">Vyber kraj</option>
