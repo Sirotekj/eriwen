@@ -6,6 +6,8 @@ import { getNabozenstvi } from '@/lib/clanek-prisma';
 import ClanekListEdit from '@/components/clanek/clanek-list-edit';
 import ClanekCreateToggle from '@/components/clanek/clanek-create-toggle';
 
+import Divider from '@/components/decorations/divider';
+
 export default async function NabozenstviPageEdit() {
   const session = await getServerSession(authOptions);
 
@@ -43,7 +45,7 @@ export default async function NabozenstviPageEdit() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

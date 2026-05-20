@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { getTazeni } from '@/lib/tazeni-prisma';
 import TazeniList from '@/components/tazeni/tazeni-list';
+import Divider from '@/components/decorations/divider';
 
 export default async function TazeniPage() {
   const tazeni = await getTazeni();
@@ -25,7 +26,7 @@ export default async function TazeniPage() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

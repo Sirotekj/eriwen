@@ -5,7 +5,10 @@ import Image from 'next/image';
 import { getAllMapa } from '@/lib/mapy-prisma';
 import MapyList from '@/components/mapy/mapy-list';
 
+import Divider from '@/components/decorations/divider';
+
 import { buildTree } from '@/components/kraje/kraje-helper';
+
 export default async function MapyPage() {
   const mapy = await getAllMapa();
   const tree = buildTree(mapy);
@@ -59,7 +62,7 @@ export default async function MapyPage() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

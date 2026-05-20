@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { getNepratele } from '@/lib/clanek-prisma';
 import ClanekList from '@/components/clanek/clanek-list';
 
+import Divider from '@/components/decorations/divider';
+
 export default async function NepratelePage() {
   const nepratele = await getNepratele();
   return (
@@ -22,7 +24,7 @@ export default async function NepratelePage() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

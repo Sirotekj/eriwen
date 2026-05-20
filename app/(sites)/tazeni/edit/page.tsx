@@ -5,6 +5,7 @@ import { permissions } from '@/lib/permissions';
 import { getTazeni } from '@/lib/tazeni-prisma';
 import TazeniListEdit from '@/components/tazeni/tazeni-list-edit';
 import TazeniCreateToggle from '@/components/tazeni/tazeni-create-toggle';
+import Divider from '@/components/decorations/divider';
 
 export default async function TazeniPageEdit() {
   const session = await getServerSession(authOptions);
@@ -42,7 +43,7 @@ export default async function TazeniPageEdit() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>
