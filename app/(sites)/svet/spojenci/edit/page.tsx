@@ -22,7 +22,7 @@ export default async function SpojenciPageEdit() {
 
   return (
     <div>
-      <h2>Spojenci</h2>
+      <h1 className="headline">Spojenci</h1>
       <p>
         Výčet spojenců a přátel družiny, na které narazila v průběhu svých
         dobrodružství.

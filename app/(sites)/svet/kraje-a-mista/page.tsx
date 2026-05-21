@@ -12,7 +12,7 @@ export default async function KrajeMistaPage() {
   const tree = buildTree(lokality);
   return (
     <div>
-      <h1>Kraje a místa</h1>
+      <h1 className="headline">Kraje a místa</h1>
 
       {lokality.length > 0 ? (
         <KrajeList lokality={tree} />

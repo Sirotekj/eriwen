@@ -3,7 +3,7 @@ import Divider from '@/components/decorations/divider';
 export default function BestiarPage() {
   return (
     <>
-      <h1>Bestiář</h1>
+      <h1 className="headline">Bestiář</h1>
       <p>Stránka je v přípravě!</p>
       <p>
         Tady můžete najít vymyšlené stvůry a nepřátele, kteří jsou důležití,

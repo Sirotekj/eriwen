@@ -14,7 +14,7 @@ export default async function MapyPage() {
   const tree = buildTree(mapy);
   return (
     <>
-      <h2>Mapy</h2>
+      <h1 className="headline">Mapy</h1>
       <blockquote>
         „Veškerá tma světa nemůže uhasit světlo jediné svíčky.“
         <span>František z Assissi</span>

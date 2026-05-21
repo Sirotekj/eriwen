@@ -18,7 +18,7 @@ export default async function PostavyPageEdit() {
 
   return (
     <div>
-      <h2>Postavy</h2>
+      <h1 className="headline">Postavy</h1>
       <blockquote>
         „Hrdinství je způsob smrti, nikoliv způsob života.“
         <span>Gabriel Laub</span>

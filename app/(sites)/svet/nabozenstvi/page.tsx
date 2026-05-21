@@ -9,7 +9,7 @@ export default async function NabozenstviPage() {
   const nabozenstvi = await getNabozenstvi();
   return (
     <div>
-      <h2>Náboženství</h2>
+      <h1 className="headline">Náboženství</h1>
       <blockquote>
         „Náboženství se střídají, pivo a víno zůstávají.“
         <span>Harvey Allen</span>

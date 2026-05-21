@@ -8,7 +8,7 @@ export default async function TazeniPage() {
   const tazeni = await getTazeni();
   return (
     <div>
-      <h2>Tažení</h2>
+      <h1 className="headline">Tažení</h1>
       <blockquote>
         „Svět je kniha, a kdo necestuje, čte jen jednu stránku.“
         <span>Svatý Augustin</span>

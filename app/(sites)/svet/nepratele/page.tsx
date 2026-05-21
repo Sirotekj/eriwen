@@ -11,7 +11,7 @@ export default async function NepratelePage() {
   const nepratele = await getNepratele();
   return (
     <div>
-      <h2>Nepřátelé</h2>
+      <h1 className="headline">Nepřátelé</h1>
       <p>
         Výčet nepřátel, s nimiž se družina střetla, (ať už je porazila nebo ne).
       </p>

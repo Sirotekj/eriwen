@@ -23,7 +23,7 @@ export default async function KrajeMistaPageEdit() {
   const tree = buildTree(lokality);
   return (
     <div>
-      <h1>Kraje a místa</h1>
+      <h1 className="headline">Kraje a místa</h1>
 
       {canCreate && (
         <>

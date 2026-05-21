@@ -43,7 +43,7 @@ export default function RootLayout({
         <Providers>
           <MainMenu />
           <div className="w-full overflow-hidden">
-            <main className="relative max-w-3xl mx-auto my-36 px-4 pt-24 pb-16">
+            <main className="relative max-w-3xl mx-auto my-36 px-4 pt-16 pb-16">
               <PaperBackground />
               {children}
             </main>
