@@ -95,19 +95,18 @@ export async function createAction(
     await SaveClanek(clanek, imageUrl);
   }
 
-  /*revalidatePath('/tazeni');
-  redirect('/tazeni');*/
-
-  return { message: 'Vytvořeno' };
+  revalidatePath(`/svet/${urlFromKategorie(kategorie).submenu}`);
+  redirect(`/svet/${urlFromKategorie(kategorie).submenu}`);
 }
 
 export async function deleteAction(formData: FormData) {
   const id = formData.get('id') as string;
   const redirectTo = formData.get('redirectTo') as string;
   await DeleteClanek(id);
-  /*revalidatePath('/tazeni');
-  redirect('/tazeni');*/
+
+  revalidatePath(redirectTo);
+  /*redirect(redirectTo);*/
   if (!redirectTo.startsWith('/')) {
-    redirect('/');
+    redirect(redirectTo);
   }
 }
