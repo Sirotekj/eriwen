@@ -3,11 +3,13 @@ export const dynamic = 'force-dynamic';
 import { getNabozenstvi } from '@/lib/clanek-prisma';
 import ClanekList from '@/components/clanek/clanek-list';
 
+import Divider from '@/components/decorations/divider';
+
 export default async function NabozenstviPage() {
   const nabozenstvi = await getNabozenstvi();
   return (
     <div>
-      <h2>Náboženství</h2>
+      <h1 className="headline">Náboženství</h1>
       <blockquote>
         „Náboženství se střídají, pivo a víno zůstávají.“
         <span>Harvey Allen</span>
@@ -22,7 +24,7 @@ export default async function NabozenstviPage() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

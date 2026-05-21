@@ -10,6 +10,8 @@ import { buildTree } from '@/components/kraje/kraje-helper';
 import MapyCreateToggle from '@/components/mapy/mapy-create-toggle';
 import MapyListEdit from '@/components/mapy/mapy-list-edit';
 
+import Divider from '@/components/decorations/divider';
+
 export default async function MapyPage() {
   const session = await getServerSession(authOptions);
 
@@ -22,7 +24,7 @@ export default async function MapyPage() {
   const tree = buildTree(mapy);
   return (
     <>
-      <h2>Mapy</h2>
+      <h1 className="headline">Mapy</h1>
       <blockquote>
         „Veškerá tma světa nemůže uhasit světlo jediné svíčky.“
         <span>František z Assissi</span>
@@ -80,7 +82,8 @@ export default async function MapyPage() {
         </p>
       )}
 
-      <hr />
+      <Divider />
+
       <div>
         <h2>Příklad</h2>
         <h3>Království</h3>

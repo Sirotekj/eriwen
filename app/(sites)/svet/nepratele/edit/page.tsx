@@ -8,6 +8,8 @@ import { getNepratele } from '@/lib/clanek-prisma';
 import ClanekListEdit from '@/components/clanek/clanek-list-edit';
 import ClanekCreateToggle from '@/components/clanek/clanek-create-toggle';
 
+import Divider from '@/components/decorations/divider';
+
 export default async function NepratelePageEdit() {
   const session = await getServerSession(authOptions);
 
@@ -20,7 +22,7 @@ export default async function NepratelePageEdit() {
 
   return (
     <div>
-      <h2>Nepřátelé</h2>
+      <h1 className="headline">Nepřátelé</h1>
       <p>
         Výčet nepřátel, s nimiž se družina střetla, (ať už je porazila nebo ne).
       </p>
@@ -44,7 +46,7 @@ export default async function NepratelePageEdit() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

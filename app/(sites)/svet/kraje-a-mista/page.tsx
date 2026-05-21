@@ -3,6 +3,8 @@ export const dynamic = 'force-dynamic';
 import { getAllLokalita } from '@/lib/kraje-prisma';
 import KrajeList from '@/components/kraje/kraje-list';
 
+import Divider from '@/components/decorations/divider';
+
 import { buildTree } from '@/components/kraje/kraje-helper';
 
 export default async function KrajeMistaPage() {
@@ -10,7 +12,7 @@ export default async function KrajeMistaPage() {
   const tree = buildTree(lokality);
   return (
     <div>
-      <h1>Kraje a místa</h1>
+      <h1 className="headline">Kraje a místa</h1>
 
       {lokality.length > 0 ? (
         <KrajeList lokality={tree} />
@@ -20,7 +22,7 @@ export default async function KrajeMistaPage() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

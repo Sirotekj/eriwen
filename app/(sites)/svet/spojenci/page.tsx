@@ -5,11 +5,13 @@ import Image from 'next/image';
 import { getSpojenci } from '@/lib/clanek-prisma';
 import ClanekList from '@/components/clanek/clanek-list';
 
+import Divider from '@/components/decorations/divider';
+
 export default async function SpojenciPage() {
   const spojenci = await getSpojenci();
   return (
     <div>
-      <h2>Spojenci</h2>
+      <h1 className="headline">Spojenci</h1>
       <p>
         Výčet spojenců a přátel družiny, na které narazila v průběhu svých
         dobrodružství.
@@ -23,7 +25,7 @@ export default async function SpojenciPage() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

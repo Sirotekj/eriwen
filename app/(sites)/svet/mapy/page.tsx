@@ -5,13 +5,16 @@ import Image from 'next/image';
 import { getAllMapa } from '@/lib/mapy-prisma';
 import MapyList from '@/components/mapy/mapy-list';
 
+import Divider from '@/components/decorations/divider';
+
 import { buildTree } from '@/components/kraje/kraje-helper';
+
 export default async function MapyPage() {
   const mapy = await getAllMapa();
   const tree = buildTree(mapy);
   return (
     <>
-      <h2>Mapy</h2>
+      <h1 className="headline">Mapy</h1>
       <blockquote>
         „Veškerá tma světa nemůže uhasit světlo jediné svíčky.“
         <span>František z Assissi</span>
@@ -59,7 +62,7 @@ export default async function MapyPage() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

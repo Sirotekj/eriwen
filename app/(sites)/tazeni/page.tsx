@@ -2,12 +2,13 @@ export const dynamic = 'force-dynamic';
 
 import { getTazeni } from '@/lib/tazeni-prisma';
 import TazeniList from '@/components/tazeni/tazeni-list';
+import Divider from '@/components/decorations/divider';
 
 export default async function TazeniPage() {
   const tazeni = await getTazeni();
   return (
     <div>
-      <h2>Tažení</h2>
+      <h1 className="headline">Tažení</h1>
       <blockquote>
         „Svět je kniha, a kdo necestuje, čte jen jednu stránku.“
         <span>Svatý Augustin</span>
@@ -25,7 +26,7 @@ export default async function TazeniPage() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

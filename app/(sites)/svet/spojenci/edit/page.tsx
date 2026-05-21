@@ -8,6 +8,8 @@ import { getSpojenci } from '@/lib/clanek-prisma';
 import ClanekListEdit from '@/components/clanek/clanek-list-edit';
 import ClanekCreateToggle from '@/components/clanek/clanek-create-toggle';
 
+import Divider from '@/components/decorations/divider';
+
 export default async function SpojenciPageEdit() {
   const session = await getServerSession(authOptions);
 
@@ -20,7 +22,7 @@ export default async function SpojenciPageEdit() {
 
   return (
     <div>
-      <h2>Spojenci</h2>
+      <h1 className="headline">Spojenci</h1>
       <p>
         Výčet spojenců a přátel družiny, na které narazila v průběhu svých
         dobrodružství.
@@ -46,7 +48,7 @@ export default async function SpojenciPageEdit() {
         </p>
       )}
 
-      <hr />
+      <Divider />
 
       <div>
         <h2>Příklad</h2>

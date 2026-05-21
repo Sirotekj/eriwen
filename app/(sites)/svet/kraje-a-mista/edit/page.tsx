@@ -3,10 +3,13 @@ import { authOptions } from '@/lib/auth';
 import { permissions } from '@/lib/permissions';
 
 import { getAllLokalita } from '@/lib/kraje-prisma';
-import { buildTree } from '@/components/kraje/kraje-helper';
 
 import KrajeCreateToggle from '@/components/kraje/kraje-create-toggle';
 import KrajeListEdit from '@/components/kraje/kraje-list-edit';
+
+import Divider from '@/components/decorations/divider';
+
+import { buildTree } from '@/components/kraje/kraje-helper';
 
 export default async function KrajeMistaPageEdit() {
   const session = await getServerSession(authOptions);
@@ -20,7 +23,7 @@ export default async function KrajeMistaPageEdit() {
   const tree = buildTree(lokality);
   return (
     <div>
-      <h1>Kraje a místa</h1>
+      <h1 className="headline">Kraje a místa</h1>
 
       {canCreate && (
         <>
@@ -39,7 +42,8 @@ export default async function KrajeMistaPageEdit() {
         </p>
       )}
 
-      <hr />
+      <Divider />
+
       <div>
         <h2>Příklad</h2>
         <h2>Nainův kraj</h2>

@@ -28,9 +28,10 @@
   }
 
   h1 {
-    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    font-size: clamp(2rem, 3vw, 2.6rem);
     line-height: 1.1;
-    @apply mt-6 mb-4 font-headlines;
+
+    @apply my-6 font-headlines;
   }
 
   h2 {
@@ -76,6 +77,21 @@
     after:bg-light
     after:-translate-y-2/3
     last:after:hidden;
+  }
+
+  .headline {
+    font-size: clamp(2rem, 2.6vw, 2.4rem);
+    @apply flex items-center justify-center gap-8 mb-8
+    before:content-['']
+    before:size-[1.4em]
+    before:bg-[url('/images/decorations/headline-decoration-3.svg')]
+    before:bg-contain before:bg-center before:bg-no-repeat
+
+    after:content-['']
+    after:size-[1.4em]
+    after:bg-[url('/images/decorations/headline-decoration-3.svg')]
+    after:bg-contain after:bg-center after:bg-no-repeat
+    after:-scale-x-100;
   }
 
   .form-container {
