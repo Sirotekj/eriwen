@@ -7,6 +7,7 @@ import { useActionState } from 'react';
 import { createAction } from '@/lib/kraje-actions';
 
 import { useLokalitaHierarchy } from '@/hooks/use-lokalita-hierarchy';
+import { LokalitaTree } from '../kraje/kraje-helper';
 
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
@@ -15,13 +16,15 @@ import ButtonPage from '@/components/utils/button-page';
 import JoditRTE from './jodit-rte';
 
 type Props = {
-  lokality: Lokalita[];
+  allLokality: Lokalita[];
+  lokality: LokalitaTree[];
   onClose: () => void;
   afterOrder?: string;
   initialData?: Lokalita;
 };
 
 export default function KrajeForm({
+  allLokality,
   lokality,
   afterOrder,
   initialData,
@@ -48,9 +51,15 @@ export default function KrajeForm({
 
     resolveParentId,
   } = useLokalitaHierarchy({
-    lokality,
+    allLokality,
     initialData,
   });
+
+  /*const hasSvety: boolean = allLokality.some((l) => l.uroven === 'SVET');
+  const hasKralovstvi: boolean = allLokality.some(
+    (l) => l.uroven === 'KRALOVSTVI',
+  );
+  const hasKraje: boolean = allLokality.some((l) => l.uroven === 'KRAJ');*/
 
   /*const [type, setType] = useState<'SVET' | 'KRALOVSTVI' | 'KRAJ' | 'MISTO'>(
     initialData?.uroven ?? 'SVET',
@@ -125,6 +134,14 @@ export default function KrajeForm({
           <option value="KRAJ">Kraj</option>
           <option value="MISTO">Místo</option>
         </select>
+
+        {
+          <pre>
+            {svety.length}
+            {kralovstvi.length}
+            {kraje.length}
+          </pre>
+        }
 
         {type === 'SVET' ? (
           ''

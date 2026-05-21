@@ -7,7 +7,7 @@ export type LokalitaTree = Lokalita & {
 export function buildTree(data: Lokalita[]): LokalitaTree[] {
   const map = new Map<string, LokalitaTree>();
 
-  // vytvoříme mapu
+  // vytvoří mapu
   data.forEach((item) => {
     map.set(item.id, {
       ...item,
