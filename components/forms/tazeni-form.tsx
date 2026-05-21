@@ -50,6 +50,7 @@ export default function TazeniForm({
             type="text"
             id="vypravec"
             name="vypravec"
+            defaultValue={initialData?.vypravec ?? ''}
             className="rounded-sm border"
             required
           />
@@ -58,6 +59,7 @@ export default function TazeniForm({
             type="text"
             id="postavy"
             name="postavy"
+            defaultValue={initialData?.postavy ?? ''}
             className="rounded-sm border"
             required
           />
@@ -66,6 +68,7 @@ export default function TazeniForm({
             type="text"
             id="obdobi"
             name="obdobi"
+            defaultValue={initialData?.obdobi ?? ''}
             className="rounded-sm border"
             required
           />
