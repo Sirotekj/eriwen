@@ -46,7 +46,10 @@ export default function Home() {
             <main className="relative max-w-3xl mx-auto my-16 px-4 pt-16 pb-16">
               <PaperBackground />
               <h1 className="headline">Úvod</h1>
-              <blockquote></blockquote>
+              <blockquote>
+                „Každé skutečné dobrodružství vzniká nárazem fantazie na
+                skutečnost.“<span>Karel Čapek</span>
+              </blockquote>
               <h4>Vítejte na stránkách o světě Eriwen,</h4>
               <p>
                 pojmenovaném na počest skupiny mladých nadšenců, kteří začali
