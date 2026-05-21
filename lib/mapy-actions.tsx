@@ -80,6 +80,7 @@ export async function createAction(
     nazev: formData.get('nazev') as string,
     popis: xss(formData.get('popis') as string),
     uroven: formData.get('uroven') as LokalitaUroven,
+    order: order,
     parentId: parentId,
     authorId: session.user.id,
   };
