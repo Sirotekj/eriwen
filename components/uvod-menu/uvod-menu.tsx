@@ -14,6 +14,7 @@ const UvodMenu = () => {
     { href: '/svet', label: 'Svět' },
     { href: '/svet/kraje-a-mista', label: 'Kraje a místa' },
     { href: '/svet/mapy', label: 'Mapy' },
+    { href: '/svet/letopisy', label: 'Letopisy' },
     { href: '/svet/nabozenstvi', label: 'Náboženství' },
     { href: '/svet/spojenci', label: 'Spojenci' },
     { href: '/svet/nepratele', label: 'Nepřátelé' },
