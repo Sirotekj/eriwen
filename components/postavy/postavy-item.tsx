@@ -15,6 +15,7 @@ export default function PostavyItem({ postava }: Props) {
       <p>
         {postava.rasa} ({postava.povolani})
       </p>
+      <p>Hráč: {postava.hrac}</p>
       {postava.image && (
         <ImageWrapper>
           <Image
@@ -30,7 +31,6 @@ export default function PostavyItem({ postava }: Props) {
       {postava.popis ? SafeContent(postava.popis) : ''}
 
       <p>Tažení: {postava.tazeni}</p>
-      <p>Hráč: {postava.hrac}</p>
     </>
   );
 }
