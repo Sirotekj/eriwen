@@ -28,15 +28,20 @@ export async function createAction(
   const id = rawId && rawId !== '' ? (rawId as string) : null;
   const session = await getServerSession(authOptions);
 
+  const errors: string[] = [];
+  const messages: string[] = [];
+
   if (!session?.user) {
-    return { message: 'Nepřihlášený uživatel' };
+    errors.push('Nepřihlášený uživatel!');
+    return { messages, errors };
   }
   const canCreate = permissions.canCreate({
     role: session.user.role,
   });
 
   if (!canCreate) {
-    return { message: 'Nemáš přístup' };
+    errors.push('Nemáš přístup!');
+    return { messages, errors };
   }
 
   let order: number;
@@ -46,7 +51,8 @@ export async function createAction(
       select: { order: true },
     });
     if (!existing) {
-      return { message: 'Záznam nenalezen' };
+      errors.push('Záznam pro "order" nenalezen!');
+      return { messages, errors };
     }
     order = existing.order;
   } else {
@@ -89,14 +95,22 @@ export async function createAction(
       },
     },
   };
-  if (
-    isInvalidText(postava.jmeno) ||
-    isInvalidText(postava.rasa) ||
-    isInvalidText(postava.povolani) ||
-    isInvalidText(postava.hrac)
-  ) {
-    return { message: 'Neplatná data formuláře' };
+  if (isInvalidText(postava.jmeno)) {
+    messages.push('Chybí jméno!');
   }
+  if (isInvalidText(postava.rasa)) {
+    messages.push('Chybí rasa!');
+  }
+  if (isInvalidText(postava.povolani)) {
+    messages.push('Chybí povolání!');
+  }
+  if (isInvalidText(postava.hrac)) {
+    messages.push('Chybí hráč!');
+  }
+  if (messages.length > 0) {
+    return { messages, errors };
+  }
+
   if (id) {
     await UpdatePostavy(postava, imageUrl, id);
   } else {
@@ -110,6 +124,7 @@ export async function createAction(
 export async function deleteAction(formData: FormData) {
   const id = formData.get('id') as string;
   await DeletePostavy(id);
+
   revalidatePath('/postavy');
   redirect('/postavy');
 }

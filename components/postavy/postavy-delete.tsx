@@ -15,7 +15,7 @@ const PostavyDelete = ({ id, onClose }: Props) => {
           <input type="hidden" name="id" value={id} />
 
           <div className="flex justify-center gap-2 mt-4">
-            <button type="submit" className="text-red-500 cursor-pointer">
+            <button type="submit" className="text-red cursor-pointer">
               Smazat
             </button>
 

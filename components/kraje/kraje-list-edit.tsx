@@ -26,6 +26,7 @@ const KrajeListEdit = ({ allLokality, lokality, role, userId }: Props) => {
     setDeleteModal(true);
   };
   const closeDeleteModal = () => {
+    setEditingId(null);
     setDeleteModal(false);
   };
   return (
@@ -36,13 +37,15 @@ const KrajeListEdit = ({ allLokality, lokality, role, userId }: Props) => {
             key={lokalita.id}
             className="relative my-4 after-content-[''] after:block after:clear-both"
           >
-            {editingId === lokalita.id ? (
-              <KrajeForm
-                allLokality={allLokality}
-                lokality={lokality}
-                initialData={lokalita}
-                onClose={() => handleClose()}
-              />
+            {!deleteModal && editingId === lokalita.id ? (
+              <div className="form-container">
+                <KrajeForm
+                  allLokality={allLokality}
+                  lokality={lokality}
+                  initialData={lokalita}
+                  onClose={() => handleClose()}
+                />
+              </div>
             ) : (
               <KrajeItemEdit
                 lokalita={lokalita}

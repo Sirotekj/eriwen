@@ -2,8 +2,7 @@
 
 import { Tazeni } from '@prisma/client';
 
-import { useActionState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useActionState } from 'react';
 
 import { createAction } from '@/lib/tazeni-actions';
 import ImagePicker from '@/components/forms/image-picker';
@@ -23,14 +22,11 @@ export default function TazeniForm({
   initialData,
   afterOrder,
 }: Props) {
-  const [state, formAction] = useActionState(createAction, { message: null });
-  const router = useRouter();
+  const [state, formAction] = useActionState(createAction, {
+    messages: [],
+    errors: [],
+  });
 
-  useEffect(() => {
-    if (state.message === 'Vytvořeno') {
-      router.push('/tazeni');
-    }
-  }, [state, router]);
   return (
     <>
       <header className="mb-4">Přidat tažení</header>
@@ -81,7 +77,22 @@ export default function TazeniForm({
           width="small"
           defaultImage={initialData?.image ?? undefined}
         />
-        {state.message && <p>{state.message}</p>}
+        {state.errors && (
+          <ul className="text-red mt-2">
+            {state.errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
+        {state.messages && (
+          <ul className="text-red">
+            {state.messages.map((message) => (
+              <li key={message} className="text-red">
+                {message}
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="flex justify-between mt-4">
           <FormSubmit />
           <ButtonPage type="button" onClick={onClose}>

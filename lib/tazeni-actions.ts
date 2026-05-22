@@ -24,16 +24,20 @@ export async function createAction(
   const id = rawId && rawId !== '' ? (rawId as string) : null;
   const session = await getServerSession(authOptions);
 
-  if (!session?.user) {
-    return { message: 'Nepřihlášený uživatel' };
-  }
+  const errors: string[] = [];
+  const messages: string[] = [];
 
+  if (!session?.user) {
+    errors.push('Nepřihlášený uživatel!');
+    return { messages, errors };
+  }
   const canCreate = permissions.canCreate({
     role: session.user.role,
   });
 
   if (!canCreate) {
-    return { message: 'Nemáš přístup' };
+    errors.push('Nemáš přístup!');
+    return { messages, errors };
   }
 
   const afterOrderRaw = formData.get('afterOrder');
@@ -48,7 +52,8 @@ export async function createAction(
     });
 
     if (!existing) {
-      return { message: 'Záznam nenalezen' };
+      errors.push('Záznam pro "order" nenalezen!');
+      return { messages, errors };
     }
 
     order = existing.order;
@@ -113,13 +118,17 @@ export async function createAction(
       },
     },
   };
-  if (
-    isInvalidText(tazeni.jmeno) ||
-    isInvalidText(tazeni.vypravec) ||
-    isInvalidText(tazeni.postavy) ||
-    isInvalidText(tazeni.pribeh)
-  ) {
-    return { message: 'Neplatná data formuláře' };
+  if (isInvalidText(tazeni.jmeno)) {
+    messages.push('Chybí jméno!');
+  }
+  if (isInvalidText(tazeni.vypravec)) {
+    messages.push('Chybí vypravěč!');
+  }
+  if (isInvalidText(tazeni.postavy)) {
+    messages.push('Chybí postavy!');
+  }
+  if (messages.length > 0) {
+    return { messages, errors };
   }
 
   if (id) {

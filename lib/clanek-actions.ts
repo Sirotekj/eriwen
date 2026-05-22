@@ -38,16 +38,20 @@ export async function createAction(
 
   const session = await getServerSession(authOptions);
 
-  if (!session?.user) {
-    return { message: 'Nepřihlášený uživatel' };
-  }
+  const errors: string[] = [];
+  const messages: string[] = [];
 
+  if (!session?.user) {
+    errors.push('Nepřihlášený uživatel!');
+    return { messages, errors };
+  }
   const canCreate = permissions.canCreate({
     role: session.user.role,
   });
 
   if (!canCreate) {
-    return { message: 'Nemáš přístup' };
+    errors.push('Nemáš přístup!');
+    return { messages, errors };
   }
 
   const order = await calculateOrder({
@@ -78,15 +82,21 @@ export async function createAction(
     obsah: xss(formData.get('obsah') as string),
     order: order,
     kategorie: kategorie,
-    //image: image.name as string,
     author: {
       connect: {
         id: session.user.id,
       },
     },
   };
-  if (isInvalidText(clanek.nazev) || isInvalidText(clanek.obsah)) {
-    return { message: 'Neplatná data formuláře' };
+
+  if (isInvalidText(clanek.nazev)) {
+    messages.push('Chybí název!');
+  }
+  if (isInvalidText(clanek.obsah)) {
+    messages.push('Chybí obsah!');
+  }
+  if (messages.length > 0) {
+    return { messages, errors };
   }
 
   if (id) {

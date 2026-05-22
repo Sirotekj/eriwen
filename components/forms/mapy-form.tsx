@@ -7,6 +7,7 @@ import { useActionState } from 'react';
 import { createAction } from '@/lib/mapy-actions';
 
 import { useLokalitaHierarchy } from '@/hooks/use-lokalita-hierarchy';
+import { LokalitaTree } from '../kraje/kraje-helper';
 
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
@@ -15,20 +16,19 @@ import ButtonPage from '@/components/utils/button-page';
 import JoditRTE from './jodit-rte';
 
 type Props = {
-  mapy: Mapa[];
+  allMapy: Mapa[];
+  mapy: LokalitaTree[];
   onClose: () => void;
   afterOrder?: string;
   initialData?: Mapa;
 };
 
-export default function MapyForm({
-  mapy,
-  afterOrder,
-  initialData,
-  onClose,
-}: Props) {
-  const [state, formAction] = useActionState(createAction, { message: null });
-  const lokality = mapy;
+export default function MapyForm({ allMapy, initialData, onClose }: Props) {
+  const [state, formAction] = useActionState(createAction, {
+    messages: [],
+    errors: [],
+  });
+  const allLokality = allMapy;
 
   const {
     type,
@@ -49,7 +49,7 @@ export default function MapyForm({
 
     resolveParentId,
   } = useLokalitaHierarchy({
-    lokality,
+    allLokality,
     initialData,
   });
 
@@ -175,7 +175,22 @@ export default function MapyForm({
 
         <input type="hidden" name="parentId" value={resolveParentId() ?? ''} />
 
-        {state.message && <p>{state.message}</p>}
+        {state.errors && (
+          <ul className="text-red mt-2">
+            {state.errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
+        {state.messages && (
+          <ul className="text-red">
+            {state.messages.map((message) => (
+              <li key={message} className="text-red">
+                {message}
+              </li>
+            ))}
+          </ul>
+        )}
         {initialData?.id && (
           <input type="hidden" name="id" value={initialData.id} />
         )}

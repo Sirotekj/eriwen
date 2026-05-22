@@ -29,6 +29,7 @@ const ClanekListEdit = ({ clanek, role, userId, kategorie }: Props) => {
     setDeleteModal(true);
   };
   const closeDeleteModal = () => {
+    setEditingId(null);
     setDeleteModal(false);
   };
   return (
@@ -39,12 +40,14 @@ const ClanekListEdit = ({ clanek, role, userId, kategorie }: Props) => {
             key={c.id}
             className="relative my-4 after-content-[''] after:block after:clear-both"
           >
-            {editingId === c.id ? (
-              <ClanekForm
-                kategorie={kategorie}
-                initialData={c}
-                onClose={() => handleClose()}
-              />
+            {!deleteModal && editingId === c.id ? (
+              <div className="form-container">
+                <ClanekForm
+                  kategorie={kategorie}
+                  initialData={c}
+                  onClose={() => handleClose()}
+                />
+              </div>
             ) : (
               <ClanekItemEdit
                 clanek={c}

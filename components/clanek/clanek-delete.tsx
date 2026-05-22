@@ -24,7 +24,7 @@ const ClanekDelete = ({ id, slovoKategorie, onClose }: Props) => {
           <input type="hidden" name="redirectTo" value={cleanPath} />
 
           <div className="flex justify-center gap-2 mt-4">
-            <button type="submit" className="text-red-500 cursor-pointer">
+            <button type="submit" className="text-red cursor-pointer">
               Smazat
             </button>
 

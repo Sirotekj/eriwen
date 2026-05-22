@@ -24,6 +24,7 @@ const PostavyListEdit = ({ postavy, role, userId }: Props) => {
     setDeleteModal(true);
   };
   const closeDeleteModal = () => {
+    setEditingId(null);
     setDeleteModal(false);
   };
   return (
@@ -34,11 +35,13 @@ const PostavyListEdit = ({ postavy, role, userId }: Props) => {
             key={postava.id}
             className="relative my-4 after-content-[''] after:block after:clear-both"
           >
-            {editingId === postava.id ? (
-              <PostavyForm
-                initialData={postava}
-                onClose={() => handleClose()}
-              />
+            {!deleteModal && editingId === postava.id ? (
+              <div className="form-container">
+                <PostavyForm
+                  initialData={postava}
+                  onClose={() => handleClose()}
+                />
+              </div>
             ) : (
               <PostavyItemEdit
                 postava={postava}
