@@ -15,6 +15,10 @@ export default function MainMenu() {
       label: 'Mapy',
     },
     {
+      url: '/svet/letopisy',
+      label: 'Letopisy',
+    },
+    {
       url: '/svet/nabozenstvi',
       label: 'Náboženství',
     },

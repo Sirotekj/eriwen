@@ -56,6 +56,11 @@ const MainMenuMobile = () => {
                 </NavLinkMobile>
               </li>
               <li className="ml-1">
+                <NavLinkMobile href="/svet/letopisy" onClick={closeMenu}>
+                  Letopisy
+                </NavLinkMobile>
+              </li>
+              <li className="ml-1">
                 <NavLinkMobile href="/svet/nabozenstvi" onClick={closeMenu}>
                   Náboženství
                 </NavLinkMobile>
