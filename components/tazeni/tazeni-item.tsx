@@ -4,6 +4,7 @@ import { Tazeni } from '@prisma/client';
 
 import ImageWrapper from '@/components/utils/image-wrapper';
 import SafeContent from '@/components/utils/clear-xss';
+import Divider from '@/components/decorations/divider';
 
 type Props = {
   tazeni: Tazeni;
@@ -41,6 +42,7 @@ const TazeniItem = ({ tazeni, index }: Props) => {
       )}
 
       {tazeni.pribeh ? SafeContent(tazeni.pribeh) : ''}
+      <Divider />
     </>
   );
 };
