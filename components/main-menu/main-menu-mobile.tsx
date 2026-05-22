@@ -34,7 +34,7 @@ const MainMenuMobile = () => {
           </button>
         </div>
 
-        <ul className="flex flex-col p-4 text-lg">
+        <ul className="flex flex-col gap-2 p-4 text-lg">
           <li>
             <NavLinkMobile href="/" onClick={closeMenu}>
               Úvod
@@ -44,7 +44,7 @@ const MainMenuMobile = () => {
             <NavLinkMobile href="/svet" onClick={closeMenu}>
               Svět
             </NavLinkMobile>
-            <ul className="ml-4 text-base list-disc">
+            <ul className="flex flex-col gap-2 ml-4 text-base list-disc">
               <li className="ml-1">
                 <NavLinkMobile href="/svet/kraje-a-mista" onClick={closeMenu}>
                   Kraje a místa

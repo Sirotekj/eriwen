@@ -14,7 +14,7 @@ const NavLinkMobile = ({ href, children }: Props) => {
   const isActive = href === '/' ? path === '/' : path.startsWith(href);
   return (
     <Link
-      className={`items-center py-2 uppercase hover:font-bold ${isActive ? 'font-bold' : undefined}`}
+      className={`uppercase hover:font-bold ${isActive ? 'font-bold' : ''}`}
       href={href}
     >
       {children}
