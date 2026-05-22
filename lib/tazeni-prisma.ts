@@ -2,7 +2,6 @@ import { prisma } from './db';
 import { Tazeni } from '@prisma/client';
 import fs from 'fs/promises';
 import path from 'path';
-import { put, del } from '@vercel/blob';
 
 import withRetry from './with-retry';
 
@@ -17,18 +16,6 @@ export async function getTazeni(): Promise<Tazeni[]> {
     }),
   );
 }
-
-/*export async function uploadImage(image: File, order: number) {
-  const env = process.env.NODE_ENV;
-  const extension = image.name.split('.').pop() as string;
-  const fileName = `${env}/tazeni/tazeni_${order}.${extension}`;
-  const blob = await put(fileName, image, {
-    access: 'public',
-    allowOverwrite: true,
-  });
-
-  return blob.url;
-}*/
 
 export async function SaveTazeni(
   tazeni: TazeniType,

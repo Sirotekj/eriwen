@@ -30,7 +30,7 @@ const TazeniListEdit = ({ tazeni, role, userId }: Props) => {
   return (
     <>
       <ul>
-        {tazeni.map((tazeni) => (
+        {tazeni.map((tazeni, index) => (
           <li
             key={tazeni.id}
             className="relative my-4 after-content-[''] after:block after:clear-both"
@@ -44,6 +44,7 @@ const TazeniListEdit = ({ tazeni, role, userId }: Props) => {
               </div>
             ) : (
               <TazeniItemEdit
+                index={index + 1}
                 tazeni={tazeni}
                 role={role}
                 userId={userId}

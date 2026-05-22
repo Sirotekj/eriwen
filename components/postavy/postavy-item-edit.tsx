@@ -35,6 +35,7 @@ const PostavyItemEdit = ({
       <p>
         {postava.rasa} ({postava.povolani})
       </p>
+      <p>Hráč: {postava.hrac}</p>
       {postava.image && (
         <ImageWrapper>
           <Image
@@ -50,7 +51,6 @@ const PostavyItemEdit = ({
       {postava.popis ? SafeContent(postava.popis) : ''}
 
       <p>Tažení: {postava.tazeni}</p>
-      <p>Hráč: {postava.hrac}</p>
 
       {canEdit && (
         <EditPostavy

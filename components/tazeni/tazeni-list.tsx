@@ -10,9 +10,9 @@ const TazeniList = ({ tazeni }: Props) => {
   return (
     <>
       <ul>
-        {tazeni.map((t) => (
+        {tazeni.map((t, index) => (
           <li key={t.id}>
-            <TazeniItem tazeni={t} />
+            <TazeniItem tazeni={t} index={index + 1} />
           </li>
         ))}
       </ul>

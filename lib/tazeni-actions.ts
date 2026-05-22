@@ -44,7 +44,6 @@ export async function createAction(
   const afterOrder = afterOrderRaw ? Number(afterOrderRaw) : undefined;
 
   let order: number;
-
   if (id) {
     const existing = await prisma.tazeni.findUnique({
       where: { id },
@@ -71,10 +70,9 @@ export async function createAction(
         order: true,
       },
     });
+
     if (next && next.order - afterOrder > 1) {
       order = Math.floor((afterOrder + next.order) / 2);
-    } else if (next) {
-      order = afterOrder + 100;
     } else {
       order = afterOrder + 100;
     }

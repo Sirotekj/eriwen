@@ -7,12 +7,15 @@ import SafeContent from '@/components/utils/clear-xss';
 
 type Props = {
   tazeni: Tazeni;
+  index: number;
 };
 
-const TazeniItem = ({ tazeni }: Props) => {
+const TazeniItem = ({ tazeni, index }: Props) => {
   return (
     <>
-      <h3 className="mb0">{tazeni.jmeno}</h3>
+      <h3>
+        {index}. {tazeni.jmeno}
+      </h3>
 
       <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
         <dt>Vypravěč:</dt>

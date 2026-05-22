@@ -13,13 +13,11 @@ const KrajeItem = ({ lokalita }: Props) => {
   return (
     <>
       {lokalita.uroven === 'SVET' && (
-        <h1 className="mb0 text-center">{lokalita.nazev}</h1>
+        <h1 className="text-center">{lokalita.nazev}</h1>
       )}
-      {lokalita.uroven === 'KRALOVSTVI' && (
-        <h2 className="mb0">{lokalita.nazev}</h2>
-      )}
-      {lokalita.uroven === 'KRAJ' && <h3 className="mb0">{lokalita.nazev}</h3>}
-      {lokalita.uroven === 'MISTO' && <h4 className="mb0">{lokalita.nazev}</h4>}
+      {lokalita.uroven === 'KRALOVSTVI' && <h2>{lokalita.nazev}</h2>}
+      {lokalita.uroven === 'KRAJ' && <h3>{lokalita.nazev}</h3>}
+      {lokalita.uroven === 'MISTO' && <h4>{lokalita.nazev}</h4>}
 
       {lokalita.image && (
         <ImageWrapper>
