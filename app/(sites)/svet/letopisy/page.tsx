@@ -1,4 +1,7 @@
 export const dynamic = 'force-dynamic';
+
+import { FantasyDateField } from '@/components/letopisy/kalendar';
+
 export default async function LetopisyPage() {
   return (
     <>
@@ -14,6 +17,8 @@ export default async function LetopisyPage() {
       <p>
         <i>Ještě zde nejsou žádné události!</i>
       </p>
+
+      {/*<FantasyDateField />*/}
     </>
   );
 }
