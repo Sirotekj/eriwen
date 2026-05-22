@@ -12,6 +12,7 @@ import SafeContent from '@/components/utils/clear-xss';
 
 type Props = {
   tazeni: Tazeni;
+  index: number;
   role: Role | undefined;
   userId: string | undefined;
   handleEdit: () => void;
@@ -20,6 +21,7 @@ type Props = {
 
 const TazeniItemEdit = ({
   tazeni,
+  index,
   role,
   userId,
   handleEdit,
@@ -33,7 +35,9 @@ const TazeniItemEdit = ({
   return (
     <>
       <div>
-        <h3 className="mb0">{tazeni.jmeno}</h3>
+        <h3>
+          {index}. {tazeni.jmeno}
+        </h3>
 
         <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
           <dt>Vypravěč:</dt>
