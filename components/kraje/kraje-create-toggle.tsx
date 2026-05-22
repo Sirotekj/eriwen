@@ -9,8 +9,8 @@ import { Lokalita } from '@prisma/client';
 import { LokalitaTree } from './kraje-helper';
 
 type Props = {
-  allLokality: LokalitaTree[];
-  lokality: Lokalita[];
+  allLokality: Lokalita[];
+  lokality: LokalitaTree[];
   afterOrder?: string;
 };
 

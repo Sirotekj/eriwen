@@ -28,7 +28,7 @@ export default async function KrajeMistaPageEdit() {
 
       {canCreate && (
         <>
-          <KrajeCreateToggle allLokality={lokality} lokality={lokality} />
+          <KrajeCreateToggle allLokality={lokality} lokality={tree} />
           <p>
             Pozn.: Nové místo se řadí abecedně ve struktuře: svět → království →
             kraj → místo.
