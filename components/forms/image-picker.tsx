@@ -84,7 +84,7 @@ export default function ImagePicker({
                 height={0}
                 sizes="30vw"
                 alt="Vybraný obrázek."
-                className="w-full h-auto mix-blend-multiply"
+                className={`w-full h-auto ${width === 'full' && 'mix-blend-multiply'}`}
               />
             </div>
           )}
@@ -104,7 +104,7 @@ export default function ImagePicker({
         <ButtonPage type="button" onClick={handlePickClick}>
           Vyber obrázek
         </ButtonPage>
-        {error && <p className="text-red text-sm">{error}</p>}
+        {error && <p className="text-red">{error}</p>}
       </div>
     </div>
   );

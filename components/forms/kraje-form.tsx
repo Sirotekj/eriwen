@@ -7,6 +7,7 @@ import { useActionState } from 'react';
 import { createAction } from '@/lib/kraje-actions';
 
 import { useLokalitaHierarchy } from '@/hooks/use-lokalita-hierarchy';
+import { LokalitaTree } from '../kraje/kraje-helper';
 
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
@@ -15,19 +16,22 @@ import ButtonPage from '@/components/utils/button-page';
 import JoditRTE from './jodit-rte';
 
 type Props = {
-  lokality: Lokalita[];
+  allLokality: Lokalita[];
+  lokality: LokalitaTree[];
   onClose: () => void;
   afterOrder?: string;
   initialData?: Lokalita;
 };
 
 export default function KrajeForm({
-  lokality,
-  afterOrder,
+  allLokality,
   initialData,
   onClose,
 }: Props) {
-  const [state, formAction] = useActionState(createAction, { message: null });
+  const [state, formAction] = useActionState(createAction, {
+    messages: [],
+    errors: [],
+  });
 
   const {
     type,
@@ -48,61 +52,9 @@ export default function KrajeForm({
 
     resolveParentId,
   } = useLokalitaHierarchy({
-    lokality,
+    allLokality,
     initialData,
   });
-
-  /*const [type, setType] = useState<'SVET' | 'KRALOVSTVI' | 'KRAJ' | 'MISTO'>(
-    initialData?.uroven ?? 'SVET',
-  );*/
-
-  /*const [selectedSvet, setSelectedSvet] = useState<string | undefined>(
-    hierarchy.svetId,
-  );
-  const [selectedKralovstvi, setSelectedKralovstvi] = useState<
-    string | undefined
-  >(hierarchy.kralovstviId);
-
-  const [selectedKraj, setSelectedKraj] = useState<string | undefined>(
-    initialData?.uroven === 'MISTO'
-      ? (initialData.parentId ?? undefined)
-      : hierarchy.krajId,
-  );*/
-
-  /*function resolveParentId() {
-    switch (type) {
-      case 'KRALOVSTVI':
-        return selectedSvet;
-
-      case 'KRAJ':
-        return selectedKralovstvi;
-
-      case 'MISTO':
-        return selectedKraj;
-
-      default:
-        return null;
-    }
-  }*/
-
-  /*const svety = useMemo(
-    () => lokality.filter((l) => l.uroven === 'SVET'),
-    [lokality],
-  );
-  const kralovstvi = useMemo(
-    () =>
-      lokality.filter(
-        (l) => l.uroven === 'KRALOVSTVI' && l.parentId === selectedSvet,
-      ),
-    [lokality, selectedSvet],
-  );
-  const kraje = useMemo(
-    () =>
-      lokality.filter(
-        (l) => l.uroven === 'KRAJ' && l.parentId === selectedKralovstvi,
-      ),
-    [lokality, selectedKralovstvi],
-  );*/
 
   return (
     <>
@@ -226,7 +178,22 @@ export default function KrajeForm({
 
         <input type="hidden" name="parentId" value={resolveParentId() ?? ''} />
 
-        {state.message && <p>{state.message}</p>}
+        {state.errors && (
+          <ul className="text-red mt-2">
+            {state.errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
+        {state.messages && (
+          <ul className="text-red">
+            {state.messages.map((message) => (
+              <li key={message} className="text-red">
+                {message}
+              </li>
+            ))}
+          </ul>
+        )}
         {initialData?.id && (
           <input type="hidden" name="id" value={initialData.id} />
         )}

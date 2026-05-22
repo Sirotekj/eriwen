@@ -1,6 +1,7 @@
 import { Prisma, ClanekKategorie, LokalitaUroven } from '@prisma/client';
 export type FormState = {
-  message: string | null;
+  messages: string[];
+  errors: string[];
 };
 
 export type PageProps = {

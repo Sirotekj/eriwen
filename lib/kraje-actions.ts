@@ -30,15 +30,20 @@ export async function createAction(
   const id = rawId && rawId !== '' ? (rawId as string) : null;
   const session = await getServerSession(authOptions);
 
+  const errors: string[] = [];
+  const messages: string[] = [];
+
   if (!session?.user) {
-    return { message: 'Nepřihlášený uživatel' };
+    errors.push('Nepřihlášený uživatel!');
+    return { messages, errors };
   }
   const canCreate = permissions.canCreate({
     role: session.user.role,
   });
 
   if (!canCreate) {
-    return { message: 'Nemáš přístup' };
+    errors.push('Nemáš přístup!');
+    return { messages, errors };
   }
 
   let order: number;
@@ -48,7 +53,8 @@ export async function createAction(
       select: { order: true },
     });
     if (!existing) {
-      return { message: 'Záznam nenalezen' };
+      errors.push('Záznam pro "order" nenalezen!');
+      return { messages, errors };
     }
     order = existing.order;
   } else {
@@ -89,7 +95,8 @@ export async function createAction(
     authorId: session.user.id,
   };
   if (isInvalidText(lokalita.nazev)) {
-    return { message: 'Neplatná data formuláře' };
+    messages.push('Chybí název!');
+    return { messages, errors };
   }
 
   const validation = await validateHierarchy(
@@ -99,8 +106,10 @@ export async function createAction(
   );
 
   if (!validation.valid) {
+    messages.push(validation.message);
     return {
-      message: validation.message,
+      messages,
+      errors,
     };
   }
 

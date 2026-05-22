@@ -24,6 +24,7 @@ const TazeniListEdit = ({ tazeni, role, userId }: Props) => {
     setDeleteModal(true);
   };
   const closeDeleteModal = () => {
+    setEditingId(null);
     setDeleteModal(false);
   };
   return (
@@ -34,8 +35,13 @@ const TazeniListEdit = ({ tazeni, role, userId }: Props) => {
             key={tazeni.id}
             className="relative my-4 after-content-[''] after:block after:clear-both"
           >
-            {editingId === tazeni.id ? (
-              <TazeniForm initialData={tazeni} onClose={() => handleClose()} />
+            {!deleteModal && editingId === tazeni.id ? (
+              <div className="form-container">
+                <TazeniForm
+                  initialData={tazeni}
+                  onClose={() => handleClose()}
+                />
+              </div>
             ) : (
               <TazeniItemEdit
                 tazeni={tazeni}

@@ -3,11 +3,9 @@
 import { ClanekKategorie } from '@prisma/client';
 import { ClanekView } from '@/types/types';
 
-import { useActionState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useActionState } from 'react';
 
 import { createAction } from '@/lib/clanek-actions';
-import { urlFromKategorie } from '@/lib/helpers';
 
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
@@ -31,16 +29,11 @@ export default function ClanekForm({
   position,
   kategorie,
 }: Props) {
-  const [state, formAction] = useActionState(createAction, { message: null });
-  const router = useRouter();
+  const [state, formAction] = useActionState(createAction, {
+    messages: [],
+    errors: [],
+  });
 
-  useEffect(() => {
-    if (state.message === 'Vytvořeno') {
-      router.push(
-        `/${urlFromKategorie(kategorie).menu}/${urlFromKategorie(kategorie).submenu}`,
-      );
-    }
-  }, [state, router, kategorie]);
   return (
     <>
       <header className="mb-4">Přidat článek</header>
@@ -53,7 +46,6 @@ export default function ClanekForm({
             name="nazev"
             defaultValue={initialData?.nazev ?? ''}
             className="rounded-sm border"
-            required
           />
         </div>
         <label className="col-start-1">Obsah:</label>
@@ -64,7 +56,23 @@ export default function ClanekForm({
           width="small"
           defaultImage={initialData?.image ?? undefined}
         />
-        {state.message && <p>{state.message}</p>}
+
+        {state.errors && (
+          <ul className="text-red mt-2">
+            {state.errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
+        {state.messages && (
+          <ul className="text-red">
+            {state.messages.map((message) => (
+              <li key={message} className="text-red">
+                {message}
+              </li>
+            ))}
+          </ul>
+        )}
 
         {afterOrder && (
           <input type="hidden" name="afterOrder" value={afterOrder} />

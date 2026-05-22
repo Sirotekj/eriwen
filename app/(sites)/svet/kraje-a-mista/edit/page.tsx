@@ -21,13 +21,14 @@ export default async function KrajeMistaPageEdit() {
 
   const lokality = await getAllLokalita();
   const tree = buildTree(lokality);
+
   return (
     <div>
       <h1 className="headline">Kraje a místa</h1>
 
       {canCreate && (
         <>
-          <KrajeCreateToggle lokality={lokality} />
+          <KrajeCreateToggle allLokality={lokality} lokality={tree} />
           <p>
             Pozn.: Nové místo se řadí abecedně ve struktuře: svět → království →
             kraj → místo.
@@ -35,7 +36,12 @@ export default async function KrajeMistaPageEdit() {
         </>
       )}
       {lokality.length > 0 ? (
-        <KrajeListEdit lokality={tree} role={role} userId={userId} />
+        <KrajeListEdit
+          allLokality={lokality}
+          lokality={tree}
+          role={role}
+          userId={userId}
+        />
       ) : (
         <p>
           <i>Ještě zde nejsou žádné popisy míst!</i>

@@ -6,13 +6,19 @@ import ButtonPage from '@/components/utils/button-page';
 import { IconEdit } from '@/components/utils/svgs/icons';
 
 import { Lokalita } from '@prisma/client';
+import { LokalitaTree } from './kraje-helper';
 
 type Props = {
-  lokality: Lokalita[];
+  allLokality: Lokalita[];
+  lokality: LokalitaTree[];
   afterOrder?: string;
 };
 
-export default function KrajeCreateToggle({ lokality, afterOrder }: Props) {
+export default function KrajeCreateToggle({
+  allLokality,
+  lokality,
+  afterOrder,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,6 +26,7 @@ export default function KrajeCreateToggle({ lokality, afterOrder }: Props) {
       {isOpen ? (
         <div className="form-container">
           <KrajeForm
+            allLokality={allLokality}
             lokality={lokality}
             onClose={() => setIsOpen(false)}
             afterOrder={afterOrder}

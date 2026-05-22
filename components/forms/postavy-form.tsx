@@ -1,11 +1,12 @@
 'use client';
 
+import { useActionState } from 'react';
+//import { useRouter } from 'next/navigation';
+
 import { Postava } from '@prisma/client';
 
-import { useActionState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-
 import { createAction } from '@/lib/postavy-actions';
+
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
 import ButtonPage from '@/components/utils/button-page';
@@ -19,14 +20,17 @@ type Props = {
 
 export default function PostavayForm({ onClose, initialData }: Props) {
   //const [state, formAction] = useFormState(createPostava, { message: null });
-  const [state, formAction] = useActionState(createAction, { message: null });
-  const router = useRouter();
+  const [state, formAction] = useActionState(createAction, {
+    messages: [],
+    errors: [],
+  });
 
+  /*const router = useRouter();
   useEffect(() => {
-    if (state.message === 'Vytvořeno') {
+    if (state.messages === 'Vytvořeno') {
       router.push('/postavy');
     }
-  }, [state, router]);
+  }, [state, router]);*/
   return (
     <>
       <header className="mb-4">Přidat postavu</header>
@@ -38,7 +42,6 @@ export default function PostavayForm({ onClose, initialData }: Props) {
             id="jmeno"
             name="jmeno"
             defaultValue={initialData?.jmeno}
-            required
             className="form-input"
           />
         </div>
@@ -48,7 +51,6 @@ export default function PostavayForm({ onClose, initialData }: Props) {
           id="rasa"
           name="rasa"
           defaultValue={initialData?.rasa}
-          required
           className="form-input"
         />
         <label htmlFor="povolani">Povolání:</label>
@@ -57,7 +59,6 @@ export default function PostavayForm({ onClose, initialData }: Props) {
           id="povolani"
           name="povolani"
           defaultValue={initialData?.povolani}
-          required
           className="form-input"
         />
         <label htmlFor="tazeni">Tažení:</label>
@@ -91,7 +92,22 @@ export default function PostavayForm({ onClose, initialData }: Props) {
           width="small"
           defaultImage={initialData?.image ?? undefined}
         />
-        {state.message && <p>{state.message}</p>}
+        {state.errors && (
+          <ul className="text-red mt-2">
+            {state.errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
+        {state.messages && (
+          <ul className="text-red">
+            {state.messages.map((message) => (
+              <li key={message} className="text-red">
+                {message}
+              </li>
+            ))}
+          </ul>
+        )}
         {initialData?.id && (
           <input type="hidden" name="id" value={initialData.id} />
         )}

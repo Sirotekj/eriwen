@@ -67,7 +67,7 @@ export default async function MapyPage() {
 
       {canCreate && (
         <>
-          <MapyCreateToggle mapy={mapy} />
+          <MapyCreateToggle allMapy={mapy} mapy={tree} />
           <p>
             Pozn.: Nové místo se řadí abecedně ve struktuře: svět → království →
             kraj → místo.
@@ -75,28 +75,29 @@ export default async function MapyPage() {
         </>
       )}
       {mapy.length > 0 ? (
-        <MapyListEdit mapy={tree} role={role} userId={userId} />
+        <MapyListEdit allMapy={mapy} mapy={tree} role={role} userId={userId} />
       ) : (
-        <p>
-          <i>Ještě zde nejsou žádné mapy!</i>
-        </p>
+        <>
+          <p>
+            <i>Ještě zde nejsou žádné mapy!</i>
+          </p>
+          <Divider />
+
+          <div>
+            <h2>Příklad</h2>
+            <h3>Království</h3>
+            <div className="border">
+              <Image
+                className="w-full mix-blend-multiply"
+                alt="Království"
+                width="3504"
+                height="2544"
+                src="/images/mapy/kralovstvi.jpg"
+              />
+            </div>
+          </div>
+        </>
       )}
-
-      <Divider />
-
-      <div>
-        <h2>Příklad</h2>
-        <h3>Království</h3>
-        <div className="border">
-          <Image
-            className="w-full mix-blend-multiply"
-            alt="Království"
-            width="3504"
-            height="2544"
-            src="/images/mapy/kralovstvi.jpg"
-          />
-        </div>
-      </div>
     </>
   );
 }

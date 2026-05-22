@@ -5,15 +5,15 @@ import { Lokalita, LokalitaUroven } from '@prisma/client';
 import { getHierarchy } from '@/components/kraje/kraje-helper';
 
 type Props = {
-  lokality: Lokalita[];
+  allLokality: Lokalita[];
   initialData?: Lokalita | null;
 };
 
-export function useLokalitaHierarchy({ lokality, initialData }: Props) {
+export function useLokalitaHierarchy({ allLokality, initialData }: Props) {
   const [type, setType] = useState<LokalitaUroven>(
     initialData?.uroven ?? 'SVET',
   );
-  const hierarchy = getHierarchy(lokality, initialData);
+  const hierarchy = getHierarchy(allLokality, initialData);
 
   const [selectedSvet, setSelectedSvet] = useState<string | undefined>(
     hierarchy.svetId,
@@ -29,26 +29,26 @@ export function useLokalitaHierarchy({ lokality, initialData }: Props) {
 
   // SVETY
   const svety = useMemo(
-    () => lokality.filter((l) => l.uroven === 'SVET'),
-    [lokality],
+    () => allLokality.filter((l) => l.uroven === 'SVET'),
+    [allLokality],
   );
 
   // KRALOVSTVI
   const kralovstvi = useMemo(
     () =>
-      lokality.filter(
+      allLokality.filter(
         (l) => l.uroven === 'KRALOVSTVI' && l.parentId === selectedSvet,
       ),
-    [lokality, selectedSvet],
+    [allLokality, selectedSvet],
   );
 
   // KRAJE
   const kraje = useMemo(
     () =>
-      lokality.filter(
+      allLokality.filter(
         (l) => l.uroven === 'KRAJ' && l.parentId === selectedKralovstvi,
       ),
-    [lokality, selectedKralovstvi],
+    [allLokality, selectedKralovstvi],
   );
 
   // parentId pro submit

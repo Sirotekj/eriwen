@@ -6,13 +6,19 @@ import ButtonPage from '@/components/utils/button-page';
 import { IconEdit } from '@/components/utils/svgs/icons';
 
 import { Mapa } from '@prisma/client';
+import { LokalitaTree } from '../kraje/kraje-helper';
 
 type Props = {
-  mapy: Mapa[];
+  allMapy: Mapa[];
+  mapy: LokalitaTree[];
   afterOrder?: string;
 };
 
-export default function KrajeCreateToggle({ mapy, afterOrder }: Props) {
+export default function KrajeCreateToggle({
+  allMapy,
+  mapy,
+  afterOrder,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,6 +26,7 @@ export default function KrajeCreateToggle({ mapy, afterOrder }: Props) {
       {isOpen ? (
         <div className="form-container">
           <MapyForm
+            allMapy={allMapy}
             mapy={mapy}
             onClose={() => setIsOpen(false)}
             afterOrder={afterOrder}
