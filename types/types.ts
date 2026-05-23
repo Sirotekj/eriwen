@@ -110,3 +110,22 @@ export type MapaView = {
   image: string | null;
   authorId: string;
 };
+
+export type LetopisyType = {
+  nadpis: string;
+  popis: string;
+
+  datePrecision: string;
+
+  year: number;
+  month: number;
+  day: number;
+
+  season: string;
+
+  author: {
+    connect: {
+      id: string;
+    };
+  };
+};

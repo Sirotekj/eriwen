@@ -76,28 +76,13 @@ const UvodMenu = () => {
             return (
               <li
                 key={item.href}
-                className="menu-circle-item w-38"
+                className="menu-circle-item w-40"
                 style={style}
               >
                 <NavLink href={item.href}>{item.label}</NavLink>
               </li>
             );
           })}
-          {/*<li className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-            <NavLink href="/svet">Svět</NavLink>
-          </li>
-
-          <li className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2">
-            <NavLink href="/postavy">Postavy</NavLink>
-          </li>
-
-          <li className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
-            <NavLink href="/tazeni">Tažení</NavLink>
-          </li>
-
-          <li className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <NavLink href="/pravidla">Pravidla</NavLink>
-          </li>*/}
         </ul>
       </nav>
     </div>

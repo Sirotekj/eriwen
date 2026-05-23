@@ -21,7 +21,7 @@ export default function Background() {
         src="/images/mountains_c.webp"
         alt="background"
         priority
-        className="absolute object-cover max-w-none w-full h-full object-center"
+        className="absolute object-cover w-full h-full max-w-none object-center"
       />
       <Image
         width="1536"
@@ -29,7 +29,7 @@ export default function Background() {
         src="/images/mountains-night_c.webp"
         alt="background"
         priority
-        className={`absolute object-cover max-w-none w-full h-full object-center transition-opacity duration-2000 ${isNight ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute object-cover w-full h-full max-w-none object-center transition-opacity duration-2000 ${isNight ? 'opacity-100' : 'opacity-0'}`}
       />
       <Rain />
       {/*<Snow />*/}
