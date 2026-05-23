@@ -119,6 +119,25 @@ enum LokalitaUroven {
   MISTO
 }
 
+model Letopisy {
+  id          String       @id @default(cuid())
+  nadpis      String
+  popis       String?
+
+  datePrecision String
+
+  year  Int
+  month Int?
+  day   Int?
+
+  season String?
+
+  authorId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+}
+
 model User {
   id            String    @id @default(cuid())
   email         String?   @unique
@@ -133,6 +152,7 @@ model User {
   clanek        Clanek[]
   kraje         Lokalita[]
   mapy          Mapa[]
+  letopisy      Letopisy[]
 }
 
 model Account {

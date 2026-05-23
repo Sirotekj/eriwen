@@ -21,8 +21,11 @@ export async function createAction(
   formData: FormData,
 ): Promise<FormState> {
   const rawId = formData.get('id') as string | null;
+  console.log('rawID:', rawId);
   const id = rawId && rawId !== '' ? (rawId as string) : null;
   const session = await getServerSession(authOptions);
+
+  console.log('ID:', id);
 
   const errors: string[] = [];
   const messages: string[] = [];

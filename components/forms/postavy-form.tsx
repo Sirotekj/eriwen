@@ -35,6 +35,10 @@ export default function PostavayForm({ onClose, initialData }: Props) {
     <>
       <header className="mb-4">Přidat postavu</header>
       <form action={formAction} className="form">
+        {initialData?.id && (
+          <input type="hidden" name="id" value={initialData.id} />
+        )}
+
         <div className="">
           <label htmlFor="jmeno">Jméno:</label>
           <input

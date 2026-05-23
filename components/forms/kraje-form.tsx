@@ -60,6 +60,9 @@ export default function KrajeForm({
     <>
       <header className="mb-4">Přidat popis místa</header>
       <form action={formAction} className="form">
+        {initialData?.id && (
+          <input type="hidden" name="id" value={initialData.id} />
+        )}
         {/* uroven */}
         <label htmlFor="uroven">
           Nejprve vyber úroveň, zda budeš vytvářet popis světa, království,
@@ -193,9 +196,6 @@ export default function KrajeForm({
               </li>
             ))}
           </ul>
-        )}
-        {initialData?.id && (
-          <input type="hidden" name="id" value={initialData.id} />
         )}
 
         <div className="flex justify-between mt-4">

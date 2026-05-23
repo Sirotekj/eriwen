@@ -31,6 +31,10 @@ export default function TazeniForm({
     <>
       <header className="mb-4">Přidat tažení</header>
       <form action={formAction} className="form">
+        {initialData?.id && (
+          <input type="hidden" name="id" value={initialData.id} />
+        )}
+
         <div className="w-full max-w-full grid grid-cols-[100px_auto]  gap-x-2 gap-y-4 md:grid-cols-[92px_auto_92px_auto]">
           <label htmlFor="jmeno">Název:</label>
           <input

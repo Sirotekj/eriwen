@@ -29,6 +29,28 @@ const MONTHS = [
   'prosinec',
 ];
 
+const precisionWeight = {
+  year: 0,
+  season: 1,
+  month: 2,
+  day: 3,
+};
+
+const seasonMonthMap = {
+  spring: 3,
+  summer: 6,
+  autumn: 9,
+  winter: 12,
+};
+
+export function getFantasyDateSortValue(date: FantasyDate) {
+  const month = date.month ?? (date.season ? seasonMonthMap[date.season] : 0);
+
+  const day = date.day ?? 0;
+
+  return [date.year, month, day, precisionWeight[date.precision]];
+}
+
 export function FantasyDateField() {
   const [value, setValue] = useState<FantasyDate>({
     precision: 'day',
@@ -38,12 +60,14 @@ export function FantasyDateField() {
   });
 
   return (
-    <div className="space-y-4">
-      <label htmlFor="precision">Typ datumu</label>
+    <>
+      <label htmlFor="datePrecision">Typ datumu</label>
       <select
-        id="precision"
-        title="precision"
+        id="datePrecision"
+        title="datePrecision"
+        name="datePrecision"
         value={value.precision}
+        className="form-select"
         onChange={(e) =>
           setValue({
             ...value,
@@ -62,10 +86,12 @@ export function FantasyDateField() {
           <label htmlFor="day">Den</label>
           <input
             title="day"
+            name="day"
             type="number"
             min={1}
-            max={30}
+            max={31}
             value={value.day ?? 1}
+            className="form-input"
             onChange={(e) =>
               setValue({
                 ...value,
@@ -77,7 +103,9 @@ export function FantasyDateField() {
           <label htmlFor="month">Měsíc</label>
           <select
             title="month"
+            name="month"
             value={value.month ?? 1}
+            className="form-select"
             onChange={(e) =>
               setValue({
                 ...value,
@@ -98,7 +126,9 @@ export function FantasyDateField() {
           <label htmlFor="season">Roční období</label>
           <select
             title="season"
+            name="season"
             value={value.season}
+            className="form-input"
             onChange={(e) =>
               setValue({
                 ...value,
@@ -116,10 +146,12 @@ export function FantasyDateField() {
       <label htmlFor="year">Rok</label>
       <input
         title="year"
+        name="year"
         type="number"
         min={-100}
         max={800}
         value={value.year}
+        className="form-input"
         onChange={(e) =>
           setValue({
             ...value,
@@ -129,6 +161,6 @@ export function FantasyDateField() {
       />
 
       <pre>{JSON.stringify(value, null, 2)}</pre>
-    </div>
+    </>
   );
 }
