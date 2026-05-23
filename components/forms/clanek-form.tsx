@@ -38,6 +38,9 @@ export default function ClanekForm({
     <>
       <header className="mb-4">Přidat článek</header>
       <form action={formAction} className="form">
+        {initialData?.id && (
+          <input type="hidden" name="id" value={initialData.id} />
+        )}
         <div className="grid grid-cols-[100px_auto_100px_auto] gap-x-2 gap-y-4">
           <label htmlFor="nazev">Název:</label>
           <input

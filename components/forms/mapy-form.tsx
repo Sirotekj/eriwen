@@ -57,6 +57,9 @@ export default function MapyForm({ allMapy, initialData, onClose }: Props) {
     <>
       <header className="mb-4">Přidat mapu</header>
       <form action={formAction} className="form">
+        {initialData?.id && (
+          <input type="hidden" name="id" value={initialData.id} />
+        )}
         {/* uroven */}
         <label htmlFor="uroven">
           Nejprve vyber úroveň, zda budeš vytvářet mapu světa, království, kraje
@@ -190,9 +193,6 @@ export default function MapyForm({ allMapy, initialData, onClose }: Props) {
               </li>
             ))}
           </ul>
-        )}
-        {initialData?.id && (
-          <input type="hidden" name="id" value={initialData.id} />
         )}
 
         <div className="flex justify-between mt-4">
