@@ -42,7 +42,7 @@ export default async function LetopisyPageEdit() {
       ) : (
         <>
           <p>
-            <i>Ještě zde není žádné události!</i>
+            <i>Ještě zde nejsou žádné události!</i>
           </p>
 
           <Divider />
