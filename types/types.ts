@@ -118,10 +118,10 @@ export type LetopisyType = {
   datePrecision: string;
 
   year: number;
-  month: number;
-  day: number;
+  month: number | null;
+  day: number | null;
 
-  season: string;
+  season: string | null;
 
   author: {
     connect: {
