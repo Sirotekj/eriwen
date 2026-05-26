@@ -26,5 +26,3 @@ const seasonStart = {
   autumn: { month: 9, day: 21 },
   winter: { month: 12, day: 21 },
 };
-
-export const sortDates = () => {};

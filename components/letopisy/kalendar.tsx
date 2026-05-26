@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 
-export type Season = 'spring' | 'summer' | 'autumn' | 'winter';
+import { Letopisy } from '@prisma/client';
+import { SuffixPathnameNormalizer } from 'next/dist/server/normalizers/request/suffix';
+
+export type SeasonType = 'spring' | 'summer' | 'autumn' | 'winter';
 
 export type FantasyDatePrecision = 'day' | 'month' | 'season' | 'year';
 
@@ -11,7 +14,7 @@ export interface FantasyDate {
   precision: FantasyDatePrecision;
   day?: number;
   month?: number;
-  season?: Season;
+  season?: SeasonType;
 }
 
 const MONTHS = [
@@ -29,6 +32,25 @@ const MONTHS = [
   'prosinec',
 ];
 
+const SEASONS: Record<SeasonType, string> = {
+  spring: 'jaro',
+  summer: 'léto',
+  autumn: 'podzim',
+  winter: 'zima',
+};
+
+//const Season
+
+export const getMonth = (month: number) => {
+  const mesic = MONTHS[month];
+  return mesic;
+};
+
+export const getSeason = (season: SeasonType) => {
+  const rocniObdobi = SEASONS[season];
+  return rocniObdobi;
+};
+
 const precisionWeight = {
   year: 0,
   season: 1,
@@ -43,13 +65,50 @@ const seasonMonthMap = {
   winter: 12,
 };
 
-export function getFantasyDateSortValue(date: FantasyDate) {
-  const month = date.month ?? (date.season ? seasonMonthMap[date.season] : 0);
+const seasonStart = {
+  spring: { month: 3, day: 21 },
+  summer: { month: 6, day: 21 },
+  autumn: { month: 9, day: 21 },
+  winter: { month: 12, day: 21 },
+};
 
-  const day = date.day ?? 0;
+export function getFantasyDateSortValue(date: FantasyDate) {
+  const seasonDate = date.season ? seasonStart[date.season] : null;
+
+  const month = date.month ?? seasonDate?.month ?? 0;
+
+  const day = date.day ?? seasonDate?.day ?? 0;
 
   return [date.year, month, day, precisionWeight[date.precision]];
 }
+
+export const getSortedLetopisy = (letopisy: Letopisy[]) => {
+  return [...letopisy].sort((a, b) => {
+    const A = getFantasyDateSortValue({
+      year: a.year,
+      month: a.month ?? undefined,
+      day: a.day ?? undefined,
+      season: a.season as SeasonType | undefined,
+      precision: a.datePrecision as FantasyDatePrecision,
+    });
+
+    const B = getFantasyDateSortValue({
+      year: b.year,
+      month: b.month ?? undefined,
+      day: b.day ?? undefined,
+      season: b.season as SeasonType | undefined,
+      precision: b.datePrecision as FantasyDatePrecision,
+    });
+
+    for (let i = 0; i < A.length; i++) {
+      if (A[i] !== B[i]) {
+        return A[i] - B[i];
+      }
+    }
+
+    return 0;
+  });
+};
 
 export function FantasyDateField() {
   const [value, setValue] = useState<FantasyDate>({
@@ -132,7 +191,7 @@ export function FantasyDateField() {
             onChange={(e) =>
               setValue({
                 ...value,
-                season: e.target.value as Season,
+                season: e.target.value as SeasonType,
               })
             }
           >

@@ -4,7 +4,7 @@ import { useActionState } from 'react';
 
 import { Letopisy } from '@prisma/client';
 
-import { createAction } from '@/lib/postavy-actions';
+import { createAction } from '@/lib/letopisy-actions';
 
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';

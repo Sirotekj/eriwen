@@ -7,6 +7,8 @@ import LetopisyItemEdit from './letopisy-item-edit';
 import LetopisyDelete from './letopisy-delete';
 import LetopisyForm from '../forms/letopisy-form';
 
+import { getSortedLetopisy } from './kalendar';
+
 type Props = {
   letopisy: Letopisy[];
   role: Role | undefined;
@@ -16,6 +18,8 @@ type Props = {
 const LetopisyListEdit = ({ letopisy, role, userId }: Props) => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
+
+  const sortedLetopisy = getSortedLetopisy(letopisy);
 
   const handleClose = () => {
     setEditingId(null);
@@ -30,7 +34,7 @@ const LetopisyListEdit = ({ letopisy, role, userId }: Props) => {
   return (
     <>
       <ul>
-        {letopisy.map((l) => (
+        {sortedLetopisy.map((l) => (
           <li
             key={l.id}
             className="relative my-4 after-content-[''] after:block after:clear-both"

@@ -1,16 +1,20 @@
+'use client';
+
 import { Letopisy } from '@prisma/client';
 
 import LetopisyItem from './letopisy-item';
+import { getSortedLetopisy } from './kalendar';
 
 type Props = {
   letopisy: Letopisy[];
 };
 
 const LetopisyList = ({ letopisy }: Props) => {
+  const sortedLetopisy = getSortedLetopisy(letopisy);
   return (
     <>
       <ul>
-        {letopisy.map((l) => (
+        {sortedLetopisy.map((l) => (
           <li key={l.id}>
             <LetopisyItem letopisy={l} />
           </li>
