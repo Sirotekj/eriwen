@@ -120,7 +120,7 @@
     @apply w-full mb-4 border;
   }
   .form-select {
-    @apply border rounded-sm p-1;
+    @apply border rounded-sm p-1 mb-4;
   }
   .form-mapa {
     @apply w-full;
