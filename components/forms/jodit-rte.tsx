@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useCallback } from 'react';
+import React, { useRef, useMemo } from 'react';
 import JoditEditor from 'jodit-react';
 import './jodit-rte.css';
 
@@ -8,8 +8,8 @@ type Props = {
 };
 
 const JoditRTE = ({ name, defaultValue }: Props) => {
-  const editor = useRef(null);
-  const [content, setContent] = useState(defaultValue ?? '');
+  const hiddenInputRef = useRef<HTMLInputElement>(null);
+  //const [content, setContent] = useState(defaultValue ?? '');
 
   const config = useMemo(
     () => ({
@@ -44,19 +44,30 @@ const JoditRTE = ({ name, defaultValue }: Props) => {
     [],
   );
 
-  const handleChange = useCallback((newContent: string) => {
+  /*const handleChange = useCallback((newContent: string) => {
     setContent(newContent);
-  }, []);
+  }, []);*/
 
   return (
     <div className="mb-6">
       <JoditEditor
-        ref={editor}
-        value={content}
+        //value={content}
+        value={defaultValue ?? ''}
         config={config}
-        onChange={handleChange}
+        //onChange={handleChange}
+        onBlur={(newContent) => {
+          if (hiddenInputRef.current) {
+            hiddenInputRef.current.value = newContent;
+          }
+        }}
       />
-      <input type="hidden" name={name} value={content} />
+      <input
+        ref={hiddenInputRef}
+        type="hidden"
+        name={name}
+        //value={content}
+        defaultValue={defaultValue ?? ''}
+      />
     </div>
   );
 };
