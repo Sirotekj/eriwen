@@ -7,7 +7,7 @@ import LetopisyItemEdit from './letopisy-item-edit';
 import LetopisyDelete from './letopisy-delete';
 import LetopisyForm from '../forms/letopisy-form';
 
-import { getSortedLetopisy } from './kalendar';
+import { getSortedLetopisy } from './sorting';
 
 type Props = {
   letopisy: Letopisy[];

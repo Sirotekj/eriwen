@@ -73,7 +73,6 @@ export async function createAction(
     await SaveLetopisy(letopisy);
   }
 
-  revalidatePath('/svet/letopisy');
   redirect('/svet/letopisy');
 }
 
@@ -81,6 +80,5 @@ export async function deleteAction(formData: FormData) {
   const id = formData.get('id') as string;
   await DeleteLetopisy(id);
 
-  revalidatePath('/svet/letopisy');
   redirect('/svet/letopisy');
 }

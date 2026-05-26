@@ -1,7 +1,4 @@
-import Image from 'next/image';
-
 import { Letopisy, Role } from '@prisma/client';
-import LetopisyCreateToggle from '@/components/letopisy/letopisy-create-toggle';
 import EditLetopisy from '@/components/utils/edit-article';
 
 import { permissions } from '@/lib/permissions';
@@ -35,13 +32,15 @@ const LetopisyItemEdit = ({
   return (
     <>
       <h4>
-        {letopisy.year}{' '}
-        {letopisy.season && getSeason(letopisy.season as SeasonType)}
-        {letopisy.month !== 0 &&
-          letopisy.month !== null &&
-          getMonth(letopisy.month)}
-        {letopisy.day !== 0 && letopisy.day !== null && letopisy.day}
+        {letopisy.year}
         {' - '}
+        <span className="text-[90%]">
+          {letopisy.season && getSeason(letopisy.season as SeasonType) + ' - '}
+          {letopisy.day !== 0 && letopisy.day !== null && letopisy.day + '. '}
+          {letopisy.month !== 0 &&
+            letopisy.month !== null &&
+            getMonth(letopisy.month) + ' - '}
+        </span>
         {letopisy.nadpis}
       </h4>
 

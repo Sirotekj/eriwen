@@ -11,7 +11,7 @@ import FormSubmit from '@/components/forms/form-submit';
 import ButtonPage from '@/components/utils/button-page';
 
 import JoditRTE from './jodit-rte';
-import { FantasyDateField } from '@/components/letopisy/kalendar';
+import { FantasyDateField } from '@/components/letopisy/kalendar-form-part';
 
 type Props = {
   onClose: () => void;
@@ -45,7 +45,7 @@ export default function LetopisyForm({ initialData, onClose }: Props) {
         <label>Popis:</label>
         <JoditRTE name="popis" defaultValue={initialData?.popis ?? ''} />
 
-        <FantasyDateField />
+        <FantasyDateField initialData={initialData} />
 
         <div className="flex justify-between mt-4">
           <FormSubmit />

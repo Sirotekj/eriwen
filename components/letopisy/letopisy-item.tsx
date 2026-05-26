@@ -15,16 +15,18 @@ type Props = {
 const LetopisyItem = ({ letopisy }: Props) => {
   return (
     <>
-      <h3>
-        {letopisy.year}{' '}
-        {letopisy.season && getSeason(letopisy.season as SeasonType)}
-        {letopisy.month !== 0 &&
-          letopisy.month !== null &&
-          getMonth(letopisy.month) + ' '}
-        {letopisy.day !== 0 && letopisy.day !== null && letopisy.day}
+      <h4>
+        {letopisy.year}
         {' - '}
+        <span className="text-[90%]">
+          {letopisy.season && getSeason(letopisy.season as SeasonType) + ' - '}
+          {letopisy.day !== 0 && letopisy.day !== null && letopisy.day + '. '}
+          {letopisy.month !== 0 &&
+            letopisy.month !== null &&
+            getMonth(letopisy.month) + ' - '}
+        </span>
         {letopisy.nadpis}
-      </h3>
+      </h4>
 
       {letopisy.popis ? SafeContent(letopisy.popis) : ''}
     </>

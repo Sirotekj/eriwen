@@ -3,7 +3,7 @@
 import { Letopisy } from '@prisma/client';
 
 import LetopisyItem from './letopisy-item';
-import { getSortedLetopisy } from './kalendar';
+import { getSortedLetopisy } from './sorting';
 
 type Props = {
   letopisy: Letopisy[];
