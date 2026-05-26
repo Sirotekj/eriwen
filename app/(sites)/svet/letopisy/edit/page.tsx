@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { permissions } from '@/lib/permissions';
 
-import { getLetopisy } from '@/lib/letopisy-prisma';
+import { getAllLetopisy } from '@/lib/letopisy-prisma';
 import LetopisyListEdit from '@/components/letopisy/letopisy-list-edit';
 import LetopisyCreateToggle from '@/components/letopisy/letopisy-create-toggle';
 
@@ -16,7 +16,7 @@ export default async function LetopisyPageEdit() {
 
   const canCreate = permissions.canCreate({ role });
 
-  const letopisy = await getLetopisy();
+  const letopisy = await getAllLetopisy();
 
   return (
     <>
@@ -27,18 +27,14 @@ export default async function LetopisyPageEdit() {
         <span>Gabriel Laub</span>
       </blockquote>
 
-      <p>Stránka je v přípravě.</p>
-
       {canCreate && (
         <>
-          {/*<LetopisyCreateToggle />*/}
-          <p>Pozn.: Nové náboženství se přidá na začátek.</p>
+          <LetopisyCreateToggle />
+          <p>Pozn.: Nová událsot se přidá podle datumu.</p>
         </>
       )}
       {letopisy.length > 0 ? (
-        {
-          /*<LetopisyListEdit letopisy={letopisy} role={role} userId={userId} />*/
-        }
+        <LetopisyListEdit letopisy={letopisy} role={role} userId={userId} />
       ) : (
         <>
           <p>
@@ -48,11 +44,14 @@ export default async function LetopisyPageEdit() {
           <Divider />
 
           <div>
-            <h2>Příklad</h2>
-            <h3>
-              <span>732</span> Velká událost
-            </h3>
-            <p>Při této události se stalo to a to...</p>
+            <h2>Příklad:</h2>
+            <h4>
+              732 - <span>jaro</span> - První setkání družiny
+            </h4>
+            <p>
+              Cilka, Kirin a Avpág se potkávají ve vsi Kámen a začíná jejich
+              společné dobrodružství.
+            </p>
           </div>
         </>
       )}

@@ -5,7 +5,7 @@ import withRetry from './with-retry';
 
 import type { LetopisyType } from '@/types/types';
 
-export async function getLetopisy(): Promise<Letopisy[]> {
+export async function getAllLetopisy(): Promise<Letopisy[]> {
   return withRetry(() => prisma.letopisy.findMany({}));
 }
 

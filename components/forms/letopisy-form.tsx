@@ -4,14 +4,14 @@ import { useActionState } from 'react';
 
 import { Letopisy } from '@prisma/client';
 
-import { createAction } from '@/lib/postavy-actions';
+import { createAction } from '@/lib/letopisy-actions';
 
 import ImagePicker from '@/components/forms/image-picker';
 import FormSubmit from '@/components/forms/form-submit';
 import ButtonPage from '@/components/utils/button-page';
 
 import JoditRTE from './jodit-rte';
-import { FantasyDateField } from '@/components/letopisy/kalendar';
+import { FantasyDateField } from '@/components/letopisy/kalendar-form-part';
 
 type Props = {
   onClose: () => void;
@@ -45,7 +45,7 @@ export default function LetopisyForm({ initialData, onClose }: Props) {
         <label>Popis:</label>
         <JoditRTE name="popis" defaultValue={initialData?.popis ?? ''} />
 
-        <FantasyDateField />
+        <FantasyDateField initialData={initialData} />
 
         <div className="flex justify-between mt-4">
           <FormSubmit />
