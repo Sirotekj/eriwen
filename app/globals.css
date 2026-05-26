@@ -81,7 +81,7 @@
 
   .headline {
     font-size: clamp(2rem, 2.6vw, 2.4rem);
-    @apply flex items-center justify-center gap-8 mb-8
+    @apply flex items-center justify-center gap-8 mb-8 text-center
     before:content-['']
     before:size-[1.4em]
     before:bg-[url('/images/decorations/headline-decoration-3.svg')]
