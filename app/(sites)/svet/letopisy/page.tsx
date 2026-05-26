@@ -16,7 +16,6 @@ export default async function LetopisyPage() {
         <span>Gabriel Laub</span>
       </blockquote>
 
-      <p>Stránka je v přípravě.</p>
       {letopisy.length > 0 ? (
         <LetopisyList letopisy={letopisy} />
       ) : (
@@ -28,11 +27,14 @@ export default async function LetopisyPage() {
           <Divider />
 
           <div>
-            <h2>Příklad</h2>
+            <h2>Příklad:</h2>
             <h4>
-              <span>732</span>jaro - Velká událost
+              732 - <span>jaro</span> - První setkání družiny
             </h4>
-            <p>Při této události se stalo to a to...</p>
+            <p>
+              Cilka, Kirin a Avpág se potkávají ve vsi Kámen a začíná jejich
+              společné dobrodružství.
+            </p>
           </div>
         </>
       )}
