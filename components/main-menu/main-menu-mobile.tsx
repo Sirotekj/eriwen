@@ -24,6 +24,7 @@ const MainMenuMobile = () => {
         <div className="fixed inset-0 bg-black/50 z-40" onClick={closeMenu} />
       )}
       <div
+        onClick={closeMenu}
         className={`fixed top-0 right-0 h-full w-64 bg-background z-50 transform transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
@@ -36,66 +37,46 @@ const MainMenuMobile = () => {
 
         <ul className="flex flex-col gap-2 p-4 text-lg">
           <li>
-            <NavLinkMobile href="/" onClick={closeMenu}>
-              Úvod
-            </NavLinkMobile>
+            <NavLinkMobile href="/">Úvod</NavLinkMobile>
           </li>
           <li>
-            <NavLinkMobile href="/svet" onClick={closeMenu}>
-              Svět
-            </NavLinkMobile>
+            <NavLinkMobile href="/svet">Svět</NavLinkMobile>
             <ul className="flex flex-col gap-2 ml-4 text-base list-disc">
               <li className="ml-1">
-                <NavLinkMobile href="/svet/kraje-a-mista" onClick={closeMenu}>
+                <NavLinkMobile href="/svet/kraje-a-mista">
                   Kraje a místa
                 </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <NavLinkMobile href="/svet/mapy" onClick={closeMenu}>
-                  Mapy
-                </NavLinkMobile>
+                <NavLinkMobile href="/svet/mapy">Mapy</NavLinkMobile>
               </li>
               <li className="ml-1">
-                <NavLinkMobile href="/svet/letopisy" onClick={closeMenu}>
-                  Letopisy
-                </NavLinkMobile>
+                <NavLinkMobile href="/svet/letopisy">Letopisy</NavLinkMobile>
               </li>
               <li className="ml-1">
-                <NavLinkMobile href="/svet/nabozenstvi" onClick={closeMenu}>
+                <NavLinkMobile href="/svet/nabozenstvi">
                   Náboženství
                 </NavLinkMobile>
               </li>
               <li className="ml-1">
-                <NavLinkMobile href="/svet/spojenci" onClick={closeMenu}>
-                  Spojenci
-                </NavLinkMobile>
+                <NavLinkMobile href="/svet/spojenci">Spojenci</NavLinkMobile>
               </li>
               <li className="ml-1">
-                <NavLinkMobile href="/svet/nepratele" onClick={closeMenu}>
-                  Nepřátelé
-                </NavLinkMobile>
+                <NavLinkMobile href="/svet/nepratele">Nepřátelé</NavLinkMobile>
               </li>
             </ul>
           </li>
           <li>
-            <NavLinkMobile href="/postavy" onClick={closeMenu}>
-              Postavy
-            </NavLinkMobile>
+            <NavLinkMobile href="/postavy">Postavy</NavLinkMobile>
           </li>
           <li>
-            <NavLinkMobile href="/tazeni" onClick={closeMenu}>
-              Tažení
-            </NavLinkMobile>
+            <NavLinkMobile href="/tazeni">Tažení</NavLinkMobile>
           </li>
           <li>
-            <NavLinkMobile href="/bestiar" onClick={closeMenu}>
-              Pravidla
-            </NavLinkMobile>
+            <NavLinkMobile href="/bestiar">Pravidla</NavLinkMobile>
             <ul className="ml-4 text-base list-disc">
               <li className="ml-1">
-                <NavLinkMobile href="/pravidla/bestiar" onClick={closeMenu}>
-                  Bestiář
-                </NavLinkMobile>
+                <NavLinkMobile href="/pravidla/bestiar">Bestiář</NavLinkMobile>
               </li>
             </ul>
           </li>
