@@ -42,6 +42,10 @@ export async function createAction(
     return { messages, errors };
   }
 
+  const monthValue = formData.get('month');
+  const dayValue = formData.get('day');
+  const seasonValue = formData.get('season');
+
   const letopisy = {
     nadpis: formData.get('nadpis') as string,
     popis: xss(formData.get('popis') as string),
@@ -49,10 +53,13 @@ export async function createAction(
     datePrecision: formData.get('datePrecision') as string,
 
     year: Number(formData.get('year')),
-    month: Number(formData.get('month')),
-    day: Number(formData.get('day')),
+    month: monthValue != null && monthValue !== '' ? Number(monthValue) : null,
+    day: dayValue != null && dayValue !== '' ? Number(dayValue) : null,
 
-    season: formData.get('season') as string,
+    season:
+      typeof seasonValue === 'string' && seasonValue !== ''
+        ? seasonValue
+        : null,
 
     author: {
       connect: {

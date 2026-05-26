@@ -5,8 +5,8 @@ import { SeasonType, FantasyDate, FantasyDatePrecision } from './kalendar';
 const precisionWeight = {
   year: 0,
   month: 1,
-  day: 2,
-  season: 3,
+  season: 2,
+  day: 3,
 };
 
 const seasonStart = {
@@ -23,7 +23,7 @@ export function getFantasyDateSortValue(date: FantasyDate) {
 
   const day = date.day ?? seasonDate?.day ?? 0;
 
-  return [date.year, precisionWeight[date.precision], month, day];
+  return [date.year, month, day, precisionWeight[date.precision]];
 }
 
 export const getSortedLetopisy = (letopisy: Letopisy[]) => {
@@ -36,6 +36,7 @@ export const getSortedLetopisy = (letopisy: Letopisy[]) => {
       precision: a.datePrecision as FantasyDatePrecision,
     });
 
+    console.log(a.year, a.month, a.day, a.season, a.datePrecision, A);
     const B = getFantasyDateSortValue({
       year: b.year,
       month: b.month ?? undefined,

@@ -16,8 +16,9 @@ export function FantasyDateField({ initialData }: Props) {
   const [value, setValue] = useState<FantasyDate>({
     precision: (initialData?.datePrecision as FantasyDatePrecision) ?? 'season',
     year: initialData?.year ?? 0,
-    day: initialData?.day ?? 1,
-    month: initialData?.month ?? 1,
+    day: initialData?.day ?? undefined,
+    month: initialData?.month ?? undefined,
+    season: (initialData?.season as SeasonType) ?? undefined,
   });
 
   return (
@@ -29,12 +30,24 @@ export function FantasyDateField({ initialData }: Props) {
         name="datePrecision"
         value={value.precision}
         className="form-select"
-        onChange={(e) =>
+        onChange={(e) => {
+          const precision = e.target.value as FantasyDatePrecision;
+
           setValue({
-            ...value,
-            precision: e.target.value as FantasyDatePrecision,
-          })
-        }
+            precision,
+
+            year: value.year,
+
+            month:
+              precision === 'day' || precision === 'month'
+                ? value.month
+                : undefined,
+
+            day: precision === 'day' ? value.day : undefined,
+
+            season: precision === 'season' ? value.season : undefined,
+          });
+        }}
       >
         <option value="day">Přesné datum</option>
         <option value="month">Měsíc</option>
@@ -43,7 +56,7 @@ export function FantasyDateField({ initialData }: Props) {
       </select>
 
       {value.precision === 'day' && (
-        <div className="flex gap-2">
+        <>
           <label htmlFor="day">Den</label>
           <input
             title="day"
@@ -80,7 +93,7 @@ export function FantasyDateField({ initialData }: Props) {
               </option>
             ))}
           </select>
-        </div>
+        </>
       )}
       {value.precision === 'season' && (
         <>
@@ -120,8 +133,6 @@ export function FantasyDateField({ initialData }: Props) {
           })
         }
       />
-
-      <pre>{JSON.stringify(value, null, 2)}</pre>
     </>
   );
 }
