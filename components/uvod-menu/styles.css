@@ -21,7 +21,7 @@ svg {
   stroke-width: 1px;
   display: none;
   @media (width >=48rem) {
-    displa: block;
+    display: block;
   }
 }
 .menu-circle {
