@@ -6,6 +6,7 @@ import { permissions } from '@/lib/permissions';
 
 import EditKraje from '@/components/utils/edit-article';
 import ImageWrapper from '@/components/utils/image-wrapper';
+import ExpandableContent from '@/components/utils/expandable-content';
 
 import SafeContent from '@/components/utils/clear-xss';
 
@@ -31,7 +32,7 @@ const KrajeItemEdit = ({
   });
   return (
     <>
-      <div>
+      <div className="mb-4">
         {lokalita.uroven === 'SVET' && (
           <h1 className="mb0 text-center">{lokalita.nazev}</h1>
         )}
@@ -44,18 +45,20 @@ const KrajeItemEdit = ({
         {lokalita.uroven === 'MISTO' && (
           <h4 className="mb0">{lokalita.nazev}</h4>
         )}
-        {lokalita.image && (
-          <ImageWrapper>
-            <Image
-              className="object-cover"
-              src={lokalita.image}
-              alt={lokalita.id}
-              sizes="242px"
-              fill
-            />
-          </ImageWrapper>
-        )}
-        {lokalita.popis ? SafeContent(lokalita.popis) : ''}
+        <ExpandableContent>
+          {lokalita.image && (
+            <ImageWrapper>
+              <Image
+                className="object-cover"
+                src={lokalita.image}
+                alt={lokalita.id}
+                sizes="242px"
+                fill
+              />
+            </ImageWrapper>
+          )}
+          {lokalita.popis ? SafeContent(lokalita.popis) : ''}
+        </ExpandableContent>
       </div>
       {canEdit && (
         <EditKraje

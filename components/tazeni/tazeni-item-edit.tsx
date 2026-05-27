@@ -7,6 +7,7 @@ import { permissions } from '@/lib/permissions';
 import TazeniCreateToggle from '@/components/tazeni/tazeni-create-toggle';
 import EditTazeni from '@/components/utils/edit-article';
 import ImageWrapper from '@/components/utils/image-wrapper';
+import ExpandableContent from '@/components/utils/expandable-content';
 
 import SafeContent from '@/components/utils/clear-xss';
 
@@ -34,35 +35,36 @@ const TazeniItemEdit = ({
   });
   return (
     <>
-      <div>
+      <div className="mb-4">
         <h3>
           {index}. {tazeni.jmeno}
         </h3>
+        <ExpandableContent>
+          <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
+            <dt>Vypravěč:</dt>
+            <dd>{tazeni.vypravec}</dd>
 
-        <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 mb-4">
-          <dt>Vypravěč:</dt>
-          <dd>{tazeni.vypravec}</dd>
+            <dt>Postavy:</dt>
+            <dd>{tazeni.postavy}</dd>
 
-          <dt>Postavy:</dt>
-          <dd>{tazeni.postavy}</dd>
+            <dt>Časové období:</dt>
+            <dd>{tazeni.obdobi}</dd>
+          </dl>
 
-          <dt>Časové období:</dt>
-          <dd>{tazeni.obdobi}</dd>
-        </dl>
+          {tazeni.image && (
+            <ImageWrapper>
+              <Image
+                className="object-cover"
+                src={tazeni.image}
+                alt={tazeni.id}
+                sizes="242px"
+                fill
+              />
+            </ImageWrapper>
+          )}
 
-        {tazeni.image && (
-          <ImageWrapper>
-            <Image
-              className="object-cover"
-              src={tazeni.image}
-              alt={tazeni.id}
-              sizes="242px"
-              fill
-            />
-          </ImageWrapper>
-        )}
-
-        {tazeni.pribeh ? SafeContent(tazeni.pribeh) : ''}
+          {tazeni.pribeh ? SafeContent(tazeni.pribeh) : ''}
+        </ExpandableContent>
         {canEdit && (
           <EditTazeni
             handleEdit={() => handleEdit()}
