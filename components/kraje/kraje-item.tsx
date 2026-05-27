@@ -1,8 +1,11 @@
+'use client';
+
 import Image from 'next/image';
 
 import { Lokalita } from '@prisma/client';
 
 import ImageWrapper from '@/components/utils/image-wrapper';
+import ExpandableContent from '@/components/utils/expandable-content';
 import SafeContent from '@/components/utils/clear-xss';
 
 type Props = {
@@ -18,20 +21,21 @@ const KrajeItem = ({ lokalita }: Props) => {
       {lokalita.uroven === 'KRALOVSTVI' && <h2>{lokalita.nazev}</h2>}
       {lokalita.uroven === 'KRAJ' && <h3>{lokalita.nazev}</h3>}
       {lokalita.uroven === 'MISTO' && <h4>{lokalita.nazev}</h4>}
+      <ExpandableContent>
+        {lokalita.image && (
+          <ImageWrapper>
+            <Image
+              className="object-cover"
+              src={lokalita.image}
+              alt={lokalita.id}
+              sizes="242px"
+              fill
+            />
+          </ImageWrapper>
+        )}
 
-      {lokalita.image && (
-        <ImageWrapper>
-          <Image
-            className="object-cover"
-            src={lokalita.image}
-            alt={lokalita.id}
-            sizes="242px"
-            fill
-          />
-        </ImageWrapper>
-      )}
-
-      {lokalita.popis ? SafeContent(lokalita.popis) : ''}
+        {lokalita.popis ? SafeContent(lokalita.popis) : ''}
+      </ExpandableContent>
     </>
   );
 };
