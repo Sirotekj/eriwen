@@ -50,6 +50,22 @@ export async function getNabozenstvi() {
     order: item.order.toString(),
   }));
 }
+
+export async function getSpolky() {
+  const data = await withRetry(() =>
+    prisma.clanek.findMany({
+      where: { kategorie: 'SPOLKY' },
+      orderBy: {
+        order: 'asc',
+      },
+    }),
+  );
+  return data.map((item) => ({
+    ...item,
+    order: item.order.toString(),
+  }));
+}
+
 export async function SaveClanek(
   clanek: ClanekCreateInput,
   imageUrl: string | undefined,
