@@ -137,7 +137,7 @@ body {
 blockquote {
   font-family: var(--font-great-vibes);
   /*font-size: 200%;*/
-  font-size: clamp(1.6rem, 2.2vw, 2.8rem);
+  font-size: clamp(1.6rem, 2.1vw, 2.1rem);
   line-height: 1.2;
   margin-block: 2rem;
   margin-inline: 6vw;
