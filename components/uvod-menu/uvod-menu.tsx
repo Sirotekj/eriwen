@@ -16,6 +16,7 @@ const UvodMenu = () => {
     { href: '/svet/mapy', label: 'Mapy' },
     { href: '/svet/letopisy', label: 'Letopisy' },
     { href: '/svet/nabozenstvi', label: 'Náboženství' },
+    { href: '/svet/rady-a-spolky', label: 'Řády a spolky' },
     { href: '/svet/spojenci', label: 'Spojenci' },
     { href: '/svet/nepratele', label: 'Nepřátelé' },
     { href: '/postavy', label: 'Postavy' },

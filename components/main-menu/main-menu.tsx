@@ -23,6 +23,10 @@ export default function MainMenu() {
       label: 'Náboženství',
     },
     {
+      url: '/svet/rady-a-spolky',
+      label: 'Řády a spolky',
+    },
+    {
       url: '/svet/spojenci',
       label: 'Spojenci',
     },
