@@ -36,7 +36,7 @@ const ClanekItem = ({
   return (
     <>
       <div>
-        <h3 className="mb0">{clanek.nazev}</h3>
+        <h3>{clanek.nazev}</h3>
 
         {clanek.image && (
           <ImageWrapper>
