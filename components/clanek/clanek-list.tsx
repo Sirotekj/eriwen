@@ -10,6 +10,16 @@ const ClanekList = ({ clanek }: Props) => {
   return (
     <>
       <ul>
+        {clanek.map((c, index) => (
+          <li key={c.id}>
+            <a className="border-b" href={`#${c.id}`}>
+              {index + 1}. {c.nazev}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <ul>
         {clanek.map((c) => (
           <li
             key={c.id}

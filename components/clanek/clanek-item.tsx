@@ -12,7 +12,7 @@ type Props = {
 const ClanekItem = ({ clanek }: Props) => {
   return (
     <>
-      <h3>{clanek.nazev}</h3>
+      <h3 id={clanek.id}>{clanek.nazev}</h3>
 
       {clanek.image && (
         <ImageWrapper>

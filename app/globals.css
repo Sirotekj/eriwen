@@ -20,6 +20,7 @@
 
 @layer base {
   html {
+    scroll-behavior: smooth;
     @apply text-base;
   }
 
@@ -131,7 +132,6 @@
 body {
   background: var(--color-background);
   color: var(--color-brown);
-  font-family: var(--font-georgia);
   font-family: var(--font-metamorphous);
 }
 blockquote {
