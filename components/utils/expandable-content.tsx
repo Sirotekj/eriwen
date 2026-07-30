@@ -59,7 +59,7 @@ export default function ExpandableContent({
   collapsedMaxHeight = 'max-h-156',
   expandedMaxHeightPx,
   className = '',
-  buttonClassName = 'absolute cursor-pointer right-0 -bottom-[1em] z-10 px-4 py-2 text-sm uppercase',
+  buttonClassName = 'absolute cursor-pointer right-0 -bottom-[2em] z-10 px-4 py-2 text-sm uppercase',
   readMoreLabel = ' číst více ',
   readLessLabel = ' méně ',
   hideButtonWhenFits = true,
