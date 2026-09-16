@@ -13,8 +13,7 @@ import { SaveClanek, UpdateClanek, DeleteClanek } from '@/lib/clanek-prisma';
 import { uploadImage } from '@/lib/upload-image';
 
 import { FormState } from '@/types/types';
-import { isInvalidText } from '@/lib/helpers';
-import { urlFromKategorie } from '@/lib/helpers';
+import { isInvalidText, parseImageMultiply, urlFromKategorie } from '@/lib/helpers';
 import { Prisma, ClanekKategorie } from '@prisma/client';
 
 import { calculateOrder } from './clanek-order';
@@ -82,6 +81,7 @@ export async function createAction(
     obsah: xss(formData.get('obsah') as string),
     order: order,
     kategorie: kategorie,
+    imageMultiply: parseImageMultiply(formData),
     author: {
       connect: {
         id: session.user.id,

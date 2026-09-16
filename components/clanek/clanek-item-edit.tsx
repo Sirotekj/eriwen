@@ -41,7 +41,7 @@ const ClanekItem = ({
         {clanek.image && (
           <ImageWrapper>
             <Image
-              className="object-cover"
+              className={`object-cover${clanek.imageMultiply ? ' mix-blend-multiply' : ''}`}
               src={clanek.image}
               alt={clanek.id}
               sizes="242px"

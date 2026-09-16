@@ -33,7 +33,7 @@ const TazeniItem = ({ tazeni, index }: Props) => {
         {tazeni.image && (
           <ImageWrapper>
             <Image
-              className="object-cover"
+              className={`object-cover${tazeni.imageMultiply ? ' mix-blend-multiply' : ''}`}
               src={tazeni.image}
               alt={tazeni.id}
               sizes="242px"

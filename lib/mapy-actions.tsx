@@ -14,7 +14,7 @@ import { permissions } from '@/lib/permissions';
 import { SaveMapa, UpdateMapa, DeleteMapa } from '@/lib/mapy-prisma';
 
 import { FormState } from '@/types/types';
-import { isInvalidText } from '@/lib/helpers';
+import { isInvalidText, parseImageMultiply } from '@/lib/helpers';
 import { validateHierarchy } from './hierarchy-validation';
 import { uploadImage } from '@/lib/upload-image';
 
@@ -89,6 +89,7 @@ export async function createAction(
     order: order,
     parentId: parentId,
     authorId: session.user.id,
+    imageMultiply: parseImageMultiply(formData),
   };
   if (isInvalidText(mapa.nazev)) {
     messages.push('Chybí název!');

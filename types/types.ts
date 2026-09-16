@@ -20,6 +20,7 @@ export type PostavaType = {
   tazeni: string;
   hrac: string;
   order: number;
+  imageMultiply: boolean;
   //image: string;
   author: {
     connect: {
@@ -35,6 +36,7 @@ export type TazeniType = {
   postavy: string;
   pribeh: string;
   order: number;
+  imageMultiply: boolean;
   //image: string;
   author: {
     connect: {
@@ -48,6 +50,7 @@ export type ClanekCreateInput = {
   obsah: string;
   kategorie: ClanekKategorie;
   order: Prisma.Decimal;
+  imageMultiply: boolean;
   author: {
     connect: {
       id: string;
@@ -72,6 +75,7 @@ export type ClanekView = {
   nazev: string;
   obsah: string | null;
   image: string | null;
+  imageMultiply: boolean;
   kategorie: ClanekKategorie;
   order: string;
   authorId: string;
@@ -83,6 +87,7 @@ export type LokalitaInput = {
   uroven: LokalitaUroven;
   parentId?: string | null;
   authorId: string;
+  imageMultiply: boolean;
 };
 
 export type LokalitaView = {
@@ -91,6 +96,7 @@ export type LokalitaView = {
   uroven: LokalitaUroven;
   popis: string | null;
   image: string | null;
+  imageMultiply: boolean;
   authorId: string;
 };
 
@@ -100,6 +106,7 @@ export type MapaInput = {
   uroven: LokalitaUroven;
   parentId?: string | null;
   authorId: string;
+  imageMultiply: boolean;
 };
 
 export type MapaView = {
@@ -108,6 +115,7 @@ export type MapaView = {
   uroven: LokalitaUroven;
   popis: string | null;
   image: string | null;
+  imageMultiply: boolean;
   authorId: string;
 };
 

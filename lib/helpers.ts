@@ -4,6 +4,10 @@ export const isInvalidText = (text: string | null) => {
   return !text || text.trim() === '';
 };
 
+export const parseImageMultiply = (formData: FormData) => {
+  return formData.get('imageMultiply') === 'true';
+};
+
 const KATEGORIE_URL = {
   SPOJENCI: { menu: 'svet', submenu: 'spojenci' },
   NEPRATELE: { menu: 'svet', submenu: 'nepratele' },

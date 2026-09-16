@@ -26,7 +26,8 @@ model Clanek {
   id        String   @id @default(cuid())
   nazev     String
   obsah     String
-  image     String?
+  image         String?
+  imageMultiply Boolean @default(false)
   kategorie ClanekKategorie
 
   order     Decimal @db.Decimal(10, 5)
@@ -43,7 +44,8 @@ model Tazeni {
   postavy   String
   pribeh    String
   obdobi    String?
-  image     String?
+  image         String?
+  imageMultiply Boolean @default(false)
 
   order     Int      @default(0)
   authorId  String
@@ -63,7 +65,8 @@ model Postava {
   hrac     String
   tazeni   String?
   popis    String?
-  image      String?
+  image         String?
+  imageMultiply Boolean @default(false)
 
   order      Int      @default(0)
   authorId   String
@@ -78,8 +81,9 @@ model Postava {
 model Lokalita {
   id          String       @id @default(cuid())
   nazev       String
-  popis       String?
-  image       String?
+  popis         String?
+  image         String?
+  imageMultiply Boolean @default(false)
 
   parentId  String?
   parent    Lokalita?   @relation("Hierarchy", fields: [parentId], references: [id])
@@ -97,8 +101,9 @@ model Lokalita {
 model Mapa {
   id          String       @id @default(cuid())
   nazev       String
-  popis       String?
-  image       String?
+  popis         String?
+  image         String?
+  imageMultiply Boolean @default(true)
 
   parentId  String?
   parent    Mapa?   @relation("Hierarchy", fields: [parentId], references: [id])

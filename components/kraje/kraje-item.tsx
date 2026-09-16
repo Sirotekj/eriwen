@@ -25,7 +25,7 @@ const KrajeItem = ({ lokalita }: Props) => {
         {lokalita.image && (
           <ImageWrapper>
             <Image
-              className="object-cover"
+              className={`object-cover${lokalita.imageMultiply ? ' mix-blend-multiply' : ''}`}
               src={lokalita.image}
               alt={lokalita.id}
               sizes="242px"
