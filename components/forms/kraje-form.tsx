@@ -177,6 +177,7 @@ export default function KrajeForm({
           name="image"
           width="small"
           defaultImage={initialData?.image ?? undefined}
+          defaultMultiply={initialData?.imageMultiply ?? false}
         />
 
         <input type="hidden" name="parentId" value={resolveParentId() ?? ''} />

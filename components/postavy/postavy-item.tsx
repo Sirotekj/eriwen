@@ -19,7 +19,7 @@ export default function PostavyItem({ postava }: Props) {
       {postava.image && (
         <ImageWrapper>
           <Image
-            className="object-cover"
+            className={`object-cover${postava.imageMultiply ? ' mix-blend-multiply' : ''}`}
             src={postava.image}
             alt={postava.id}
             sizes="242px"

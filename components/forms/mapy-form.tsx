@@ -174,6 +174,7 @@ export default function MapyForm({ allMapy, initialData, onClose }: Props) {
           name="image"
           width="full"
           defaultImage={initialData?.image ?? undefined}
+          defaultMultiply={initialData?.imageMultiply ?? true}
         />
 
         <input type="hidden" name="parentId" value={resolveParentId() ?? ''} />

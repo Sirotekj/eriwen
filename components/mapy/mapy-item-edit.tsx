@@ -42,7 +42,7 @@ const MapyItemEdit = ({
           <ImageWrapper size="large">
             <picture>
               <img
-                className="object-cover h-auto mix-blend-multiply"
+                className={`object-cover h-auto${mapa.imageMultiply ? ' mix-blend-multiply' : ''}`}
                 src={mapa.image}
                 alt={mapa.id}
               />

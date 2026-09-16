@@ -80,6 +80,7 @@ export default function TazeniForm({
           name="image"
           width="small"
           defaultImage={initialData?.image ?? undefined}
+          defaultMultiply={initialData?.imageMultiply ?? false}
         />
         {state.errors && (
           <ul className="text-red mt-2">

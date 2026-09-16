@@ -11,15 +11,18 @@ export default function ImagePicker({
   name,
   width,
   defaultImage,
+  defaultMultiply = false,
 }: {
   label: string;
   name: string;
   width: 'full' | 'small';
   defaultImage?: string | null;
+  defaultMultiply?: boolean;
 }) {
   const [pickedImage, setPickedImage] = useState<string | null>(
     defaultImage ?? null,
   );
+  const [multiply, setMultiply] = useState(defaultMultiply);
   const [error, setError] = useState<string | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -84,11 +87,26 @@ export default function ImagePicker({
                 height={0}
                 sizes="30vw"
                 alt="Vybraný obrázek."
-                className={`w-full h-auto ${width === 'full' && 'mix-blend-multiply'}`}
+                className={`w-full h-auto ${multiply ? 'mix-blend-multiply' : ''}`}
               />
             </div>
           )}
         </div>
+        <label htmlFor="imageMultiply" className="mb-3 flex items-center gap-2">
+          <input
+            id="imageMultiply"
+            type="checkbox"
+            checked={multiply}
+            onChange={(event) => setMultiply(event.target.checked)}
+            className="accent-current"
+          />
+          Prolnout s pozadím
+        </label>
+        <input
+          type="hidden"
+          name="imageMultiply"
+          value={multiply ? 'true' : 'false'}
+        />
         <input
           type="file"
           id={name}

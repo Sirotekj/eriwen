@@ -17,7 +17,7 @@ import {
 } from '@/lib/postavy-prisma';
 
 import { FormState } from '@/types/types';
-import { isInvalidText } from '@/lib/helpers';
+import { isInvalidText, parseImageMultiply } from '@/lib/helpers';
 import { uploadImage } from '@/lib/upload-image';
 
 export async function createAction(
@@ -89,6 +89,7 @@ export async function createAction(
     popis: xss(formData.get('popis') as string),
     tazeni: formData.get('tazeni') as string,
     order: order,
+    imageMultiply: parseImageMultiply(formData),
     author: {
       connect: {
         id: session.user.id,

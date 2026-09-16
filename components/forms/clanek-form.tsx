@@ -59,6 +59,7 @@ export default function ClanekForm({
           name="image"
           width="small"
           defaultImage={initialData?.image ?? undefined}
+          defaultMultiply={initialData?.imageMultiply ?? false}
         />
 
         {state.errors && (

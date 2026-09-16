@@ -13,7 +13,7 @@ import { permissions } from '@/lib/permissions';
 import { SaveTazeni, UpdateTazeni, DeleteTazeni } from '@/lib/tazeni-prisma';
 
 import { FormState } from '@/types/types';
-import { isInvalidText } from '@/lib/helpers';
+import { isInvalidText, parseImageMultiply } from '@/lib/helpers';
 import { uploadImage } from '@/lib/upload-image';
 
 export async function createAction(
@@ -112,7 +112,7 @@ export async function createAction(
     postavy: formData.get('postavy') as string,
     pribeh: xss(formData.get('pribeh') as string),
     order: order,
-    //image: image.name as string,
+    imageMultiply: parseImageMultiply(formData),
     author: {
       connect: {
         id: session.user.id,

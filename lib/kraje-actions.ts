@@ -18,7 +18,7 @@ import {
 } from '@/lib/kraje-prisma';
 
 import { FormState } from '@/types/types';
-import { isInvalidText } from '@/lib/helpers';
+import { isInvalidText, parseImageMultiply } from '@/lib/helpers';
 import { validateHierarchy } from './hierarchy-validation';
 import { uploadImage } from '@/lib/upload-image';
 
@@ -93,6 +93,7 @@ export async function createAction(
     order: order,
     parentId: parentId,
     authorId: session.user.id,
+    imageMultiply: parseImageMultiply(formData),
   };
   if (isInvalidText(lokalita.nazev)) {
     messages.push('Chybí název!');
