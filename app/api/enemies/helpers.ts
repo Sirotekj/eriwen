@@ -52,7 +52,10 @@ export async function getAuthUser(
 ): Promise<AuthUser | null> {
   const session = await getServerSession(authOptions);
   if (session?.user != null) {
-    return { id: session.user.id, role: session.user.role };
+    return {
+      id: session.user.id,
+      role: session.user.role ?? Role.READER,
+    };
   }
 
   const header = request.headers.get('authorization');
