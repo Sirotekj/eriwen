@@ -144,6 +144,47 @@ model Letopisy {
   author      User      @relation(fields: [authorId], references: [id])
 }
 
+model Nepritel {
+  id                String    @id @default(cuid())
+  name              String
+  health            Int?
+  mana              Int?
+  favor             Int?
+  adrenaline        Int?
+  level             Int?
+  divinePower       Int?
+  challengeRating   String?
+  strength          Int?
+  dexterity         Int?
+  constitution      Int?
+  intelligence      Int?
+  charisma          Int?
+  movement          Int?
+  size              String?
+  attackValue       Int?
+  damageValue       Int?
+  baseDefense       Int?
+  defenseValue      Int?
+  specialAbilities  String?
+  resistances       String?
+  immunities        String?
+  weaknesses        String?
+  skills            String?
+  habitat           String?
+  type              String?
+  experiencePoints  Int?
+  notes             String?
+  description       String?
+  image             String?
+  imageMultiply     Boolean   @default(false)
+  isPublic          Boolean   @default(false)
+
+  authorId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+}
+
 model User {
   id            String    @id @default(cuid())
   email         String?   @unique
@@ -159,6 +200,7 @@ model User {
   kraje         Lokalita[]
   mapy          Mapa[]
   letopisy      Letopisy[]
+  nepratele      Nepritel[]
 }
 
 model Account {
