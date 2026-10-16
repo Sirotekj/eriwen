@@ -1,11 +1,10 @@
 import { randomBytes } from 'crypto';
-import { Role } from '@prisma/client';
 
 import { prisma } from '@/lib/prisma';
 
 const SESSION_DAYS = 30;
 
-type GoogleIdTokenPayload = {
+export type GoogleIdTokenPayload = {
   sub: string;
   email?: string;
   email_verified?: string | boolean;
@@ -14,6 +13,21 @@ type GoogleIdTokenPayload = {
   aud?: string;
   exp?: string;
 };
+
+export type MobileAuthErrorCode =
+  | 'INVALID_TOKEN'
+  | 'UNKNOWN_USER'
+  | 'GOOGLE_ACCOUNT_NOT_LINKED';
+
+export class MobileAuthError extends Error {
+  constructor(
+    public readonly code: MobileAuthErrorCode,
+    message: string,
+  ) {
+    super(message);
+    this.name = 'MobileAuthError';
+  }
+}
 
 function getAllowedGoogleAudiences(): string[] {
   return [
@@ -25,44 +39,48 @@ function getAllowedGoogleAudiences(): string[] {
 
 export async function verifyGoogleIdToken(
   idToken: string,
-): Promise<GoogleIdTokenPayload | null> {
+): Promise<GoogleIdTokenPayload> {
   const response = await fetch(
     `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`,
   );
 
   if (!response.ok) {
-    return null;
+    throw new MobileAuthError('INVALID_TOKEN', 'Neplatný Google idToken.');
   }
 
   const payload = (await response.json()) as GoogleIdTokenPayload;
   const allowedAudiences = getAllowedGoogleAudiences();
 
   if (!payload.sub || !payload.aud) {
-    return null;
+    throw new MobileAuthError('INVALID_TOKEN', 'Neplatný Google idToken.');
   }
 
   if (
     allowedAudiences.length > 0 &&
     !allowedAudiences.includes(payload.aud)
   ) {
-    return null;
+    throw new MobileAuthError('INVALID_TOKEN', 'Neplatný Google idToken.');
   }
 
   if (payload.exp && Number(payload.exp) * 1000 < Date.now()) {
-    return null;
+    throw new MobileAuthError('INVALID_TOKEN', 'Neplatný Google idToken.');
   }
 
   const emailVerified =
     payload.email_verified === true || payload.email_verified === 'true';
 
   if (!payload.email || !emailVerified) {
-    return null;
+    throw new MobileAuthError('INVALID_TOKEN', 'Neplatný Google idToken.');
   }
 
   return payload;
 }
 
-export async function findOrCreateGoogleUser(payload: GoogleIdTokenPayload) {
+/**
+ * Only existing users with a linked Google Account can sign in from mobile.
+ * No auto-create / auto-link — user must already exist from web NextAuth Google login.
+ */
+export async function findExistingGoogleUser(payload: GoogleIdTokenPayload) {
   const existingAccount = await prisma.account.findUnique({
     where: {
       provider_providerAccountId: {
@@ -77,38 +95,27 @@ export async function findOrCreateGoogleUser(payload: GoogleIdTokenPayload) {
     return existingAccount.user;
   }
 
-  const existingUser = payload.email
-    ? await prisma.user.findUnique({ where: { email: payload.email } })
-    : null;
-
-  if (existingUser) {
-    await prisma.account.create({
-      data: {
-        userId: existingUser.id,
-        type: 'oauth',
-        provider: 'google',
-        providerAccountId: payload.sub,
-      },
-    });
-    return existingUser;
-  }
-
-  return prisma.user.create({
-    data: {
-      email: payload.email,
-      name: payload.name ?? null,
-      image: payload.picture ?? null,
-      emailVerified: new Date(),
-      role: Role.READER,
+  const existingUser = await prisma.user.findUnique({
+    where: { email: payload.email },
+    include: {
       accounts: {
-        create: {
-          type: 'oauth',
-          provider: 'google',
-          providerAccountId: payload.sub,
-        },
+        where: { provider: 'google' },
+        select: { id: true },
       },
     },
   });
+
+  if (!existingUser) {
+    throw new MobileAuthError(
+      'UNKNOWN_USER',
+      'Účet s tímto Google emailem v databázi neexistuje.',
+    );
+  }
+
+  throw new MobileAuthError(
+    'GOOGLE_ACCOUNT_NOT_LINKED',
+    'Účet existuje, ale nemá spárovaný Google Account. Nejdřív se přihlas na webu přes Google.',
+  );
 }
 
 export async function createMobileSession(userId: string) {
